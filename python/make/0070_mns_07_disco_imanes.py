@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# disco horario con imanes
+# disco minutero con imanes
 
 from xml.dom import minidom
 import math, os, sys, time, yaml

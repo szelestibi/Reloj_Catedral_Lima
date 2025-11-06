@@ -29,7 +29,7 @@ dimensions:
     orbit_radius: 45.255
     screw_diameter: *M4
   tetrafix_60:       # tetrafix 60
-    orbit_radius: 90 ## para ajustar
+    orbit_radius: 32 ## para ajustar
     screw_diameter: *M4
   panels:
     strut_orbit_radius: 707.106 # X:50cm Y:50cm

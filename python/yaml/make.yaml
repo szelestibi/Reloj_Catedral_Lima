@@ -72,7 +72,7 @@ AGUJAS:
       - hexafix_48
 MECANISMO:
   # PANEL ACRILICO DELANTERO ------------------------- 0020
-  pared_00_acrilico:
+  pared_01_acrilico:
     grid: 130x130
     piece: panel_plexi
     mainline: panel
@@ -150,12 +150,33 @@ MECANISMO:
     axis_hole: mns_axis_diameter
     cuts_files: # cuts and holes
       - hexafix_60
-  # LISTON CON SENSORES MINUTO ----------------------------
+  # LISTON CON SENSORES MINUTO ----------------------- 0085
   mns_09_liston_sensores:
-  # PANEL METAL TRASERO -----------------------------------
+    grid: 130x130
+    piece: sensores
+    mainline: mags
+    cuts_files: # cuts and holes
+      - senso_ojos
+  # PANEL METAL TRASERO ------------------------------ 0090
   pared_02_metal:
-  # PANEL ACRILICO TRASERO --------------------------------
-  pared_03_acrilico:
+    grid: 130x130
+    piece: panel_metal
+    mainline: metal
+    axis_hole: bearing_mns_diameter external
+    cuts_files: # cuts and holes
+      - panel_holes
+      - tetrafix_60
+      # - senso_ojos
+  # PANEL ACRILICO TRASERO --------------------------- 0100
+  pared_02_acrilico:
+    grid: 130x130
+    piece: panel_plexi
+    mainline: panel
+    axis_hole: bearing_mns_diameter external
+    cuts_files: # cuts and holes
+      - panel_holes
+      - tetrafix_60
+      - senso_ojos
 MOTORES:
   wheel_mns:
   wheel_hrs:
