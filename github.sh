@@ -1,11 +1,21 @@
 #!/bin/bash
 
-git config --global init.defaultBranch main
-git config --global user.email "szelest@web.de"
-git config --global user.name "Tiberio Szeles"
-git init
-git add .
-git commit -m "Initial commit"
-git remote add origin https://github.com/szelestibi/Reloj_Catedral_Lima
-git branch -M main
+#git config --global init.defaultBranch main
+#git config --global user.email "szelest@web.de"
+#git config --global user.name "Tiberio Szeles"
+#git init
+#git add .
+#git commit -m "Initial commit"
+#git remote add origin https://github.com/szelestibi/Reloj_Catedral_Lima
+#git branch -M main
 #git push -u origin main
+#git push --force-with-lease origin main
+#git push --force origin main
+#ssh-keygen -t ed25519 -C "szelest@web.de"
+#eval "$(ssh-agent -s)"
+#ssh-add ~/.ssh/id_ed25519
+#git remote set-url origin git@github.com:szelestibi/Reloj_Catedral_Lima.git
+#git push -u origin main
+git add -A
+git commit -m "Remove files"
+git push origin main
