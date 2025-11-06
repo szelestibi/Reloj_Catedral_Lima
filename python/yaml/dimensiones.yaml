@@ -34,12 +34,13 @@ dimensions:
   panels:
     strut_orbit_radius: 707.106 # X:50cm Y:50cm
     strut_hole_diameter: 12
-  panel_plexi:
-  panel_plexi_front:
-  panel_plexi_rear:
-  panel_metal:
-  panel_metal_front:
-  panel_metal_rear:
+  panel_plexi_xy: &p_plexi_xy 60
+  panel_metal_xy: *p_plexi_xy
+  panel_metal_rs: 8  # small circle radius
+  panel_metal_rb: 58 # big circle radius
+  foot_stand_rb: 88  # big circle radius
+  foot_stand_rx: 1   # curve rdius
+  foot_stand_ax: 60  # optimum connecting angle [°]
   ojo_contrapeso: # en las agujas
     orbit: 465
     diameter: *M5

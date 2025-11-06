@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?><!-- generated with ../scripts/patas.py --><!-- SZT 2025.11.06 11:44:35 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="138cm" height="138cm" viewBox="-69 -69 138 138">
+<defs><style type="text/css">
+ #pata { fill:#204060; fill-opacity:.7; fill-rule:evenodd; stroke:none; }
+ #bgnd { fill:white; }
+</style></defs>
+<rect id="bgnd" height="138" width="138" x="-69" y="-69" />
+<path id="pata" d="M -58 50 A 8 8 0 0 1 -46 43.072 A 88 88 0 0 0 46 43.072 A 8 8 0 0 1 58 50 V 59 A 1 1 0 0 1 57 60 H -57 A 1 1 0 0 1 -58 59 Z" />
+</svg>

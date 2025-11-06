@@ -4,10 +4,13 @@
 from datetime import datetime
 import math
 import os
+import yaml
 
-d_metal = ''
-r_metal = 8
-r_bigxx = 58
+with open('../yaml/dimensiones.yaml', 'r', encoding='utf-8') as f:
+ dimensions = yaml.safe_load(f).get('dimensions', {})
+
+r_metal = dimensions['panel_metal_rs']
+r_bigxx = dimensions['panel_metal_rb']
 
 def calc_px_py(x,y,r,a):
  ang = math.radians(a)
