@@ -16,6 +16,7 @@
 #ssh-add ~/.ssh/id_edXXXXX
 #git remote set-url origin git@github.com:szelestibi/Reloj_Catedral_Lima.git
 #git push -u origin main
+git add .gitignore
 git add -A
 #it commit -m "2025.11.05 20:00:00"
 git commit -m "$(date '+%Y.%m.%d %H:%M:%S')"
