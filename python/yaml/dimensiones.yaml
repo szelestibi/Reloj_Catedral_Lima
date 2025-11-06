@@ -29,7 +29,7 @@ dimensions:
     orbit_radius: 45.255
     screw_diameter: *M4
   tetrafix_60:       # tetrafix 60
-    orbit_radius: 32 ## para ajustar
+    orbit_radius: 32
     screw_diameter: *M4
   panels:
     strut_orbit_radius: 707.106 # X:50cm Y:50cm
@@ -64,6 +64,6 @@ dimensions:
   bearing_fixer_hrs:
     diameter: *b_hrs_ext
     screw_diameter: *M5
-  bearing_fixer_cmd:                  # trifix
+  bearing_fixer_cmd:                  # trifix para los rodamientos de ejes de comandos
     diameter: *mo_bea_dia
     screw_diameter: *M4
