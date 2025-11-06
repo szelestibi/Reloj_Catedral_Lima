@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?><!-- SZT 2025.11.04 19:25:33 -->
+<?xml version="1.0" encoding="utf-8" ?><!-- SZT 2025.11.06 08:26:00 -->
 <svg xmlns="http://www.w3.org/2000/svg" width="30cm" height="156cm" viewBox="-15 -53 30 156">
 <style id="grid_style" type="text/css">
  #grid line { fill:none; stroke-width:.001cm; stroke-opacity:.5; stroke:rgb(0,0,255); }
@@ -218,7 +218,7 @@
 <path id="d_left" class="deco" d="M -7.3 42.873 Q -6.7 44.373 -8 45.873 A 2.5 2.5 0 0 0 -1.5 48.873 A 5 5 0 0 0 -7.3 42.873 Z"/>
 <path id="d_right" class="deco" d="M 7.3 42.873 A 5 5 0 0 0 1.5 48.873 A 2.5 2.5 0 0 0 8.0 45.873 Q 6.7 44.373 7.3 42.873 Z"/>
 <path id="d_far" class="deco" d="M 1.5 52.873 H -1.5 Q -4.5 60.873 0 65.873 Q 4.5 60.873 1.5 52.873 Z"/>
-<path id="axis" class="hole" d="M -2.11 0 a 2.11 2.11 0 1 0 4.22 0 a 2.11 2.11 0 1 0 -4.22 0 Z"/>
+<path id="axis" class="hole" d="M -.935 0 a .935 .935 0 1 0 1.87 0 a .935 .935 0 1 0 -1.87 0 Z"/>
 <path id="HF48" class="hole" d="M 3.292 0 a .263 .263 0 1 0 .525 0 a .263 .263 0 1 0 -.525 0 Z M 1.515 3.079 a .263 .263 0 1 0 .525 0 a .263 .263 0 1 0 -.525 0 Z M -2.04 3.079 a .263 .263 0 1 0 .525 0 a .263 .263 0 1 0 -.525 0 Z M -3.818 0 a .263 .263 0 1 0 .525 0 a .263 .263 0 1 0 -.525 0 Z M -2.04 -3.079 a .263 .263 0 1 0 .525 0 a .263 .263 0 1 0 -.525 0 Z M 1.515 -3.079 a .263 .263 0 1 0 .525 0 a .263 .263 0 1 0 -.525 0 Z"/>
 <path id="OJOP" class="hole" d="M -.263 -46.5 a .263 .263 0 1 0 .525 0 a .263 .263 0 1 0 -.525 0 Z"/>
 </svg>
