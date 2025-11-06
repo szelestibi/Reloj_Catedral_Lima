@@ -11,7 +11,7 @@
 #git push -u origin main
 #git push --force-with-lease origin main
 #git push --force origin main
-#ssh-keygen -t ed25519 -C "szelest@web.de"
+#ssh-keygen -t edXXXXX -C "szelest@web.de"
 #eval "$(ssh-agent -s)"
 #ssh-add ~/.ssh/id_edXXXXX
 #git remote set-url origin git@github.com:szelestibi/Reloj_Catedral_Lima.git
