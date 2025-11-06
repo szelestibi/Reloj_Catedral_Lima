@@ -17,5 +17,6 @@
 #git remote set-url origin git@github.com:szelestibi/Reloj_Catedral_Lima.git
 #git push -u origin main
 git add -A
-git commit -m "2025.11.05 20:00:00"
+#it commit -m "2025.11.05 20:00:00"
+git commit -m "$(date '+%Y.%m.%d %H:%M:%S')"
 git push origin main
