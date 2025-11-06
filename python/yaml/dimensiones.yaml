@@ -39,7 +39,7 @@ dimensions:
   panel_metal_rs: 8  # small circle radius
   panel_metal_rb: 58 # big circle radius
   foot_stand_rb: 88  # big circle radius
-  foot_stand_rx: 1   # curve rdius
+  foot_stand_rx: 1   # curve radius
   foot_stand_ax: 60  # optimum connecting angle [°]
   ojo_contrapeso: # en las agujas
     orbit: 465
