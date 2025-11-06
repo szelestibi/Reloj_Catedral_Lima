@@ -1,8 +1,8 @@
 RELOJ CATEDRAL LIMA - SZT 31.10.2025
 
-agujas
-ejes
-mecanismo
-motores
-python
-svg_master
+AGUJAS
+EJES
+MECANISMO
+MOTORES
+PYTHON
+SVG_MASTER
