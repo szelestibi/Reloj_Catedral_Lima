@@ -1,23 +1,23 @@
-AGUJAS:
+AGUJAS:                      # ARCHIVOS SVG PARA LAS AGUJAS en 2D
   - 0000_mns_00_base.svg
   - 0000_mns_01_capa_1.svg
   - 0000_mns_10_disco_conexion.svg
   - 0010_hrs_00_base.svg
   - 0010_hrs_01_capa_1.svg
   - 0010_hrs_10_disco_conexion.svg
-EJES:
-
-MECANISMO:
+EJES:                        # ARCHIVOS SVG PARA LOS EJES en 2D
+  - momentaneamente vacio
+MECANISMO:                   # ARCHIVOS SVG PARA EL MECANISMO en 2D
   - 0020_pared_00_acrilico.svg
   - 0020_pared_01_metal.svg
   - 0025_hrs_02_liston_sensores.svg
   - 0030_hrs_03_disco_conexion.svg
   - 0040_hrs_04_disco_imanes.svg
   - 0050_hrs_05_geneva_48.svg
-MOTORES:
-
+MOTORES:                     # ARCHIVOS SVG PARA LOS MOTORES en 2D
+  - momentaneamente vacio
 PYTHON:
-  - grids:
+  - grids:                   # CUADRICULAS [cm]
     - grid_010x010.svg
     - grid_024x150.svg
     - grid_030x030.svg
