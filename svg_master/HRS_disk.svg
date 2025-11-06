@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?><!-- generated with ../scripts/discos.py --><!-- SZT 2025.11.03 21:01:02 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="12cm" height="12cm" viewBox="-6 -6 12 12">
+<defs><style>
+ path { fill: rgba(30,60,90,.7); stroke: none; fill-rule:evenodd; }
+ #bgnd { fill: white; stroke: none; }
+</style></defs>
+<rect id="bgnd" x="-6" y="-6" width="12" height="12" />
+<path id="disk" class="piece" d="M -5 0 a 5 5 0 1 0 10 0 a 5 5 0 1 0 -10 0 Z" />
+</svg>

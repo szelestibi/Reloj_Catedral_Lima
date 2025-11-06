@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?><!-- generated with ../scripts/pentafix.py --><!-- SZT 2025.11.03 21:01:02 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="36cm" height="36cm" viewBox="-18 -18 36 36">
+<defs><style>
+ path { fill: rgba(30,60,90,.7); stroke: none; fill-rule:evenodd; }
+ #bgnd { fill: white; stroke: none; }
+</style></defs>
+<rect id="bgnd" height="36" width="36" x="-18" y="-18" />
+<path id="PFIX" class="hole" d="M 11.2 -3.708 a .212 .212 0 1 0 .425 0 a .212 .212 0 1 0 -.425 0 Z M 6.841 9.708 a .212 .212 0 1 0 .425 0 a .212 .212 0 1 0 -.425 0 Z M -7.266 9.708 a .212 .212 0 1 0 .425 0 a .212 .212 0 1 0 -.425 0 Z M -11.625 -3.708 a .212 .212 0 1 0 .425 0 a .212 .212 0 1 0 -.425 0 Z M -.213 -12 a .212 .212 0 1 0 .425 0 a .212 .212 0 1 0 -.425 0 Z" />
+</svg>

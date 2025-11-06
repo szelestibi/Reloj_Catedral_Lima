@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?><!-- generated with ../scripts/senso_ojos.py --><!-- SZT 2025.11.04 15:05:24 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="22cm" height="7cm" viewBox="-57 -3.5 22 7">
+<defs><style>
+ path { fill: rgba(30,60,90,.7); stroke: none; fill-rule:evenodd; }
+ #bgnd { fill: #FFF; stroke: none; }
+</style></defs>
+<rect id="bgnd" height="7" width="22" x="-57" y="-3.5" />
+<path id="ojos" class="hole" d="M -55.66 -2 a .16 .16 0 1 0 .32 0 a .16 .16 0 1 0 -.32 0 Z M -36.66 -2 a .16 .16 0 1 0 .32 0 a .16 .16 0 1 0 -.32 0 Z M -55.66 2 a .16 .16 0 1 0 .32 0 a .16 .16 0 1 0 -.32 0 Z M -36.66 2 a .16 .16 0 1 0 .32 0 a .16 .16 0 1 0 -.32 0 Z" />
+</svg>

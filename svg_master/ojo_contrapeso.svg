@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?><!-- generated with ../scripts/ojo_cpeso.py --><!-- SZT 2025.11.03 21:01:02 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="2cm" height="2cm" viewBox="-1 -47.5 2 2">
+<defs><style>
+ path { fill: rgba(30,60,90,.7); stroke: none; fill-rule:evenodd; }
+ #bgnd { fill: white; stroke: none; }
+</style></defs>
+<rect id="bgnd" x="-1" y="-47.5" width="2" height="2" />
+<path id="OJOP" class="hole" d="M -.263 -46.5 a .263 .263 0 1 0 .525 0 a .263 .263 0 1 0 -.525 0 Z" />
+</svg>

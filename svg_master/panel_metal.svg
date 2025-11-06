@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?><!-- generated with ../scripts/metal_p.py --><!-- SZT 2025.11.04 15:12:26 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="138cm" height="138cm" viewBox="-69 -69 138 138">
+<defs><style type="text/css">
+ #metal { fill:#204060; fill-opacity:.7; fill-rule:evenodd; stroke:none; }
+ #bgnd { fill:white; }
+</style></defs>
+<rect id="bgnd" height="138" width="138" x="-69" y="-69" />
+<path id="metal" d="M -55.657 -44.343 A 8 8 0 0 1 -44.343 -55.657 A 58 58 0 0 0 44.343 -55.657 A 8 8 0 0 1 55.657 -44.343 A 58 58 0 0 0 55.657 44.343 A 8 8 0 0 1 44.343 55.657 A 58 58 0 0 0 -44.343 55.657 A 8 8 0 0 1 -55.657 44.343 A 58 58 0 0 0 -55.657 -44.343 Z" />
+</svg>

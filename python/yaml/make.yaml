@@ -1,0 +1,145 @@
+INFO: CONFIG para los SCRIPTS que generan los SVG en ./AGUJAS ./EJES ./MECANISMO ./MOTORES
+LIMPIAR:
+  clean:
+GRID: True
+AGUJAS:
+  # MINUTERO ----------------------------------------------
+  mns_00_base:
+    grid: 24x150
+    piece: MNS_contrapeso
+    mainline: hand
+    #include:
+    axis_hole: mns_axis_diameter
+    cuts_files: # cuts and holes
+      - hexafix_60
+      - ojo_contrapeso
+  mns_01_capa_1:
+    grid: 24x150
+    piece: MNS_contrapeso
+    mainline: hand
+    include:
+      - strip
+      - d_left
+      - d_right
+      - d_far
+      - d_circle
+    axis_hole: mns_axis_diameter
+    cuts_files: # cuts and holes
+      - hexafix_60
+      - ojo_contrapeso
+  mns_10_disco_conexion:
+    grid: 30x30
+    piece: MNS_disk
+    mainline: disk
+    axis_hole: mns_axis_diameter
+    cuts_files: # cuts and holes
+      - hexafix_60
+# INDICADOR DE HORAS CAPA BASE ----------------------- 0010
+  hrs_00_base:
+    grid: 24x150
+    piece: HRS_contrapeso
+    mainline: hand
+    #include:
+    axis_hole: hrs_axis_diameter external
+    cuts_files: # cuts and holes
+      - hexafix_48
+      - ojo_contrapeso
+# INDICADOR DE HORAS CAPA 1 -------------------------- 0010
+  hrs_01_capa_1:
+    grid: 24x150
+    piece: HRS_contrapeso
+    mainline: hand
+    include:
+      - strip
+      - d_left
+      - d_right
+      - d_far
+    axis_hole: hrs_axis_diameter external
+    cuts_files: # cuts and holes
+      - hexafix_48
+      - ojo_contrapeso
+# DISCO CONEXION EJE HORARIO ------------------------- 0010
+  hrs_10_disco_conexion:
+    grid: 30x30
+    piece: HRS_disk
+    mainline: disk
+    axis_hole: hrs_axis_diameter external
+    cuts_files: # cuts and holes
+      - hexafix_48
+MECANISMO:
+  # PANEL ACRILICO DELANTERO ------------------------- 0020
+  pared_00_acrilico:
+    grid: 130x130
+    piece: panel_plexi
+    mainline: panel
+    axis_hole: bearing_hrs_diameter external
+    cuts_files: # cuts and holes
+      - panel_holes
+      - tetrafix_48
+      - senso_ojos
+  # PANEL METAL DELANTERO ---------------------------- 0020
+  pared_01_metal:
+    grid: 130x130
+    piece: panel_metal
+    mainline: metal
+    axis_hole: bearing_hrs_diameter external
+    cuts_files: # cuts and holes
+      - panel_holes
+      - tetrafix_48
+      # - senso_ojos
+  # LISTON CON SENSORES HORA ------------------------- 0025
+  hrs_02_liston_sensores:
+    grid: 130x130
+    piece: sensores
+    mainline: mags
+    cuts_files: # cuts and holes
+      - senso_ojos
+  # DISCO CONEXION HORAS ----------------------------- 0030
+  hrs_03_disco_conexion:
+    grid: 30x30
+    piece: HRS_disk
+    mainline: disk
+    axis_hole: hrs_axis_diameter external
+    cuts_files: # cuts and holes
+      - hexafix_48
+  # DISCO CON IMANES G48 ----------------------------- 0040
+  hrs_04_disco_imanes:
+    grid: 130x130
+    piece: geneva_48_wheel
+    mainline: NULL # NULL = None in python
+    axis_hole: hrs_connect_wheel diameter
+    cuts_files:
+      - pentafix
+  # GENEVA 48 ---------------------------------------- 0050
+  hrs_05_geneva_48:
+    grid: 130x130
+    piece: geneva_48_driven
+    mainline: driven
+    #axis_hole: hrs_axis_diameter external
+    axis_hole: mns_axis_diameter
+    axis_hole_add: 3 # add 3 millimeter
+    cuts_files: # cuts and holes
+      - hexafix_48
+  # GENEVA 60 ---------------------------------------- 0060
+  mns_06_geneva_60:
+  # DISCO CON IMANES G60 ----------------------------- 0070
+  mns_07_disco_imanes:
+  # DISCO CONEXION MINUTOS --------------------------- 0080
+  mns_08_disco_conexion:
+    grid: 30x30
+    piece: MNS_disk
+    mainline: disk
+    axis_hole: mns_axis_diameter
+    cuts_files: # cuts and holes
+      - hexafix_60
+  # LISTON CON SENSORES MINUTO ----------------------------
+  mns_09_liston_sensores:
+  # PANEL METAL TRASERO -----------------------------------
+  pared_02_metal:
+  # PANEL ACRILICO TRASERO --------------------------------
+  pared_03_acrilico:
+MOTORES:
+  wheel_mns:
+  wheel_hrs:
+  driver_mns:
+  driver_hrs:

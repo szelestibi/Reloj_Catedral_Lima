@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- SZT 1.11.2025 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="12cm" height="12cm" viewBox="-6 -6 12 12">
+<defs><style id="grid_style" type="text/css">
+ #grid line { fill:none; stroke-width:.001cm; stroke-opacity:.5; stroke:rgb(0,0,255); }
+ #grid .axis-line { fill:none; stroke-width:.002cm; stroke-opacity:.5; stroke:rgb(100,0,0); }
+ #grid text { dominant-baseline:central; fill:rgb(0,80,0); font-size:.01cm; text-anchor:middle; }
+ #grid .axis-text { dominant-baseline:central; fill:rgb(80,0,0); font-size:.01cm; text-anchor:middle; }
+ #bgnd { fill:white; }
+</style></defs>
+<g id="grid" transform="scale(1,1)">
+ <rect id="bgnd" height="12" width="12" x="-6" y="-6" />
+ <line x1="-5" x2="-5" y1="-5" y2="5" />
+ <line x1="-5" x2="5" y1="-5" y2="-5" />
+ <line x1="-4" x2="-4" y1="-5" y2="5" />
+ <line x1="-5" x2="5" y1="-4" y2="-4" />
+ <line x1="-3" x2="-3" y1="-5" y2="5" />
+ <line x1="-5" x2="5" y1="-3" y2="-3" />
+ <line x1="-2" x2="-2" y1="-5" y2="5" />
+ <line x1="-5" x2="5" y1="-2" y2="-2" />
+ <line x1="-1" x2="-1" y1="-5" y2="5" />
+ <line x1="-5" x2="5" y1="-1" y2="-1" />
+ <line x1="1" x2="1" y1="-5" y2="5" />
+ <line x1="-5" x2="5" y1="1" y2="1" />
+ <line x1="2" x2="2" y1="-5" y2="5" />
+ <line x1="-5" x2="5" y1="2" y2="2" />
+ <line x1="3" x2="3" y1="-5" y2="5" />
+ <line x1="-5" x2="5" y1="3" y2="3" />
+ <line x1="4" x2="4" y1="-5" y2="5" />
+ <line x1="-5" x2="5" y1="4" y2="4" />
+ <line x1="5" x2="5" y1="-5" y2="5" />
+ <line x1="-5" x2="5" y1="5" y2="5" />
+ <line class="axis-line" x1="0" x2="0" y1="-5" y2="5" />
+ <line class="axis-line" x1="-5" x2="5" y1="0" y2="0" />
+ <text x="-5" y="-5.25">-5</text>
+ <text class="axis-text" x="0" y="-5.25">cm</text>
+ <text x="5" y="-5.25">5</text>
+</g></svg>

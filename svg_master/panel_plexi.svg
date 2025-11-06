@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?><!-- SZT 30.10.2025 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="138cm" height="138cm" viewBox="-69 -69 138 138">
+<defs><style type="text/css">
+ #panel { fill:#204060; fill-opacity:.7; fill-rule:evenodd; stroke:none; }
+ #bgnd { fill:white; }
+</style></defs>
+<rect id="bgnd" height="138" width="138" x="-69" y="-69" />
+<path id="panel" d="M -57 -60 H 57 A 3 3 0 0 1 60 -57 V 57 A 3 3 0 0 1 57 60 H 50.5 A .5 .5 0 0 0 49.5 60 H .5 A .5 .5 0 0 0 -.5 60 H -57 A 3 3 0 0 1 -60 57 V -57 A 3 3 0 0 1 -57 -60 Z" />
+</svg>
