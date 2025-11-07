@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" width="12cm" height="12cm" viewBox="-6.0 52 12 12">
+<defs><style type="text/css">
+ path { stroke:none; fill:#204060; fill-opacity:.7; fill-rule:evenodd; }
+ #bgd { fill:white; }
+</style></defs>
+<path id="bgd" d="M -6 52 H 6 V 64 H -6 Z" />
+<path id="axis" d="M -0.5,57.896 A 0.5 0.5 0 0 0 0.5 57.896 A 0.5 0.5 0 0 0 -0.5 57.896 Z " />
+<path id="disk" d="M -5.074,57.896 A 5.074 5.074 0 1 0 5.074 57.896 A 5.074 5.074 0 1 0 -5.074 57.896 Z " />
+<path id="pin" d="M 2.499,57.217 A 0.5 0.5 0 0 0 3.499 57.217 A 0.5 0.5 0 0 0 2.498 57.217 Z " />
+<path id="luna" d="M 0,55.797 A 2.097 2.097 0 1 0 0.903 59.789 A 58 58 0 0 1 0 55.797 Z " />
+</svg>
