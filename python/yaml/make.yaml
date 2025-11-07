@@ -177,6 +177,16 @@ MECANISMO:
       - panel_holes
       - tetrafix_60
       - senso_ojos
+  # PATAS de SOSTENIMIENTO---------------------------- 0110
+  patas_00:
+    grid: 130x130
+    piece: patas
+    mainline: pata
+    # axis_hole: bearing_mns_diameter external
+    #cuts_files: # cuts and holes
+    #  - panel_holes
+    #  - tetrafix_60
+    #  - senso_ojos
 MOTORES:
   wheel_mns:
   wheel_hrs:
