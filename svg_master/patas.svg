@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" ?><!-- generated with ../scripts/patas.py --><!-- SZT 2025.11.06 11:44:35 -->
+<?xml version="1.0" encoding="UTF-8" ?><!-- generated with ../scripts/patas.py --><!-- SZT 2025.11.06 21:42:56 -->
 <svg xmlns="http://www.w3.org/2000/svg" width="138cm" height="138cm" viewBox="-69 -69 138 138">
 <defs><style type="text/css">
  #pata { fill:#204060; fill-opacity:.7; fill-rule:evenodd; stroke:none; }
  #bgnd { fill:white; }
 </style></defs>
 <rect id="bgnd" height="138" width="138" x="-69" y="-69" />
-<path id="pata" d="M -58 50 A 8 8 0 0 1 -46 43.072 A 88 88 0 0 0 46 43.072 A 8 8 0 0 1 58 50 V 59 A 1 1 0 0 1 57 60 H -57 A 1 1 0 0 1 -58 59 Z" />
+<path id="panel" style="fill:rgba(30,60,90,.2); fill-rule:evenodd; stroke:none;" d="M -57 -60 H 57 A 3 3 0 0 1 60 -57 V 57 A 3 3 0 0 1 57 60 H 50.5 A .5 .5 0 0 0 49.5 60 H .5 A .5 .5 0 0 0 -.5 60 H -57 A 3 3 0 0 1 -60 57 V -57 A 3 3 0 0 1 -57 -60 Z M -55.657 -44.343 A 8 8 0 0 1 -44.343 -55.657 A 58 58 0 0 0 44.343 -55.657 A 8 8 0 0 1 55.657 -44.343 A 58 58 0 0 0 55.657 44.343 A 8 8 0 0 1 44.343 55.657 A 58 58 0 0 0 -44.343 55.657 A 8 8 0 0 1 -55.657 44.343 A 58 58 0 0 0 -55.657 -44.343 Z " />
+<path id="pata" d="M -58 50 A 8 8 0 0 1 -46 43.072 A 88 88 0 0 0 46 43.072 A 8 8 0 0 1 58 50 V 59.5 A 1 1 0 0 1 57 60.5 H -57 A 1 1 0 0 1 -58 59.5 ZM 49.475 50 a .525 .525 0 1 0 1.05 0 a .525 .525 0 1 0 -1.05 0 Z M -50.525 50 a .525 .525 0 1 0 1.05 0 a .525 .525 0 1 0 -1.05 0 Z" />
 </svg>
