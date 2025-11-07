@@ -1,0 +1,23 @@
+{
+ "name": "Python 3.12",
+ "image": "mcr.microsoft.com/devcontainers/python:3.12",
+ "features": {
+  "ghcr.io/devcontainers/features/git:1": {},
+  "ghcr.io/devcontainers/features/common-utils:2": {}
+ },
+ "postCreateCommand": "pip install -U pip && if [ -f requirements.txt ]; then pip install -r requirements.txt; fi",
+ "customizations": {
+  "vscode": {
+   "extensions": [
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-toolsai.jupyter",
+    "GitHub.vscode-github-actions"
+   ],
+   "settings": {
+    "python.defaultInterpreterPath": "/usr/local/bin/python",
+    "editor.formatOnSave": true
+   }
+  }
+ }
+}
