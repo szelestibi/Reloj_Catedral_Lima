@@ -71,6 +71,7 @@ Scripts para generar las piezas en 2D: agujas, ejes, mecanismo, motores:
 - `0085_mns_09_liston_sensores.py`
 - `0090_pared_02_metal.py`
 - `0100_pared_02_acrilico.py`
+- `0110_patas_00.svg`
 
 ### modules
 
