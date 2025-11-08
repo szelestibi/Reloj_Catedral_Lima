@@ -1,0 +1,20 @@
+<!doctype html><html><head><style> body, input { font-family:monospace; font-size:24px; } .info { padding-right:10px; } body { background:#306090; color:#FFFFFF; } </style><script>
+var pxpi = 90;
+window.onload = function() { init(); }
+function init() {
+ window.document.getElementById("mmin").focus();
+ window.document.getElementById("mmin").select();
+ mm2px(window.document.getElementById("mmin").value); }
+function mm2px(inval) {
+ window.document.getElementById("resultpx").innerHTML = (pxpi * inval / 25.4).toFixed(3);
+ window.document.getElementById("mmin").focus();
+ window.document.getElementById("mmin").select(); }
+function px2mm(inval) {
+ window.document.getElementById("resultmm").innerHTML = (inval * 25.4 / pxpi).toFixed(3);
+ window.document.getElementById("pxin").focus();
+ window.document.getElementById("pxin").select(); }
+</script></head><body>
+<span class="info">mm:</span><input id="mmin" type="number" value="25.4" onchange="mm2px(this.value);"><br /><span class="info">px:</span><span id="resultpx"></span>
+<br />&nbsp;<br />
+<span class="info">px:</span><input id="pxin" type="number" value="90" onchange="px2mm(this.value);"><br /><span class="info">mm:</span><span id="resultmm"></span>
+</body></html>
