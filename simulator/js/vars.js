@@ -1,8 +1,11 @@
 var wWidth, wHeight;
+var HH, MM, SS;
 var geneva_angle_deg = 0; // geneva wheel rotation angle
 var driver_angle_deg = 0; // driver wheel rotation angle
 
 var face_switch_arg = 0;
+
+var zoomed = 0;
 
 var wheels = {
  'driver_axis_dist_cm' : '57.896',
@@ -22,10 +25,8 @@ var axis_deg = {
  'HRS_1' : 10 * 30 + 2 * 7.5 }
 
 var views = { // svg  [cm]
- 'global' : [-60,-60,120,120],
- 'moon_driver_M' : [],
- 'moon_driver_H' : [],
- 'mins_driver_0' : [],
- 'mins_driver_1' : [],
- 'hrs_driver_0' : [],
- 'hrs_driver_1' : []}
+ 'global' : [120,120,-60,-60],
+ 'mins_driver_0' : [14,14,33,-50],
+ 'mins_driver_1' : [14,14,33,37],
+ 'hrs_driver_0' : [14,14,-48,34],
+ 'hrs_driver_1' : [14,14,-48,-48]}

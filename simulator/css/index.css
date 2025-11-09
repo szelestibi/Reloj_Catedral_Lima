@@ -26,3 +26,13 @@ body {
 
 #clockface_container {
  background: transparent; }
+
+.cq_elem {
+ position: absolute;
+ cursor: pointer;
+ background: rgba(0,0,0,0); }
+
+#CQM {
+ position: absolute;
+ cursor: pointer;
+ background: rgba(0,100,0,.1); }
