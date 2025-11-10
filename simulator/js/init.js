@@ -1,8 +1,18 @@
 window.onload = () => {
  get_geometry();
+ var xy;
+ if(wWidth > wHeight) {
+  xy = wHeight; }
+ else {
+  xy = wWidth; }
+ ['mecanism_container','clockface_container','hrs_container','mns_container'].forEach(e => {
+  $_(e).style.width = xy + 'px';
+  $_(e).style.height = xy + 'px';
+  $_(e).style.left = (wWidth - xy) / 2 + 'px;'
+  $_(e).style.top = (wHeight - xy) / 2 + 'px;' });
  face_switch_arg = 1;
  face_switch();
- dial = window.document.createElement('img');
+ const dial = window.document.createElement('img');
  dial.id = 'clock_dial';
  dial.src = './svg/dial.svg';
  $_('clockface_container').appendChild(dial);
@@ -10,36 +20,44 @@ window.onload = () => {
   var rect = dial.getBoundingClientRect();
   var dial_xy = rect.width;
   // console.log(`dial_xy: ${dial_xy}`);
-  dial.style.width = (dial_xy * 77 / 100) + 'px';
+  var hmd = (dial_xy * 77 / 100) + 'px'
+  dial.style.width = hmd;
   mk_clickable_quarters(dial_xy);
-  mk_clickable_menu(dial_xy);
+  mk_clickable_reset(dial_xy * 155 / 100);
   var now = new Date();
   HH = now.getHours() % 12;
   MM = now.getMinutes();
   SS = now.getSeconds();
-  place_clock_hands(); }
- $_('clockface_container').onclick = () => {
-  face_switch(); }
- /* */ }
+  place_clock_hands();
+  make_drivers(); }
+ $_('docbody').onclick = () => {
+  face_switch(); } }
 
 place_clock_hands = () => {
- $_('geneva_60').setAttribute('transform', `rotate(${MM * 6})`);
+ const mns_angle = MM * 6;
+ $_('geneva_60').setAttribute('transform', `rotate(${mns_angle})`);
+ $_('MNS').setAttribute('transform', `scale(27) rotate(${mns_angle + 180})`);
  // MM = 7; SS = 30;
- var angle = Math.floor((MM * 60 + SS + 450) / 900) * 7.5;
- console.log(angle);
- $_('geneva_48').setAttribute('transform', `rotate(${(HH * 30) + (Math.floor((MM * 60 + SS + 450) / 900) * 7.5) })`); }
+ const hrs_angle = (HH * 30) + (Math.floor((MM * 60 + SS + 450) / 900) * 7.5);
+ $_('geneva_48').setAttribute('transform', `rotate(${hrs_angle})`);
+ $_('HRS').setAttribute('transform', `scale(27) rotate(${hrs_angle + 180})`); }
 
-mk_clickable_menu = (xy) => {
+mk_clickable_reset = (xy) => {
  var cq_m = window.document.createElement('div');
  cq_m.id = 'CQM';
  cq_m.className = 'cq_elem';
- cq_m.title = 'MENU';
- cq_m.style.width = xy / 3 + 'px';
- cq_m.style.height = xy / 3 + 'px';
- cq_m.style.left = (wWidth - xy / 3) / 2 + 'px';
- cq_m.style.top = (wHeight - xy / 3) / 2 + 'px';
+ cq_m.title = 'RESET';
+ cq_m.style.width = xy / 2 + 'px';
+ cq_m.style.height = xy / 2 + 'px';
+ cq_m.style.left = (wWidth - xy / 2) / 2 + 'px';
+ cq_m.style.top = (wHeight - xy / 2) / 2 + 'px';
  window.document.body.appendChild(cq_m);
- cq_m.onclick = e => {}}
+ cq_m.onclick = e => {
+  $_('clockface_container').style.visibility = 'visible';
+  $_('hrs_container').style.visibility = 'visible';
+  $_('mns_container').style.visibility = 'visible';
+  change_view('svg_48',views['global']);
+  change_view('svg_60',views['global']); }}
 
 mk_clickable_quarters = (xy) => {
  var cq_0 = window.document.createElement('div');
@@ -79,61 +97,40 @@ mk_clickable_quarters = (xy) => {
  cq_3.style.top = (wHeight - xy) / 2 + 'px';
  window.document.body.appendChild(cq_3);
  cq_0.onclick = () => {
-  if(zoomed == 0) {
    face_switch_arg = 0;
    face_switch(face_switch_arg);
-   zoomed = 1;
-   $_('clock_dial').style.visibility = 'hidden';
+   $_('clockface_container').style.visibility = 'hidden';
+   $_('hrs_container').style.visibility = 'hidden';
+   $_('mns_container').style.visibility = 'hidden';
+   change_view('svg_48',views['hrs_driver_1']);
    change_view('svg_60',views['mins_driver_0']); }
-  else {
-   zoomed = 0;
-   $_('clock_dial').style.visibility = 'visible';
-   change_view('svg_48',views['global']);
-   change_view('svg_60',views['global']); } }
  cq_1.onclick = () => {
-  if(zoomed == 0) {
    face_switch_arg = 0;
    face_switch(face_switch_arg);
-   zoomed = 1;
-   $_('clock_dial').style.visibility = 'hidden';
+   $_('clockface_container').style.visibility = 'hidden';
+   $_('hrs_container').style.visibility = 'hidden';
+   $_('mns_container').style.visibility = 'hidden';
+   change_view('svg_48',views['hrs_driver_0']);
    change_view('svg_60',views['mins_driver_1']); }
-  else {
-   zoomed = 0;
-   $_('clock_dial').style.visibility = 'visible';
-   change_view('svg_48',views['global']);
-   change_view('svg_60',views['global']); } }
  cq_2.onclick = () => {
-  if(zoomed == 0) {
    face_switch_arg = 1;
    face_switch(face_switch_arg);
-   zoomed = 1;
-   $_('clock_dial').style.visibility = 'hidden';
-   change_view('svg_48',views['hrs_driver_0']); }
-  else {
-   zoomed = 0;
-   $_('clock_dial').style.visibility = 'visible';
-   change_view('svg_48',views['global']);
-   change_view('svg_60',views['global']); } }
+   $_('clockface_container').style.visibility = 'hidden';
+   $_('hrs_container').style.visibility = 'hidden';
+   $_('mns_container').style.visibility = 'hidden';
+   change_view('svg_48',views['hrs_driver_0']);
+   change_view('svg_60',views['mins_driver_1']); }
  cq_3.onclick = () => {
-  if(zoomed == 0) {
    face_switch_arg = 1;
    face_switch(face_switch_arg);
-   zoomed = 1;
-   $_('clock_dial').style.visibility = 'hidden';
-   change_view('svg_48',views['hrs_driver_1']); }
-  else {
-   zoomed = 0;
-   $_('clock_dial').style.visibility = 'visible';
-   change_view('svg_48',views['global']);
-   change_view('svg_60',views['global']); }}}
+   $_('clockface_container').style.visibility = 'hidden';
+   $_('hrs_container').style.visibility = 'hidden';
+   $_('mns_container').style.visibility = 'hidden';
+   change_view('svg_48',views['hrs_driver_1']);
+   change_view('svg_60',views['mins_driver_0']); }}
 
 face_switch = () => {
- if(zoomed == 1) {
-  $_('clock_dial').style.visibility = 'visible';
-  change_view('svg_48',views['global']);
-  change_view('svg_60',views['global']);
-  zoomed = 0;
-  return; }
+ // if($_('clockface_container').style.visibility == 'hidden') return;
  if(face_switch_arg == 0) {
   $_('svg_48').style.display = 'none';
   $_('svg_60').style.display = 'block';
