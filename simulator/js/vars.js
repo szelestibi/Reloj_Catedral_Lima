@@ -1,9 +1,22 @@
 var svgns = 'http://www.w3.org/2000/svg';
 
 var wWidth, wHeight;
-var HH, MM, SS;
+var SH, SM;               // START HOUR, START MINUTE
+var HH, MM, SS;           // time indicated by clock
+var TH, TM, TS;           // target time = to be indicated
 var geneva_angle_deg = 0; // geneva wheel rotation angle
 var driver_angle_deg = 0; // driver wheel rotation angle
+
+// --- MANUAL SETTINGS BEGIN ---
+var mode =  0;            // -1 DECO CLOCK, 0 = normal run [TIME to TH+TM], 1+ = test [set TH+TM manually]
+var secx = 50;            // second when the movement to next minute begins
+// --- MANUAL SETTINGS END -----
+
+var modes = {
+ '-1' : 'HOME CLOCK',
+  '0' : 'NORMAL RUN' }
+
+var psec = -1;            // previous second value for time critical routines
 
 var face_switch_arg = 0;
 
@@ -35,3 +48,5 @@ var views = { // svg  [cm]
  'hrs_driver_1' : [14,14,-48,-48]}
 
 var drivers = {}
+
+var clockmove; // interval handler

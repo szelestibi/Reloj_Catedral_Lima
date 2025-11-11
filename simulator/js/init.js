@@ -5,12 +5,19 @@ window.onload = () => {
   xy = wHeight; }
  else {
   xy = wWidth; }
- ['mecanism_container','clockface_container','hrs_container','mns_container'].forEach(e => {
+ var digital_clock = window.document.createElement('div');
+ digital_clock.id = 'DC';
+ window.document.body.appendChild(digital_clock);
+ ['mecanism_container','clockface_container','seconds_container','marker_container','hrs_container','mns_container'].forEach(e => {
   $_(e).style.width = xy + 'px';
   $_(e).style.height = xy + 'px';
   $_(e).style.left = (wWidth - xy) / 2 + 'px;'
   $_(e).style.top = (wHeight - xy) / 2 + 'px;' });
- face_switch_arg = 1;
+ /*
+ if(mode == -1) {
+  $_('mecanism_container').style.visibility = 'hidden';
+  $_('marker_container').style.visibility = 'hidden'; } */
+ face_switch_arg = 0;
  face_switch();
  const dial = window.document.createElement('img');
  dial.id = 'clock_dial';
@@ -24,29 +31,56 @@ window.onload = () => {
   dial.style.width = hmd;
   mk_clickable_quarters(dial_xy);
   mk_clickable_reset(dial_xy * 155 / 100);
+  var now_date = new Date();
+  SH = now_date.getHours();
+  SM = now_date.getMinutes();
   getTimeNow();
-  place_clock_hands();
-  setInterval(() => {
+  exec_movement(F = 1);
+  setTimeout(() => {
+   if(mode in modes) {
+    window.document.title = 'RCL ' + modes[mode]; }
+   else {
+    window.document.title = 'RCL MANUAL TEST'; }},3000);
+  clockjump = setInterval(() => {
    getTimeNow();
-   place_clock_hands(); },10000);
+   exec_movement(F = 0); },250);
   make_drivers(); }
  $_('docbody').onclick = () => {
-  face_switch(); } }
+  face_switch(); }
+ /* KEYS */ }
 
 getTimeNow = () => {
- var now = new Date();
- HH = now.getHours() % 12;
- MM = now.getMinutes();
- SS = now.getSeconds(); }
+ var now_date = new Date();
+ HH = now_date.getHours();
+ MM = now_date.getMinutes();
+ SS = now_date.getSeconds();
+ now_date.setTime(now_date.getTime() + (60 - secx) * 1000);
+ TH = now_date.getHours();
+ TM = now_date.getMinutes();
+ TS = now_date.getSeconds(); }
 
-place_clock_hands = () => {
- console.log(`${String(HH).padStart(2, '0')}:${String(MM).padStart(2, '0')}:${String(SS).padStart(2, '0')}`);
- const mns_angle = MM * 6;
- $_('geneva_60').setAttribute('transform', `rotate(${mns_angle})`);
- $_('MNS').setAttribute('transform', `scale(27) rotate(${mns_angle + 180})`);
- const hrs_angle = (HH * 30) + (Math.floor((MM * 60 + SS + 450) / 900) * 7.5);
- $_('geneva_48').setAttribute('transform', `rotate(${hrs_angle})`);
- $_('HRS').setAttribute('transform', `scale(27) rotate(${hrs_angle + 180})`); }
+exec_movement = (F = 0) => {
+ if(SS == psec) return;
+ console.log(`TT: ${String(TH).padStart(2, '0')}:${String(TM).padStart(2, '0')}:${String(TS).padStart(2, '0')}`);
+ $_('DC').innerHTML = `${String(HH).padStart(2, '0')}:${String(MM).padStart(2, '0')}:${String(SS).padStart(2, '0')}`;
+ const secs_angle = SS * 6;
+ $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`);
+ if((F == 1) || (mode == -1)) {
+  const mns_angle = MM * 6;
+  $_('geneva_60').setAttribute('transform', `rotate(${mns_angle})`);
+  $_('MNS').setAttribute('transform', `scale(27) rotate(${mns_angle + 180})`);
+  const hrs_angle = ((HH % 12) * 30) + (Math.floor((MM * 60 + SS + 450) / 900) * 7.5);
+  $_('geneva_48').setAttribute('transform', `rotate(${hrs_angle})`);
+  $_('HRS').setAttribute('transform', `scale(27) rotate(${hrs_angle + 180})`); }
+ if((mode == 0) && (TS == 0)) {
+  rotate_marker(); }
+ psec = SS; }
+
+rotate_marker = () => {
+ if(face_switch_arg == 0) { // HRS
+  $_('marker').setAttribute('transform', `rotate(-11.25)`); }
+ else { // MNS
+  $_('marker').setAttribute('transform', `rotate(9)`); }}
 
 mk_clickable_reset = (xy) => {
  var cq_m = window.document.createElement('div');

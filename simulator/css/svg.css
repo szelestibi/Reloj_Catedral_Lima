@@ -44,3 +44,16 @@ svg .deco {
 .driver_pin {
  fill: rgba(8,8,8,.5);
  stroke: none; }
+
+svg #marker {
+ position: absolute;
+ fill: none;
+ fill: rgba(0,180,0,.3);
+ stroke-width: .1;
+ stroke: rgba(0,180,0,.9); }
+
+svg #SECS {
+ fill: none;
+ fill: rgba(180,0,0,.9);
+ stroke-width: .1;
+ stroke: rgba(180,0,0,.9); }
