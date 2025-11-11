@@ -24,20 +24,26 @@ window.onload = () => {
   dial.style.width = hmd;
   mk_clickable_quarters(dial_xy);
   mk_clickable_reset(dial_xy * 155 / 100);
-  var now = new Date();
-  HH = now.getHours() % 12;
-  MM = now.getMinutes();
-  SS = now.getSeconds();
+  getTimeNow();
   place_clock_hands();
+  setInterval(() => {
+   getTimeNow();
+   place_clock_hands(); },10000);
   make_drivers(); }
  $_('docbody').onclick = () => {
   face_switch(); } }
 
+getTimeNow = () => {
+ var now = new Date();
+ HH = now.getHours() % 12;
+ MM = now.getMinutes();
+ SS = now.getSeconds(); }
+
 place_clock_hands = () => {
+ console.log(`${String(HH).padStart(2, '0')}:${String(MM).padStart(2, '0')}:${String(SS).padStart(2, '0')}`);
  const mns_angle = MM * 6;
  $_('geneva_60').setAttribute('transform', `rotate(${mns_angle})`);
  $_('MNS').setAttribute('transform', `scale(27) rotate(${mns_angle + 180})`);
- // MM = 7; SS = 30;
  const hrs_angle = (HH * 30) + (Math.floor((MM * 60 + SS + 450) / 900) * 7.5);
  $_('geneva_48').setAttribute('transform', `rotate(${hrs_angle})`);
  $_('HRS').setAttribute('transform', `scale(27) rotate(${hrs_angle + 180})`); }

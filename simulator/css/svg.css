@@ -24,6 +24,10 @@ svg .half_h {
 svg #hand {
  fill: rgba(20,40,60,1); }
 
+svg .contrapeso {
+ fill: rgba(150,150,150,.3);
+ stroke: none; }
+
 svg .deco {
  fill: rgba(255,255,255,.7);
  stroke: none; }
