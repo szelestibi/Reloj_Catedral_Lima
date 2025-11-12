@@ -5,14 +5,17 @@ var SH, SM;               // SHOWN TIME  - SET @ STARTUP
 var HH, MM, SS;           // ACTUAL TIME - ACTUALIZED EVERY SECOND
 var TH, TM, TS;           // TARGET TIME - TO BE INDICATED
 
-// --- MANUAL SETTINGS BEGIN ---
+// --- ETC CMANUAL SETTINGS BEGIN ---
 var mode = -1;            // -1 FORCE DECO CLOCK WITH JUMPING HANDS, 0 = NORMAL RUN, 1 = TEST [AUTOSWITCH 0/1, SET mode = 0]
 var secx = 50;            // second when the movement to next minute begins in mode 0
-// --- MANUAL SETTINGS END -----
+// --- ETC MANUAL SETTINGS END -----
 
 var modes = {
  '-1' : 'HOME CLOCK',
   '0' : 'NORMAL RUN' }
+
+var DELTA_H = 0;
+var DELTA_M = 0;
 
 var psec = -1;            // previous second value for time critical routines
 
@@ -48,3 +51,5 @@ var views = { // svg  [cm]
 var drivers = {}
 
 var clockmove; // interval handler
+
+var loaded = 0;

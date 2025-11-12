@@ -8,6 +8,9 @@ window.onload = () => {
  var digital_clock = window.document.createElement('div');
  digital_clock.id = 'DC';
  window.document.body.appendChild(digital_clock);
+ var target_clock = window.document.createElement('div');
+ target_clock.id = 'TC';
+ window.document.body.appendChild(target_clock);
  ['mechanism_container','clockface_container','seconds_container','marker_container','hrs_container','mns_container'].forEach(e => {
   $_(e).style.width = xy + 'px';
   $_(e).style.height = xy + 'px';
@@ -46,77 +49,97 @@ window.onload = () => {
   make_drivers(); }
  $_('docbody').onclick = () => {
   face_switch(); }
- window.document.onkeydown = function(k) {
-  if(k.key == 'ArrowUp') {         // HRS++
+ if(mode != -1) {
+  window.document.onkeydown = function(k) {
+   if(k.key == 'ArrowUp') {         // HRS++
+    if(face_switch_arg == 0) {
+     switch_mode_1();
+     if(++TH == 24) TH = 0;
+     rotate_marker(); }}
+   else if(k.key == 'ArrowDown') {  // HRS--
+    if(face_switch_arg == 0) {
+     switch_mode_1();
+     if(--TH == -1) TH = 23;
+     rotate_marker(); }}
+   else if(k.key == 'ArrowLeft') {  // MNS --
+    if(face_switch_arg == 1) {
+     switch_mode_1();
+     if(--TM == -1) TM = 59;
+     rotate_marker(); }}
+   else if(k.key == 'ArrowRight') { // MNS++
+    if(face_switch_arg == 1) {
+     switch_mode_1();
+     if(++TM == 60) TM = 0;
+     rotate_marker(); }}
+   else if(k.key == 'Enter') {      // EXEC
+    switch_mode_1();
+   }
+   else if(k.key == 'Escape') {
+    switch_mode_0(); }
+   else if(k.key == ' ') {
+    face_switch(); }}}}
 
-  }
-  else if(k.key == 'ArrowDown') {  // HRS--
+switch_mode_1 = () => {
+ mode = 1;
+ window.document.title = 'RCL MANUAL TEST';
+ }
 
-  }
-  else if(k.key == 'ArrowLeft') {  // MNS --
-
-  }
-  else if(k.key == 'ArrowRight') { // MNS++
-
-  }
-  else if(k.key == 'Enter') {      // EXEC
-
-  }
-  else if(k.key == 'Escape') {}
-  else if(k.key == ' ') {}}}
+switch_mode_0 = () => {
+ mode = 0;
+ window.document.title = 'RCL ' + modes[mode]; }
 
 getTimeNow = () => {
  var now_date = new Date();
  SS = now_date.getSeconds();
  MM = now_date.getMinutes();
  HH = now_date.getHours();
-
+ if(mode == -1) {
+  SM = MM;
+  SH = HH; }
  now_date.setTime(now_date.getTime() + (60 - secx) * 1000); // TARGET TIME
- TH = now_date.getHours();
- TM = now_date.getMinutes();
- TS = now_date.getSeconds(); }
+ TS = now_date.getSeconds();
+ if((mode == 0) || (loaded == 0)) {
+  TM = now_date.getMinutes();
+  TH = now_date.getHours(); }}
 
 exec_movement = () => {
  if(SS == psec) return;
- // console.log(`TargetTime: ${String(TH).padStart(2, '0')}:${String(TM).padStart(2, '0')}:${String(TS).padStart(2, '0')}`);
  $_('DC').innerHTML = `${String(HH).padStart(2,'0')}:${String(MM).padStart(2,'0')}:${String(SS).padStart(2,'0')}`;
+ if(mode == 0) {
+  $_('TC').innerHTML = `${String(TH).padStart(2, '0')}:${String(TM).padStart(2, '0')}:${String(TS).padStart(2, '0')}`; }
+ else if(mode == 1) {
+  $_('TC').innerHTML = `${String(TH).padStart(2, '0')}:${String(TM).padStart(2, '0')}`; }
  const secs_angle = SS * 6;
  $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`);
- const mns_angle = SM * 6;
- $_('geneva_60').setAttribute('transform', `rotate(${mns_angle})`);
- $_('MNS').setAttribute('transform', `scale(27) rotate(${mns_angle + 180})`);
- const hrs_angle = ((SH % 12) * 30) + (Math.floor((SM * 60 + SS + 450) / 900) * 7.5);
- $_('geneva_48').setAttribute('transform', `rotate(${hrs_angle})`);
- $_('HRS').setAttribute('transform', `scale(27) rotate(${hrs_angle + 180})`);
+ if((mode == -1) || (loaded == 0)) {
+  const mns_angle = SM * 6;
+  $_('geneva_60').setAttribute('transform', `rotate(${mns_angle})`);
+  $_('MNS').setAttribute('transform', `scale(27) rotate(${mns_angle + 180})`);
+  const hrs_angle = ((SH % 12) * 30) + (Math.floor((SM * 60 + SS + 450) / 900) * 7.5);
+  $_('geneva_48').setAttribute('transform', `rotate(${hrs_angle})`);
+  $_('HRS').setAttribute('transform', `scale(27) rotate(${hrs_angle + 180})`);
+  loaded = 1; }
+ if((mode == 0) && ((TS == 0) || (TS == 30))) {
+  rotate_marker(TS); }
  psec = SS; }
 
-rotate_marker = () => {
+rotate_marker = (ts = -1) => {
+ if(mode == -1) return;
  if(face_switch_arg == 0) { // HRS
-  $_('marker').setAttribute('transform', `rotate(-11.25)`); }
+  if(ts = 0) return;
+  const hrs_angle = ((SH % 12) * 30) + (Math.floor((SM * 60 + SS + 450) / 900) * 7.5);
+  const hrt_angle = ((TH % 12) * 30) + (Math.floor((TM * 60 + SS + 450) / 900) * 7.5);
+  const angle_diff = (hrt_angle - hrs_angle);
+  console.log(`angle_diff: ${angle_diff}`);
+  $_('marker').setAttribute('transform', `rotate(${-angle_diff})`); }
  else { // MNS
+  if(ts == 30) return;
   var min_diff = (TM - SM) % 60;
   console.log(`${TM} - ${SM} = ${min_diff}`);
-  $_('marker').setAttribute('transform', `rotate(-${min_diff * 6})`); }}
-
-mk_clickable_reset = (xy) => {
- var cq_m = window.document.createElement('div');
- cq_m.id = 'CQM';
- cq_m.className = 'cq_elem';
- cq_m.title = 'RESET';
- cq_m.style.width = xy / 2 + 'px';
- cq_m.style.height = xy / 2 + 'px';
- cq_m.style.left = (wWidth - xy / 2) / 2 + 'px';
- cq_m.style.top = (wHeight - xy / 2) / 2 + 'px';
- window.document.body.appendChild(cq_m);
- cq_m.onclick = e => {
-  $_('clockface_container').style.visibility = 'visible';
-  $_('hrs_container').style.visibility = 'visible';
-  $_('mns_container').style.visibility = 'visible';
-  change_view('svg_48',views['global']);
-  change_view('svg_60',views['global']); }}
+  $_('marker').setAttribute('transform', `rotate(${-min_diff * 6})`); }}
 
 face_switch = () => {
- // if($_('clockface_container').style.visibility == 'hidden') return;
+ // if(mode == -1) return;
  if(face_switch_arg == 0) {
   $_('svg_48').style.display = 'none';
   $_('svg_60').style.display = 'block';
@@ -134,6 +157,24 @@ change_view = (s,[w,h,x,y]) => {
  s.viewBox.baseVal.y = y;
  s.viewBox.baseVal.width = w;
  s.viewBox.baseVal.height = h; }
+
+mk_clickable_reset = (xy) => {
+ if(mode == -1) return;
+ var cq_m = window.document.createElement('div');
+ cq_m.id = 'CQM';
+ cq_m.className = 'cq_elem';
+ cq_m.title = 'RESET';
+ cq_m.style.width = xy / 2 + 'px';
+ cq_m.style.height = xy / 2 + 'px';
+ cq_m.style.left = (wWidth - xy / 2) / 2 + 'px';
+ cq_m.style.top = (wHeight - xy / 2) / 2 + 'px';
+ window.document.body.appendChild(cq_m);
+ cq_m.onclick = e => {
+  $_('clockface_container').style.visibility = 'visible';
+  $_('hrs_container').style.visibility = 'visible';
+  $_('mns_container').style.visibility = 'visible';
+  change_view('svg_48',views['global']);
+  change_view('svg_60',views['global']); }}
 
 mk_clickable_quarters = (xy) => {
  if(mode == -1) return;
