@@ -129,14 +129,19 @@ rotate_marker = (ts = -1) => {
   if(ts = 0) return;
   const hrs_angle = ((SH % 12) * 30) + (Math.floor((SM * 60 + SS + 450) / 900) * 7.5);
   const hrt_angle = ((TH % 12) * 30) + (Math.floor((TM * 60 + SS + 450) / 900) * 7.5);
-  const angle_diff = (hrt_angle - hrs_angle);
-  console.log(`angle_diff: ${angle_diff}`);
+  var angle_diff = (((hrt_angle - hrs_angle) + 180) % 360 + 360) % 360 - 180;
+  DELTA_H = angle_diff / 7.5;
+  console.log(`DELTA_H: ${DELTA_H} [${angle_diff}°]`);
   $_('marker').setAttribute('transform', `rotate(${-angle_diff})`); }
  else { // MNS
   if(ts == 30) return;
-  var min_diff = (TM - SM) % 60;
-  console.log(`${TM} - ${SM} = ${min_diff}`);
-  $_('marker').setAttribute('transform', `rotate(${-min_diff * 6})`); }}
+  const min_diff = (TM - SM) % 60;
+  var angle_diff = (((min_diff * 6) + 180) % 360 + 360) % 360 - 180;
+  DELTA_M = angle_diff / 6;
+  console.log(`DELTA_M: ${DELTA_M} [${angle_diff}°]`);
+  $_('marker').setAttribute('transform', `rotate(${-angle_diff})`); }}
+
+const normalizeAngle = a => ((a + 180) % 360 + 360) % 360 - 180;
 
 face_switch = () => {
  // if(mode == -1) return;
