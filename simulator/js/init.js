@@ -8,17 +8,14 @@ window.onload = () => {
  var digital_clock = window.document.createElement('div');
  digital_clock.id = 'DC';
  window.document.body.appendChild(digital_clock);
- ['mecanism_container','clockface_container','seconds_container','marker_container','hrs_container','mns_container'].forEach(e => {
+ ['mechanism_container','clockface_container','seconds_container','marker_container','hrs_container','mns_container'].forEach(e => {
   $_(e).style.width = xy + 'px';
   $_(e).style.height = xy + 'px';
   $_(e).style.left = (wWidth - xy) / 2 + 'px;'
   $_(e).style.top = (wHeight - xy) / 2 + 'px;' });
- /*
  if(mode == -1) {
-  $_('mecanism_container').style.visibility = 'hidden';
-  $_('marker_container').style.visibility = 'hidden'; } */
- face_switch_arg = 0;
- face_switch();
+  // $_('mechanism_container').style.visibility = 'hidden';
+  $_('marker_container').style.visibility = 'hidden'; }
  const dial = window.document.createElement('img');
  dial.id = 'clock_dial';
  dial.src = './svg/dial.svg';
@@ -32,10 +29,12 @@ window.onload = () => {
   mk_clickable_quarters(dial_xy);
   mk_clickable_reset(dial_xy * 155 / 100);
   var now_date = new Date();
-  SH = now_date.getHours();
   SM = now_date.getMinutes();
+  SH = now_date.getHours();
   getTimeNow();
-  exec_movement(F = 1);
+  face_switch_arg = 0; // 0 = SHOW MNS MECHANIC, 1 = HRS
+  face_switch();       // 0 = SHOW MNS MECHANIC, 1 = HRS
+  exec_movement();
   setTimeout(() => {
    if(mode in modes) {
     window.document.title = 'RCL ' + modes[mode]; }
@@ -47,40 +46,57 @@ window.onload = () => {
   make_drivers(); }
  $_('docbody').onclick = () => {
   face_switch(); }
- /* KEYS */ }
+ window.document.onkeydown = function(k) {
+  if(k.key == 'ArrowUp') {         // HRS++
+
+  }
+  else if(k.key == 'ArrowDown') {  // HRS--
+
+  }
+  else if(k.key == 'ArrowLeft') {  // MNS --
+
+  }
+  else if(k.key == 'ArrowRight') { // MNS++
+
+  }
+  else if(k.key == 'Enter') {      // EXEC
+
+  }
+  else if(k.key == 'Escape') {}
+  else if(k.key == ' ') {}}}
 
 getTimeNow = () => {
  var now_date = new Date();
- HH = now_date.getHours();
- MM = now_date.getMinutes();
  SS = now_date.getSeconds();
- now_date.setTime(now_date.getTime() + (60 - secx) * 1000);
+ MM = now_date.getMinutes();
+ HH = now_date.getHours();
+
+ now_date.setTime(now_date.getTime() + (60 - secx) * 1000); // TARGET TIME
  TH = now_date.getHours();
  TM = now_date.getMinutes();
  TS = now_date.getSeconds(); }
 
-exec_movement = (F = 0) => {
+exec_movement = () => {
  if(SS == psec) return;
- console.log(`TT: ${String(TH).padStart(2, '0')}:${String(TM).padStart(2, '0')}:${String(TS).padStart(2, '0')}`);
- $_('DC').innerHTML = `${String(HH).padStart(2, '0')}:${String(MM).padStart(2, '0')}:${String(SS).padStart(2, '0')}`;
+ // console.log(`TargetTime: ${String(TH).padStart(2, '0')}:${String(TM).padStart(2, '0')}:${String(TS).padStart(2, '0')}`);
+ $_('DC').innerHTML = `${String(HH).padStart(2,'0')}:${String(MM).padStart(2,'0')}:${String(SS).padStart(2,'0')}`;
  const secs_angle = SS * 6;
  $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`);
- if((F == 1) || (mode == -1)) {
-  const mns_angle = MM * 6;
-  $_('geneva_60').setAttribute('transform', `rotate(${mns_angle})`);
-  $_('MNS').setAttribute('transform', `scale(27) rotate(${mns_angle + 180})`);
-  const hrs_angle = ((HH % 12) * 30) + (Math.floor((MM * 60 + SS + 450) / 900) * 7.5);
-  $_('geneva_48').setAttribute('transform', `rotate(${hrs_angle})`);
-  $_('HRS').setAttribute('transform', `scale(27) rotate(${hrs_angle + 180})`); }
- if((mode == 0) && (TS == 0)) {
-  rotate_marker(); }
+ const mns_angle = SM * 6;
+ $_('geneva_60').setAttribute('transform', `rotate(${mns_angle})`);
+ $_('MNS').setAttribute('transform', `scale(27) rotate(${mns_angle + 180})`);
+ const hrs_angle = ((SH % 12) * 30) + (Math.floor((SM * 60 + SS + 450) / 900) * 7.5);
+ $_('geneva_48').setAttribute('transform', `rotate(${hrs_angle})`);
+ $_('HRS').setAttribute('transform', `scale(27) rotate(${hrs_angle + 180})`);
  psec = SS; }
 
 rotate_marker = () => {
  if(face_switch_arg == 0) { // HRS
   $_('marker').setAttribute('transform', `rotate(-11.25)`); }
  else { // MNS
-  $_('marker').setAttribute('transform', `rotate(9)`); }}
+  var min_diff = (TM - SM) % 60;
+  console.log(`${TM} - ${SM} = ${min_diff}`);
+  $_('marker').setAttribute('transform', `rotate(-${min_diff * 6})`); }}
 
 mk_clickable_reset = (xy) => {
  var cq_m = window.document.createElement('div');
@@ -99,7 +115,28 @@ mk_clickable_reset = (xy) => {
   change_view('svg_48',views['global']);
   change_view('svg_60',views['global']); }}
 
+face_switch = () => {
+ // if($_('clockface_container').style.visibility == 'hidden') return;
+ if(face_switch_arg == 0) {
+  $_('svg_48').style.display = 'none';
+  $_('svg_60').style.display = 'block';
+  face_switch_arg = 1; }
+ else {
+  $_('svg_60').style.display = 'none';
+  $_('svg_48').style.display = 'block';
+  face_switch_arg = 0; }
+ rotate_marker(); }
+
+change_view = (s,[w,h,x,y]) => {
+ if(typeof(s) == 'string') {
+  s = $_(s); }
+ s.viewBox.baseVal.x = x;
+ s.viewBox.baseVal.y = y;
+ s.viewBox.baseVal.width = w;
+ s.viewBox.baseVal.height = h; }
+
 mk_clickable_quarters = (xy) => {
+ if(mode == -1) return;
  var cq_0 = window.document.createElement('div');
  cq_0.id = 'CQ0';
  cq_0.className = 'cq_elem';
@@ -168,22 +205,3 @@ mk_clickable_quarters = (xy) => {
    $_('mns_container').style.visibility = 'hidden';
    change_view('svg_48',views['hrs_driver_1']);
    change_view('svg_60',views['mins_driver_0']); }}
-
-face_switch = () => {
- // if($_('clockface_container').style.visibility == 'hidden') return;
- if(face_switch_arg == 0) {
-  $_('svg_48').style.display = 'none';
-  $_('svg_60').style.display = 'block';
-  face_switch_arg = 1; }
- else {
-  $_('svg_60').style.display = 'none';
-  $_('svg_48').style.display = 'block';
-  face_switch_arg = 0; }}
-
-change_view = (s,[w,h,x,y]) => {
- if(typeof(s) == 'string') {
-  s = $_(s); }
- s.viewBox.baseVal.x = x;
- s.viewBox.baseVal.y = y;
- s.viewBox.baseVal.width = w;
- s.viewBox.baseVal.height = h; }

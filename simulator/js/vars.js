@@ -1,15 +1,13 @@
 var svgns = 'http://www.w3.org/2000/svg';
 
 var wWidth, wHeight;
-var SH, SM;               // START HOUR, START MINUTE
-var HH, MM, SS;           // time indicated by clock
-var TH, TM, TS;           // target time = to be indicated
-var geneva_angle_deg = 0; // geneva wheel rotation angle
-var driver_angle_deg = 0; // driver wheel rotation angle
+var SH, SM;               // SHOWN TIME  - SET @ STARTUP
+var HH, MM, SS;           // ACTUAL TIME - ACTUALIZED EVERY SECOND
+var TH, TM, TS;           // TARGET TIME - TO BE INDICATED
 
 // --- MANUAL SETTINGS BEGIN ---
-var mode =  0;            // -1 DECO CLOCK, 0 = normal run [TIME to TH+TM], 1+ = test [set TH+TM manually]
-var secx = 50;            // second when the movement to next minute begins
+var mode = -1;            // -1 FORCE DECO CLOCK WITH JUMPING HANDS, 0 = NORMAL RUN, 1 = TEST [AUTOSWITCH 0/1, SET mode = 0]
+var secx = 50;            // second when the movement to next minute begins in mode 0
 // --- MANUAL SETTINGS END -----
 
 var modes = {
