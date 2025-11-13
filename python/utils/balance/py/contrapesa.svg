@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" ?><!-- generated with ./contrapesa.py --><!-- SZT 2025.11.10 22:38:42 -->
+<?xml version="1.0" encoding="UTF-8" ?><!-- generated with ./contrapesa.py --><!-- SZT 2025.11.12 15:23:25 -->
 <svg xmlns="http://www.w3.org/2000/svg" width="13cm" height="57cm" viewBox="-6.5 -50.5 13 57">
 <defs><style>
  path { fill: rgba(30,60,90,.7); stroke: none; fill-rule:evenodd; }
  #bgnd { fill: white; stroke: none; }
 </style></defs>
 <rect id="bgnd" width="13" height="57" x="-6.5" y="-50.5" />
-<path id="cpx" d="M -1.5 -5.809 V -42.292 A 4 4 0 1 1 1.5 -42.292 V -5.809 A 6 6 0 1 1 -1.5 -5.809 Z" />
+<path id="cpx" class="contrapeso" d="M -1.5 -5.809 V -45.292 A 4 4 0 1 1 1.5 -45.292 V -5.809 Z" />
 </svg>

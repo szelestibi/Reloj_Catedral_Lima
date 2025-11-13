@@ -6,7 +6,7 @@ AGUJAS:
   # MINUTERO ----------------------------------------------
   mns_00_base:
     grid: 24x150
-    piece: MNS_contrapeso
+    piece: MNS_contrapeso_delgado
     mainline: hand
     #include:
     axis_hole: mns_axis_diameter
@@ -15,14 +15,15 @@ AGUJAS:
       - ojo_contrapeso
   mns_01_capa_1:
     grid: 24x150
-    piece: MNS_contrapeso
+    piece: MNS_contrapeso_delgado
     mainline: hand
     include:
       - strip
       - d_left
       - d_right
       - d_far
-      - d_circle
+      #- d_circle
+      - d_spitz
     axis_hole: mns_axis_diameter
     cuts_files: # cuts and holes
       - hexafix_60

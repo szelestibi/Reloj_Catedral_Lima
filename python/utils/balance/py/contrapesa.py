@@ -13,14 +13,14 @@ bgnd = True
 
 dimensiones = {
  'width_cm': 3,
- 'length_cm' : 50,
+ 'length_cm' : 53,
  'r_axis_cm': 6,
  'r_weight_cm': 4 }
 
 #ret = 1 # stumpf gerundet
 #ret = 2 # stumpf gerundet mit achse
-ret = 3 # mit achse und gegengewicht
-#ret = 4 # mit gegengewicht
+#ret = 3 # mit achse und gegengewicht
+ret = 4 # mit gegengewicht
 
 W = dimensiones['width_cm']
 L = dimensiones['length_cm']
@@ -79,12 +79,6 @@ def build_counterweight(w,l,r,s):
  elif ret == 4:
   return f'M {float_shorten(P0.x)} {float_shorten(P0.y)} V {float_shorten(PA.y)} A {float_shorten(s)} {float_shorten(s)} 0 1 1 {float_shorten(PB.x)} {float_shorten(PB.y)} V {float_shorten(P1.y)} Z '
 
-
- # return f'M {P0.x} {P0.y} V {-l + w} A {w/2} {w/2} 0 0 1 {P1.x} {-l + w} V {P1.y} Z '                               # stumpf gerundet
- # return f'M {P0.x} {P0.y} V {-l + w} A {w/2} {w/2} 0 0 1 {P1.x} {-l + w} V {P1.y} A {r} {r} 0 1 1 {P0.x} {P0.y} Z ' # stumpf gerundet mit achse
- # return f'M {P0.x} {P0.y} V {PA.y} A {s} {s} 0 1 1 {PB.x} {PB.y} V {P1.y} A {r} {r} 0 1 1 {P0.x} {P0.y} Z '         # mit achse und gegengewicht
- # return f'M {P0.x} {P0.y} V {PA.y} A {s} {s} 0 1 1 {PB.x} {PB.y} V {P1.y} Z '                                         # mit gegengewicht
-
 def build_svg():
  d = build_counterweight(W,L,R,S)
  timestamp = datetime.now().strftime('%Y.%m.%d %H:%M:%S')
@@ -95,7 +89,7 @@ def build_svg():
  #bgnd {{ fill: white; stroke: none; }}
 </style></defs>
 {'<rect id="bgnd" width="13" height="57" x="-6.5" y="-50.5" />' if bgnd == True else ''}
-<path id="cpx" d="{d.strip()}" />
+<path id="cpx" class="contrapeso" d="{d.strip()}" />
 </svg>'''
  return svg
 

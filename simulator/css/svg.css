@@ -57,3 +57,7 @@ svg #SECS {
  fill: rgba(180,0,0,.9);
  stroke-width: .1;
  stroke: rgba(180,0,0,.9); }
+
+svg #deco_axis {
+ fill: rgba(191,191,191,.9);
+ stroke: none; }

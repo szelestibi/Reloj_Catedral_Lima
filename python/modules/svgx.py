@@ -52,7 +52,10 @@ def make(unit,filename):
  svg_txt.append(piece.piecedata['mainline'].toxml())
  for entry in piece.piecedata:
   if entry != 'opening_tag' and entry != 'mainline':
-   svg_txt.append(piece.piecedata[entry].toxml())
+   try:
+    svg_txt.append(piece.piecedata[entry].toxml())
+   except AttributeError:
+    print(f'INCLUDE ERROR: "{entry}" seems to be inexistent ...')
  # axis hole
  if 'axis_hole' in cfgx.makedata[unit][part]:
   r_add = 0
