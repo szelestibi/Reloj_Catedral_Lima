@@ -15,6 +15,7 @@ def join_paths(svg_file):
   print('no <path> elements found')
   return
  if len(paths) == 1:
+  return
   with open(f'./{svg_file}_joined.svg', 'w', encoding='utf-8') as f:
    svgroot.writexml(f, encoding='utf-8')
   return
