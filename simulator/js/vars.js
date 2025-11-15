@@ -30,18 +30,16 @@ var wheels = {
   'driver_axis_dist_cm' : 59.337,
   'driving_pin_orbit_cm' : 4.327,
   'driving_pin_diameter_cm' : 2.00,
-  'driving_pin_touch_angle_deg' : 120.00 },
+  'driving_pin_touch_angle_deg' : 90 },
  'tri_driver_mns' : {
   'driver_axis_dist_cm' : 58.949,
   'driving_pin_orbit_cm' : 3.463,
   'driving_pin_diameter_cm' : 2.00,
-  'driving_pin_touch_angle_deg' : 120.00 }}
+  'driving_pin_touch_angle_deg' : -90 }}
 
 var axis_deg = {
- 'MNS_0' :  7 * 6,
- 'MNS_1' : 23 * 6,
- 'HRS_0' :  7 * 30 + 2 * 7.5,
- 'HRS_1' : 10 * 30 + 2 * 7.5 }
+ 'MNS' : 23 * 6,
+ 'HRS' :  7 * 30 + 2 * 7.5 }
 
 var views = { // svg  [cm]
  'global' : [130,130,-65,-65],
@@ -55,3 +53,6 @@ var drivers = {}
 var clockmove; // interval handler
 
 var loaded = 0;
+
+D_HRS = 0;
+D_MNS = 0;
