@@ -25,15 +25,17 @@ var zoomed = 0;
 
 var wheels = {
  'driver_axis_dist_cm' : 57.896,
- 'driver_axis_diameter_cm' : 1.00,
- 'geneva_48' : {
-  'driving_pin_orbit_cm' : 3.816,
-  'driving_pin_diameter_cm' : 1.25,
-  'driving_pin_touch_angle_deg' : 10.92 },
- 'geneva_60' : {
-  'driving_pin_orbit_cm' : 3.074,
-  'driving_pin_diameter_cm' : 1.00,
-  'driving_pin_touch_angle_deg' : 12.75 }}
+ 'driver_axis_diameter_cm' : 2.00,
+ 'tri_driver_hrs' : {
+  'driver_axis_dist_cm' : 59.337,
+  'driving_pin_orbit_cm' : 4.327,
+  'driving_pin_diameter_cm' : 2.00,
+  'driving_pin_touch_angle_deg' : 120.00 },
+ 'tri_driver_mns' : {
+  'driver_axis_dist_cm' : 58.949,
+  'driving_pin_orbit_cm' : 3.463,
+  'driving_pin_diameter_cm' : 2.00,
+  'driving_pin_touch_angle_deg' : 120.00 }}
 
 var axis_deg = {
  'MNS_0' :  7 * 6,
