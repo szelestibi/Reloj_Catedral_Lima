@@ -6,7 +6,7 @@ import math
 import os
 import yaml
 
-o = 74.5 # offset
+o = 74.5 # offset, unit is SVG given unit
 
 class Point:
  def __init__(self, x, y):
