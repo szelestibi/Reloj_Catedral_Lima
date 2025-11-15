@@ -5,18 +5,19 @@ from xml.dom import minidom
 import math
 
 # --- SETTINGS BEGIN ----------------------------------
+gridfile = './grid_020x020.svg'
 grid = True
-grid = False
+#grid = False
 slots = 60   # MNS
 # slots = 48 # HRS
 # given R, calculate C -------
-R_mm = 70                    # big wheel radius
-C_mm = math.pi * 2 * R_mm    # big wheel circumference
+R_mm = 70                     # big wheel radius
+C_mm = math.pi * 2 * R_mm     # big wheel circumference
 # given C, calculate R -------
-#C_mm = 3600                 # big wheel circumference
-#R_mm = C_mm / (2 * math.pi) # big wheel radius
+# C_mm = 3600                 # big wheel circumference
+# R_mm = C_mm / (2 * math.pi) # big wheel radius
 # also needed in settings: ---
-o_mm = 3                     # driving pin diameter
+o_mm = 3                      # driving pin diameter
 print(f'''
 --- INPUT --------------------
 slots:            {slots:5d}
@@ -132,7 +133,7 @@ def add_path(id,cl,d):
 
 def load_grid():
  global svgroot, svgmain
- svgroot = minidom.parse(f'./grid_020x020.svg')
+ svgroot = minidom.parse(gridfile)
  svgmain = svgroot.getElementsByTagName('svg')[0]
 
 def make_wheel():
@@ -197,7 +198,7 @@ if __name__ == '__main__':
  if grid == False:
   remove_grid()
  remove_whitespace_nodes(svgroot)
- with open(f'./tri_drive.svg', 'w', encoding='utf-8') as f:
+ with open(f'./tri_drive_mm.svg', 'w', encoding='utf-8') as f:
   svgroot.writexml(f, newl='\n', encoding='utf-8')
   # svgroot.writexml(f, indent='', addindent='', newl='\n', encoding='utf-8')
  svgroot.unlink()
