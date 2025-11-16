@@ -7,6 +7,20 @@ polar2xy = (deg,r) => {
   y: cy - r * Math.cos(rad) }}
 
 class Driver {
+ tri_rotate = () => {
+  const disks = {
+   'D_HRS' : 'geneva_48',
+   'D_MNS' : 'geneva_60' }
+  const radii = {
+   'D_HRS' : 'tri_driver_hrs',
+   'D_MNS' : 'tri_driver_mns' }
+  console.log(disks[this.name]);
+  var rot = this.rotation;
+  console.log(rot);
+  var orbit_r = wheels[radii[this.name]]['driving_pin_orbit_cm'] - 0;
+  var axis_dx = wheels[radii[this.name]]['driver_axis_dist_cm'] - 0;
+  var wheel_delta = Math.atan((orbit_r * Math.sin(rot)) / (axis_dx - (orbit_r * Math.cos(rot))));
+  console.log(`O: ${orbit_r} A: ${axis_dx} WD: ${wheel_delta}`); }
  autorot_ = d => {
   this.rotation += d;
   if((this.rotation % 120) == 0) {

@@ -24,7 +24,6 @@ var face_switch_arg = 0;
 var zoomed = 0;
 
 var wheels = {
- 'driver_axis_dist_cm' : 57.896,
  'driver_axis_diameter_cm' : 2.00,
  'tri_driver_hrs' : {
   'driver_axis_dist_cm' : 59.337,
