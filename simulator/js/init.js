@@ -73,7 +73,7 @@ window.onload = () => {
      rotate_marker(); }}
    else if(k.key == 'Enter') {      // EXEC
     switch_mode_1();
-   }
+   /***/ }
    else if(k.key == 'Escape') {
     switch_mode_0(); }
    else if(k.key == ' ') {
@@ -82,7 +82,7 @@ window.onload = () => {
 switch_mode_1 = () => {
  mode = 1;
  window.document.title = 'RCL MANUAL TEST';
- }
+ /***/ }
 
 switch_mode_0 = () => {
  mode = 0;
@@ -183,6 +183,7 @@ mk_clickable_reset = (xy) => {
 
 mk_clickable_quarters = (xy) => {
  if(mode == -1) return;
+ /*
  var cq_0 = window.document.createElement('div');
  cq_0.id = 'CQ0';
  cq_0.className = 'cq_elem';
@@ -192,6 +193,7 @@ mk_clickable_quarters = (xy) => {
  cq_0.style.left = (wWidth / 2) + 'px';
  cq_0.style.top = (wHeight - xy) / 2 + 'px';
  window.document.body.appendChild(cq_0);
+ */
  var cq_1 = window.document.createElement('div');
  cq_1.id = 'CQ1';
  cq_1.className = 'cq_elem';
@@ -210,6 +212,7 @@ mk_clickable_quarters = (xy) => {
  cq_2.style.left = (wWidth - xy) / 2 + 'px';
  cq_2.style.top = (wHeight / 2) + 'px';
  window.document.body.appendChild(cq_2);
+ /*
  var cq_3 = window.document.createElement('div');
  cq_3.id = 'CQ3';
  cq_3.className = 'cq_elem';
@@ -219,6 +222,8 @@ mk_clickable_quarters = (xy) => {
  cq_3.style.left = (wWidth - xy) / 2 + 'px';
  cq_3.style.top = (wHeight - xy) / 2 + 'px';
  window.document.body.appendChild(cq_3);
+ */
+ /*
  cq_0.onclick = () => {
    face_switch_arg = 0;
    face_switch(face_switch_arg);
@@ -227,6 +232,7 @@ mk_clickable_quarters = (xy) => {
    $_('mns_container').style.visibility = 'hidden';
    change_view('svg_48',views['hrs_driver_1']);
    change_view('svg_60',views['mins_driver_0']); }
+ */
  cq_1.onclick = () => {
    face_switch_arg = 0;
    face_switch(face_switch_arg);
@@ -243,6 +249,7 @@ mk_clickable_quarters = (xy) => {
    $_('mns_container').style.visibility = 'hidden';
    change_view('svg_48',views['hrs_driver_0']);
    change_view('svg_60',views['mins_driver_1']); }
+ /*
  cq_3.onclick = () => {
    face_switch_arg = 1;
    face_switch(face_switch_arg);
@@ -250,4 +257,5 @@ mk_clickable_quarters = (xy) => {
    $_('hrs_container').style.visibility = 'hidden';
    $_('mns_container').style.visibility = 'hidden';
    change_view('svg_48',views['hrs_driver_1']);
-   change_view('svg_60',views['mins_driver_0']); }}
+   change_view('svg_60',views['mins_driver_0']); }
+ */ }
