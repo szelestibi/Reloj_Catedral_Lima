@@ -25,17 +25,15 @@ var zoomed = 0;
 
 var wheels = {
  'tri_driver_hrs' : {
-  'driver_axis_diameter_cm' : 2.00,
   'driver_axis_dist_cm' : 59.337,
   'driving_pin_orbit_cm' : 4.327,
-  'driving_pin_diameter_cm' : 2.00,
-  'driving_pin_touch_angle_deg' : 90 },
- 'tri_driver_mns' : {
   'driver_axis_diameter_cm' : 2.00,
+  'driving_pin_diameter_cm' : 2.00 },
+ 'tri_driver_mns' : {
   'driver_axis_dist_cm' : 58.949,
   'driving_pin_orbit_cm' : 3.463,
-  'driving_pin_diameter_cm' : 2.00,
-  'driving_pin_touch_angle_deg' : -90 }}
+  'driver_axis_diameter_cm' : 2.00,
+  'driving_pin_diameter_cm' : 2.00 }}
 
 var axis_deg = {
  'MNS' : 23 * 6,
