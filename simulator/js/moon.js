@@ -7,12 +7,17 @@ polar2xy = (deg,r) => {
   y: cy - r * Math.cos(rad) }}
 
 class Driver {
- autorotate_to = deg => {
-  var name = this.name;
-  var radius = this.radius;
-  var angle = this.angle;
-
- }
+ autorot_ = d => {
+  this.rotation += d;
+  if((this.rotation % 120) == 0) {
+   clearInterval(this.intv_handler);
+   this.rotating = false; }
+  $_(this.name).setAttribute('transform',`rotate(${this.angle}) translate(${this.radius}) rotate(${this.rotation})`); }
+ autorotate = dir => {
+  if(this.rotating) return;
+  this.intv_handler = setInterval(() => {
+   this.autorot_(dir); }, 100);
+   this.rotating = true; }
  rotate_by = deg => {
   this.rotation += deg;
   $_(this.name).setAttribute('transform',`rotate(${this.angle}) translate(${this.radius}) rotate(${this.rotation})`); }
@@ -25,6 +30,8 @@ class Driver {
   this.angle = angle;
   this.rotation = 0;
   this.rot_goto = 0;
+  this.intv_handler;
+  this.rotating = false;
   var drv = window.document.createElementNS(svgns,'g');
   drv.id = name;
   if(name.includes('HRS')) {
