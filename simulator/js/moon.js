@@ -1,3 +1,14 @@
+class clockwork {
+ static instance = new clockwork();
+ constructor(hh = 12, mm = 0) {
+  this.HH = hh;
+  this.MM = mm; }
+/* USAGE:
+let cw = clockwork.instance;
+cw.HH = 3;
+cw.MM = 15;
+console.log(cw); */ }
+
 polar2xy = (deg,r) => {
  const cx = 0;
  const cy = 0;
@@ -8,19 +19,12 @@ polar2xy = (deg,r) => {
 
 class Driver {
  tri_rotate = () => {
-  const disks = {
-   'D_HRS' : 'geneva_48',
-   'D_MNS' : 'geneva_60' }
-  const radii = {
-   'D_HRS' : 'tri_driver_hrs',
-   'D_MNS' : 'tri_driver_mns' }
-  console.log(disks[this.name]);
   var rot = this.rotation;
   console.log(rot);
-  var orbit_r = wheels[radii[this.name]]['driving_pin_orbit_cm'] - 0;
-  var axis_dx = wheels[radii[this.name]]['driver_axis_dist_cm'] - 0;
+  const orbit_r = wheels[this.orbits[this.name]]['driving_pin_orbit_cm'] - 0;
+  const axis_dx = wheels[this.orbits[this.name]]['driver_axis_dist_cm'] - 0;
   var wheel_delta = Math.atan((orbit_r * Math.sin(rot)) / (axis_dx - (orbit_r * Math.cos(rot))));
-  console.log(`O: ${orbit_r} A: ${axis_dx} WD: ${wheel_delta}`); }
+  return(`O: ${orbit_r} A: ${axis_dx} WD: ${wheel_delta}`); /**/ }
  autorot_ = d => {
   this.rotation += d;
   if((this.rotation % 120) == 0) {
@@ -39,6 +43,12 @@ class Driver {
   this.rotation = deg;
   $_(this.name).setAttribute('transform',`rotate(${this.angle}) translate(${this.radius}) rotate(${this.rotation})`); }
  constructor(name,radius,angle) {
+  this.disks = {
+   'D_HRS' : 'svg_48',
+   'D_MNS' : 'svg_60' }
+  this.orbits = {
+   'D_HRS' : 'tri_driver_hrs',
+   'D_MNS' : 'tri_driver_mns' }
   this.name = name;
   this.radius = radius;
   this.angle = angle;
@@ -48,52 +58,29 @@ class Driver {
   this.rotating = false;
   var drv = window.document.createElementNS(svgns,'g');
   drv.id = name;
-  if(name.includes('HRS')) {
-   var peri = window.document.createElementNS(svgns,'circle');
-   peri.setAttribute('class', 'driver_circle');
-   peri.setAttribute('r', wheels['tri_driver_hrs']['driving_pin_orbit_cm'] + 3);
-   drv.appendChild(peri);
-   var axis = window.document.createElementNS(svgns,'circle');
-   axis.setAttribute('class','driver_axis');
-   axis.setAttribute('r', wheels['driver_axis_diameter_cm'] / 2);
-   drv.appendChild(axis);
-   var R = wheels['tri_driver_hrs']['driving_pin_orbit_cm'];
-   var A = 30;
-   for(var p=0;p<3;p++) {
-    var pin_x = window.document.createElementNS(svgns,'circle');
-    pin_x.setAttribute('class','driver_pin');
-    var C = polar2xy(A,R);
-    pin_x.setAttribute('r', wheels['tri_driver_hrs']['driving_pin_diameter_cm'] / 2);
-    pin_x.setAttribute('cx',C.x);
-    pin_x.setAttribute('cy',C.y);
-    drv.appendChild(pin_x);
-    A += 120; }
-    drv.setAttribute('transform',`rotate(${angle}) translate(${radius})`);
-   parent = $_('svg_48'); }
-  else if(name.includes('MNS')) {
-   var peri = window.document.createElementNS(svgns,'circle');
-   peri.setAttribute('class', 'driver_circle');
-   peri.setAttribute('r', wheels['tri_driver_mns']['driving_pin_orbit_cm'] + 3);
-   drv.appendChild(peri);
-   var axis = window.document.createElementNS(svgns,'circle');
-   axis.setAttribute('class','driver_axis');
-   axis.setAttribute('r', wheels['driver_axis_diameter_cm'] / 2);
-   drv.appendChild(axis);
-   var R = wheels['tri_driver_mns']['driving_pin_orbit_cm'];
-   var A = 30;
-   for(var p=0;p<3;p++) {
-    var pin_x = window.document.createElementNS(svgns,'circle');
-    pin_x.setAttribute('class','driver_pin');
-    var C = polar2xy(A,R);
-    pin_x.setAttribute('r', wheels['tri_driver_hrs']['driving_pin_diameter_cm'] / 2);
-    pin_x.setAttribute('cx',C.x);
-    pin_x.setAttribute('cy',C.y);
-    drv.appendChild(pin_x);
-    A += 120; }
-   drv.setAttribute('transform',`rotate(${angle}) translate(${radius})`);
-   parent = $_('svg_60'); }
+  var peri = window.document.createElementNS(svgns,'circle');
+  peri.setAttribute('class', 'driver_circle');
+  peri.setAttribute('r', wheels[this.orbits[this.name]]['driving_pin_orbit_cm'] + 3);
+  drv.appendChild(peri);
+  var axis = window.document.createElementNS(svgns,'circle');
+  axis.setAttribute('class','driver_axis');
+  axis.setAttribute('r', wheels[this.orbits[this.name]]['driver_axis_diameter_cm'] / 2);
+  drv.appendChild(axis);
+  var R = wheels[this.orbits[this.name]]['driving_pin_orbit_cm'];
+  var A = 30;
+  for(var p=0;p<3;p++) {
+   var pin_x = window.document.createElementNS(svgns,'circle');
+   pin_x.setAttribute('class','driver_pin');
+   var C = polar2xy(A,R);
+   pin_x.setAttribute('r', wheels[this.orbits[this.name]]['driving_pin_diameter_cm'] / 2);
+   pin_x.setAttribute('cx',C.x);
+   pin_x.setAttribute('cy',C.y);
+   drv.appendChild(pin_x);
+   A += 120; }
+  drv.setAttribute('transform',`rotate(${this.angle}) translate(${radius})`);
+  parent = $_(this.disks[this.name]);
   parent.appendChild(drv);
- return this; }}
+  return this; }}
 
 make_drivers = () => {
  var r = wheels['tri_driver_hrs']['driver_axis_dist_cm'];
