@@ -24,24 +24,32 @@ radToDeg = rad => {
  return rad * 180 / Math.PI; }
 
 class Driver {
- tri_rotate = () => {
+ tri_rotate = s => {
+  console.log(s);
   var rot = this.rotation % 120;
   var rad = degToRad(rot);
   var wheel_delta = 0;
   const orbit_r = wheels[this.orbits[this.name]]['driving_pin_orbit_cm'] - 0;
   const axis_dx = wheels[this.orbits[this.name]]['driver_axis_dist_cm'] - 0;
-  if(rot <= 60) {
-   wheel_delta = radToDeg(Math.atan((orbit_r * Math.sin(rad)) / (axis_dx - (orbit_r * Math.cos(rad))))); }
+  if(s > 0) {
+   if(rot <= 60) {
+    wheel_delta = radToDeg(Math.atan((orbit_r * Math.sin(rad)) / (axis_dx - (orbit_r * Math.cos(rad))))); }
+   else {
+    wheel_delta = 6 - radToDeg(Math.atan((orbit_r * Math.sin(2 * Math.PI / 3 - rad)) / (axis_dx - (orbit_r * Math.cos(2 * Math.PI / 3 - rad))))); }}
   else {
-   wheel_delta = 0; }
-  console.log(`ROT: ${rot} Δ: ${wheel_delta.toFixed(3)}`); /**/ }
+   if(rot > 60) {
+    wheel_delta = -(radToDeg(Math.atan((orbit_r * Math.sin(2 * Math.PI / 3 - rad)) / (axis_dx - (orbit_r * Math.cos(2 * Math.PI / 3 - rad)))))); }
+   else {
+    wheel_delta = -(6 - radToDeg(Math.atan((orbit_r * Math.sin(rad)) / (axis_dx - (orbit_r * Math.cos(rad)))))); }}
+  console.log(`ROT: ${rot} Δ: ${wheel_delta.toFixed(3)}`);
+  /**/ }
  autorotate_ = deg => {
   this.rotation += deg;
   if((this.rotation % 120) == 0) {
    this.rotation = 120;
    clearInterval(this.intv_handler);
    this.rotating = false; }
-  this.tri_rotate();
+  this.tri_rotate(Math.sign(deg));
   $_(this.name).setAttribute('transform',`rotate(${this.angle}) translate(${this.radius}) rotate(${this.rotation})`); }
  autorotate = deg => {
   if(this.rotating) return;
