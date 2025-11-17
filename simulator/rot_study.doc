@@ -1,4 +1,4 @@
-MNS.autorotate(-3):
+MNS.autorotate(-3): MINUS
 ROT:   0 Δ: 0.000
 ROT: 117 Δ: 2.919 => Δ 03
 ROT: 114 Δ: 3.000 ...
@@ -41,7 +41,7 @@ ROT:   6 Δ: 6 - 0.374 OK
 ROT:   3 Δ: 6 - 0.187 OK
 ROT:   0 Δ:     0.000 OK
 
-MNS.autorotate(3):
+MNS.autorotate(3): PLUS
 ROT:   0 Δ: 0.000 OK
 ROT:   3 Δ: 0.187 OK
 ROT:   6 Δ: 0.374 OK
