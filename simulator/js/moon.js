@@ -17,30 +17,44 @@ polar2xy = (deg,r) => {
   x: cx + r * Math.sin(rad),
   y: cy - r * Math.cos(rad) }}
 
+degToRad = deg => {
+ return deg * Math.PI / 180; }
+
+radToDeg = rad => {
+ return rad * 180 / Math.PI; }
+
 class Driver {
  tri_rotate = () => {
-  var rot = this.rotation;
-  console.log(rot);
+  var rot = this.rotation % 120;
+  var rad = degToRad(rot);
+  var wheel_delta = 0;
   const orbit_r = wheels[this.orbits[this.name]]['driving_pin_orbit_cm'] - 0;
   const axis_dx = wheels[this.orbits[this.name]]['driver_axis_dist_cm'] - 0;
-  var wheel_delta = Math.atan((orbit_r * Math.sin(rot)) / (axis_dx - (orbit_r * Math.cos(rot))));
-  return(`O: ${orbit_r} A: ${axis_dx} WD: ${wheel_delta}`); /**/ }
- autorot_ = d => {
-  this.rotation += d;
+  if(rot <= 60) {
+   wheel_delta = radToDeg(Math.atan((orbit_r * Math.sin(rad)) / (axis_dx - (orbit_r * Math.cos(rad))))); }
+  else {
+   wheel_delta = 0; }
+  console.log(`ROT: ${rot} Δ: ${wheel_delta.toFixed(3)}`); /**/ }
+ autorotate_ = deg => {
+  this.rotation += deg;
   if((this.rotation % 120) == 0) {
+   this.rotation = 120;
    clearInterval(this.intv_handler);
    this.rotating = false; }
+  this.tri_rotate();
   $_(this.name).setAttribute('transform',`rotate(${this.angle}) translate(${this.radius}) rotate(${this.rotation})`); }
- autorotate = dir => {
+ autorotate = deg => {
   if(this.rotating) return;
   this.intv_handler = setInterval(() => {
-   this.autorot_(dir); }, 100);
+   this.autorotate_(deg); }, 100);
    this.rotating = true; }
  rotate_by = deg => {
   this.rotation += deg;
+  this.rotation %= 120 + 120;
   $_(this.name).setAttribute('transform',`rotate(${this.angle}) translate(${this.radius}) rotate(${this.rotation})`); }
  rotate_to = deg => {
   this.rotation = deg;
+  this.rotation %= 120 + 120;
   $_(this.name).setAttribute('transform',`rotate(${this.angle}) translate(${this.radius}) rotate(${this.rotation})`); }
  constructor(name,radius,angle) {
   this.disks = {
@@ -52,7 +66,7 @@ class Driver {
   this.name = name;
   this.radius = radius;
   this.angle = angle;
-  this.rotation = 0;
+  this.rotation = 120;
   this.rot_goto = 0;
   this.intv_handler;
   this.rotating = false;
