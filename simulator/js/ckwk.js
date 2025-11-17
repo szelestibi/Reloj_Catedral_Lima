@@ -1,10 +1,13 @@
 class clockwork {
- static instance = new clockwork();
+ static CW = new clockwork();
  constructor(hh = 12, mm = 0) {
   this.HH = hh;
-  this.MM = mm; }
+  this.MM = mm;
+  this.HH_angle = 0;
+  this.MM_angle = 0;
+  this.MK_angle = 0; }
 /* USAGE:
-let cw = clockwork.instance;
+let cw = clockwork.CW;
 cw.HH = 3;
 cw.MM = 15;
 console.log(cw); */ }
@@ -43,7 +46,7 @@ class Driver {
    else {
     wheel_delta = -(a_stepx - radToDeg(Math.atan((orbit_r * Math.sin(rad)) / (axis_dx - (orbit_r * Math.cos(rad)))))); }}
   console.log(`ROT: ${rot} Δ: ${wheel_delta.toFixed(3)}`);
-  /**/ }
+  /* CW */ }
  autorotate_ = deg => {
   this.rotation += deg;
   if((this.rotation % 120) == 0) {

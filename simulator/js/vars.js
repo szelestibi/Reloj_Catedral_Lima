@@ -14,14 +14,9 @@ var modes = {
  '-1' : 'HOME CLOCK',
   '0' : 'NORMAL RUN' }
 
-var DELTA_H = 0;
-var DELTA_M = 0;
-
 var psec = -1;            // previous second value for time critical routines
 
-var face_switch_arg = 0;
-
-var zoomed = 0;
+var face_switch_arg = 0;  // [0 | 1]
 
 var wheels = {
  'tri_driver_hrs' : {
@@ -48,11 +43,12 @@ var views = { // svg  [cm]
  'hrs_driver_0' : [14,14,-48,34],
  'hrs_driver_1' : [14,14,-48,-48]}
 
-var drivers = {}
-
 var clockmove; // interval handler
 
 var loaded = 0;
 
-D_HRS = 0;
-D_MNS = 0;
+var D_HRS = 0;
+var D_MNS = 0;
+
+var CW;        // clockwork
+
