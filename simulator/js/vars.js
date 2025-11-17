@@ -25,11 +25,13 @@ var zoomed = 0;
 
 var wheels = {
  'tri_driver_hrs' : {
+  'wheel_angle_step' : 7.5,
   'driver_axis_dist_cm' : 59.337,
   'driving_pin_orbit_cm' : 4.327,
   'driver_axis_diameter_cm' : 2.00,
   'driving_pin_diameter_cm' : 2.00 },
  'tri_driver_mns' : {
+  'wheel_angle_step' : 6,
   'driver_axis_dist_cm' : 58.949,
   'driving_pin_orbit_cm' : 3.463,
   'driver_axis_diameter_cm' : 2.00,

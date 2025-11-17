@@ -29,18 +29,19 @@ class Driver {
   var rot = this.rotation % 120;
   var rad = degToRad(rot);
   var wheel_delta = 0;
+  const a_stepx = wheels[this.orbits[this.name]]['wheel_angle_step'] - 0;
   const orbit_r = wheels[this.orbits[this.name]]['driving_pin_orbit_cm'] - 0;
   const axis_dx = wheels[this.orbits[this.name]]['driver_axis_dist_cm'] - 0;
   if(s > 0) {
    if(rot <= 60) {
     wheel_delta = radToDeg(Math.atan((orbit_r * Math.sin(rad)) / (axis_dx - (orbit_r * Math.cos(rad))))); }
    else {
-    wheel_delta = 6 - radToDeg(Math.atan((orbit_r * Math.sin(2 * Math.PI / 3 - rad)) / (axis_dx - (orbit_r * Math.cos(2 * Math.PI / 3 - rad))))); }}
+    wheel_delta = a_stepx - radToDeg(Math.atan((orbit_r * Math.sin(2 * Math.PI / 3 - rad)) / (axis_dx - (orbit_r * Math.cos(2 * Math.PI / 3 - rad))))); }}
   else {
    if(rot > 60) {
     wheel_delta = -(radToDeg(Math.atan((orbit_r * Math.sin(2 * Math.PI / 3 - rad)) / (axis_dx - (orbit_r * Math.cos(2 * Math.PI / 3 - rad)))))); }
    else {
-    wheel_delta = -(6 - radToDeg(Math.atan((orbit_r * Math.sin(rad)) / (axis_dx - (orbit_r * Math.cos(rad)))))); }}
+    wheel_delta = -(a_stepx - radToDeg(Math.atan((orbit_r * Math.sin(rad)) / (axis_dx - (orbit_r * Math.cos(rad)))))); }}
   console.log(`ROT: ${rot} Δ: ${wheel_delta.toFixed(3)}`);
   /**/ }
  autorotate_ = deg => {
