@@ -99,14 +99,14 @@ window.onload = () => {
    else if(k.key == ' ') {
     CW.face_switch(); }}}}
 
+switch_mode_0 = () => {
+ mode = 0;
+ window.document.title = 'RCL ' + modes[mode]; }
+
 switch_mode_1 = () => {
  mode = 1;
  window.document.title = 'RCL MANUAL TEST';
  /***/ }
-
-switch_mode_0 = () => {
- mode = 0;
- window.document.title = 'RCL ' + modes[mode]; }
 
 getTimeNow = () => {
  var now_date = new Date();
@@ -166,17 +166,6 @@ mk_clickable_reset = (xy) => {
 
 mk_clickable_quarters = (xy) => {
  if(mode == -1) return;
- /*
- var cq_0 = window.document.createElement('div');
- cq_0.id = 'CQ0';
- cq_0.className = 'cq_elem';
- cq_0.title = 'MNS_0';
- cq_0.style.width = xy / 2 + 'px';
- cq_0.style.height = xy / 2 + 'px';
- cq_0.style.left = (wWidth / 2) + 'px';
- cq_0.style.top = (wHeight - xy) / 2 + 'px';
- window.document.body.appendChild(cq_0);
- */
  var cq_1 = window.document.createElement('div');
  cq_1.id = 'CQ1';
  cq_1.className = 'cq_elem';
@@ -195,26 +184,6 @@ mk_clickable_quarters = (xy) => {
  cq_2.style.left = (wWidth - xy) / 2 + 'px';
  cq_2.style.top = (wHeight / 2) + 'px';
  window.document.body.appendChild(cq_2);
- /*
- var cq_3 = window.document.createElement('div');
- cq_3.id = 'CQ3';
- cq_3.className = 'cq_elem';
- cq_3.title = 'HRS_1';
- cq_3.style.width = xy / 2 + 'px';
- cq_3.style.height = xy / 2 + 'px';
- cq_3.style.left = (wWidth - xy) / 2 + 'px';
- cq_3.style.top = (wHeight - xy) / 2 + 'px';
- window.document.body.appendChild(cq_3);
- */
- /*
- cq_0.onclick = () => {
-   CW.face_switch(0);
-   $_('clockface_container').style.visibility = 'hidden';
-   $_('hrs_container').style.visibility = 'hidden';
-   $_('mns_container').style.visibility = 'hidden';
-   change_view('svg_48',views['hrs_driver_1']);
-   change_view('svg_60',views['mins_driver_0']); }
- */
  cq_1.onclick = () => {
    CW.face_switch(0);
    $_('clockface_container').style.visibility = 'hidden';
@@ -228,13 +197,4 @@ mk_clickable_quarters = (xy) => {
    $_('hrs_container').style.visibility = 'hidden';
    $_('mns_container').style.visibility = 'hidden';
    change_view('svg_48',views['hrs_driver_0']);
-   change_view('svg_60',views['mins_driver_1']); }
- /*
- cq_3.onclick = () => {
-   CW.face_switch(1);
-   $_('clockface_container').style.visibility = 'hidden';
-   $_('hrs_container').style.visibility = 'hidden';
-   $_('mns_container').style.visibility = 'hidden';
-   change_view('svg_48',views['hrs_driver_1']);
-   change_view('svg_60',views['mins_driver_0']); }
- */ }
+   change_view('svg_60',views['mins_driver_1']); }}
