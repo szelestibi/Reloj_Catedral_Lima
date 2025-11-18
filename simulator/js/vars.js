@@ -16,7 +16,7 @@ var modes = {
 
 var psec = -1;            // previous second value for time critical routines
 
-var face_switch_arg = 0;  // [0 | 1]
+var face_switch_arg = 0;  // [0 HRS | 1 MNS]
 
 var wheels = {
  'tri_driver_hrs' : {

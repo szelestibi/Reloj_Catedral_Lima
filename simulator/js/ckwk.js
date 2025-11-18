@@ -1,16 +1,37 @@
 class clockwork {
  static CW = new clockwork();
  constructor(hh = 12, mm = 0) {
-  this.HH = hh;
-  this.MM = mm;
-  this.HH_angle = 0;
+  this.MM = mm; // actual MM
+  this.HH = hh; // actual HH
+  this.SM = mm; // start  MM
+  this.SH = hh; // start  HH
   this.MM_angle = 0;
+  this.HH_angle = 0;
   this.MK_angle = 0; }
-/* USAGE:
-let cw = clockwork.CW;
-cw.HH = 3;
-cw.MM = 15;
-console.log(cw); */ }
+ init = (hh,mm,ss) => {
+  this.MM = mm;
+  this.HH = hh;
+  this.SM = mm;
+  this.SH = hh;
+  this.MM_angle = mm * 6;
+  this.HH_angle = ((hh % 12) * 30) + (Math.floor((mm * 60 + ss + 450) / 900) * 7.5);
+  $_('geneva_60').setAttribute('transform', `rotate(${this.MM_angle})`);
+  $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180})`);
+  $_('geneva_48').setAttribute('transform', `rotate(${this.HH_angle})`);
+  $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180})`);
+  $_('marker').setAttribute('transform', `rotate(${-this.MK_angle})`); }
+ set = (hh,mm,ss=0) => {
+  console.log(`this is CW.set(${hh},${mm},${ss})`);
+  this.MM = mm;
+  this.HH = hh;
+  if(face_switch_arg == 1) { // MNS
+   this.MK_angle = (((((this.MM - this.SM) % 60) * 6) + 180) % 360 + 360) % 360 - 180;
+   $_('marker').setAttribute('transform', `rotate(${-this.MK_angle})`); }
+  else {                     // HRS
+   const HT_angle = ((hh % 12) * 30) + (Math.floor((mm * 60 + ss + 450) / 900) * 7.5);
+   this.MK_angle = (((HT_angle - this.HH_angle) + 180) % 360 + 360) % 360 - 180;
+   $_('marker').setAttribute('transform', `rotate(${-this.MK_angle})`); }}
+ face_switch = (F=0) => {} }
 
 polar2xy = (deg,r) => {
  const cx = 0;

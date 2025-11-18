@@ -52,26 +52,32 @@ window.onload = () => {
   face_switch(); }
  if(mode != -1) {
   window.document.onkeydown = function(k) {
-   if(k.key == 'ArrowUp') {         // HRS++
+   if(k.key == 'ArrowUp') {         // HRS++ [++15MNS]
     if(face_switch_arg == 0) {
      switch_mode_1();
-     if(++TH == 24) TH = 0;
-     rotate_marker(); }}
-   else if(k.key == 'ArrowDown') {  // HRS--
+     TM += 15;
+     if(TM > 59) {
+      TM -= 60;
+      if(++TH == 24) TH = 0; }
+      CW.set(TH,TM); }}
+   else if(k.key == 'ArrowDown') {  // HRS-- [--15MNS]
     if(face_switch_arg == 0) {
      switch_mode_1();
-     if(--TH == -1) TH = 23;
-     rotate_marker(); }}
+     TM -= 15;
+     if(TM < 0) {
+      TM += 60;
+      if(--TH == -1) TH = 23; }
+     CW.set(TH,TM); }}
    else if(k.key == 'ArrowLeft') {  // MNS --
     if(face_switch_arg == 1) {
      switch_mode_1();
      if(--TM == -1) TM = 59;
-     rotate_marker(); }}
+     CW.set(TH,TM); }}
    else if(k.key == 'ArrowRight') { // MNS++
     if(face_switch_arg == 1) {
      switch_mode_1();
      if(++TM == 60) TM = 0;
-     rotate_marker(); }}
+     CW.set(TH,TM); }}
    else if(k.key == 'Enter') {      // EXEC
     switch_mode_1();
    /***/ }
@@ -113,15 +119,10 @@ exec_movement = () => {
  const secs_angle = SS * 6;
  $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`);
  if((mode == -1) || (loaded == 0)) {
-  const mns_angle = SM * 6;
-  $_('geneva_60').setAttribute('transform', `rotate(${mns_angle})`);
-  $_('MNS').setAttribute('transform', `scale(27) rotate(${mns_angle + 180})`);
-  const hrs_angle = ((SH % 12) * 30) + (Math.floor((SM * 60 + SS + 450) / 900) * 7.5);
-  $_('geneva_48').setAttribute('transform', `rotate(${hrs_angle})`);
-  $_('HRS').setAttribute('transform', `scale(27) rotate(${hrs_angle + 180})`);
+  CW.init(HH,MM,SS);
   loaded = 1; }
  if((mode == 0) && ((TS == 0) || (TS == 30))) {
-  rotate_marker(TS); }
+  CW.set(TH,TM,TS); }
  psec = SS; }
 
 rotate_marker = (ts = -1) => {
