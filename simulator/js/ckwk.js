@@ -7,7 +7,8 @@ class clockwork {
   this.SH = hh; // start  HH
   this.MM_angle = 0;
   this.HH_angle = 0;
-  this.MK_angle = 0; }
+  this.MK_angle = 0;
+  this.shown_face = 0; }
  init = (hh,mm,ss) => {
   this.MM = mm;
   this.HH = hh;
@@ -24,14 +25,28 @@ class clockwork {
   console.log(`this is CW.set(${hh},${mm},${ss})`);
   this.MM = mm;
   this.HH = hh;
-  if(face_switch_arg == 1) { // MNS
+  this.show_face_(SS); }
+ face_switch = (F=undefined) => {
+  if(F == undefined) {}
+  else {
+   this.shown_face = F; }
+  if(this.shown_face == 0) {
+   $_('svg_48').style.display = 'none';
+   $_('svg_60').style.display = 'block';
+   this.shown_face = 1; }
+  else {
+   $_('svg_60').style.display = 'none';
+   $_('svg_48').style.display = 'block';
+   this.shown_face = 0; }
+  this.show_face_(SS); }
+ show_face_ = (ss) => {
+  if(this.shown_face == 1) { // MNS
    this.MK_angle = (((((this.MM - this.SM) % 60) * 6) + 180) % 360 + 360) % 360 - 180;
    $_('marker').setAttribute('transform', `rotate(${-this.MK_angle})`); }
   else {                     // HRS
-   const HT_angle = ((hh % 12) * 30) + (Math.floor((mm * 60 + ss + 450) / 900) * 7.5);
+   const HT_angle = ((this.HH % 12) * 30) + (Math.floor((this.MM * 60 + ss + 450) / 900) * 7.5);
    this.MK_angle = (((HT_angle - this.HH_angle) + 180) % 360 + 360) % 360 - 180;
-   $_('marker').setAttribute('transform', `rotate(${-this.MK_angle})`); }}
- face_switch = (F=0) => {} }
+   $_('marker').setAttribute('transform', `rotate(${-this.MK_angle})`); }} }
 
 polar2xy = (deg,r) => {
  const cx = 0;

@@ -36,8 +36,7 @@ window.onload = () => {
   SM = now_date.getMinutes();
   SH = now_date.getHours();
   getTimeNow();
-  face_switch_arg = 0; // 0 = SHOW MNS MECHANIC, 1 = HRS
-  face_switch();       // 0 = SHOW MNS MECHANIC, 1 = HRS
+  CW.face_switch(0); // 0 = SHOW MNS MECHANIC, 1 = HRS
   exec_movement();
   setTimeout(() => {
    if(mode in modes) {
@@ -49,11 +48,11 @@ window.onload = () => {
    exec_movement(F = 0); },250);
   make_drivers(); }
  $_('docbody').onclick = () => {
-  face_switch(); }
+  CW.face_switch(); }
  if(mode != -1) {
   window.document.onkeydown = function(k) {
    if(k.key == 'ArrowUp') {         // HRS++ [++15MNS]
-    if(face_switch_arg == 0) {
+    if(CW.shown_face == 0) {
      switch_mode_1();
      TM += 15;
      if(TM > 59) {
@@ -61,7 +60,7 @@ window.onload = () => {
       if(++TH == 24) TH = 0; }
       CW.set(TH,TM); }}
    else if(k.key == 'ArrowDown') {  // HRS-- [--15MNS]
-    if(face_switch_arg == 0) {
+    if(CW.shown_face == 0) {
      switch_mode_1();
      TM -= 15;
      if(TM < 0) {
@@ -69,12 +68,12 @@ window.onload = () => {
       if(--TH == -1) TH = 23; }
      CW.set(TH,TM); }}
    else if(k.key == 'ArrowLeft') {  // MNS --
-    if(face_switch_arg == 1) {
+    if(CW.shown_face == 1) {
      switch_mode_1();
      if(--TM == -1) TM = 59;
      CW.set(TH,TM); }}
    else if(k.key == 'ArrowRight') { // MNS++
-    if(face_switch_arg == 1) {
+    if(CW.shown_face == 1) {
      switch_mode_1();
      if(++TM == 60) TM = 0;
      CW.set(TH,TM); }}
@@ -84,7 +83,7 @@ window.onload = () => {
    else if(k.key == 'Escape') {
     switch_mode_0(); }
    else if(k.key == ' ') {
-    face_switch(); }}}}
+    CW.face_switch(); }}}}
 
 switch_mode_1 = () => {
  mode = 1;
@@ -124,38 +123,6 @@ exec_movement = () => {
  if((mode == 0) && ((TS == 0) || (TS == 30))) {
   CW.set(TH,TM,TS); }
  psec = SS; }
-
-rotate_marker = (ts = -1) => {
- if(mode == -1) return;
- if(face_switch_arg == 0) { // HRS
-  if(ts = 0) return;
-  const hrs_angle = ((SH % 12) * 30) + (Math.floor((SM * 60 + SS + 450) / 900) * 7.5);
-  const hrt_angle = ((TH % 12) * 30) + (Math.floor((TM * 60 + SS + 450) / 900) * 7.5);
-  var angle_diff = (((hrt_angle - hrs_angle) + 180) % 360 + 360) % 360 - 180; // normalize angle -180 ... +180
-  var DELTA_H = angle_diff / 7.5;
-  console.log(`DELTA_H: ${DELTA_H} [${angle_diff}°]`);
-  $_('marker').setAttribute('transform', `rotate(${-angle_diff})`); }
- else { // MNS
-  if(ts == 30) return;
-  const min_diff = (TM - SM) % 60;
-  var angle_diff = (((min_diff * 6) + 180) % 360 + 360) % 360 - 180; // normalize angle -180 ... +180
-  var DELTA_M = angle_diff / 6;
-  console.log(`DELTA_M: ${DELTA_M} [${angle_diff}°]`);
-  $_('marker').setAttribute('transform', `rotate(${-angle_diff})`); }}
-
-// const normalizeAngle = a => ((a + 180) % 360 + 360) % 360 - 180;
-
-face_switch = () => {
- // if(mode == -1) return;
- if(face_switch_arg == 0) {
-  $_('svg_48').style.display = 'none';
-  $_('svg_60').style.display = 'block';
-  face_switch_arg = 1; }
- else {
-  $_('svg_60').style.display = 'none';
-  $_('svg_48').style.display = 'block';
-  face_switch_arg = 0; }
- rotate_marker(); }
 
 change_view = (s,[w,h,x,y]) => {
  if(typeof(s) == 'string') {
@@ -227,8 +194,7 @@ mk_clickable_quarters = (xy) => {
  */
  /*
  cq_0.onclick = () => {
-   face_switch_arg = 0;
-   face_switch(face_switch_arg);
+   CW.face_switch(0);
    $_('clockface_container').style.visibility = 'hidden';
    $_('hrs_container').style.visibility = 'hidden';
    $_('mns_container').style.visibility = 'hidden';
@@ -236,16 +202,14 @@ mk_clickable_quarters = (xy) => {
    change_view('svg_60',views['mins_driver_0']); }
  */
  cq_1.onclick = () => {
-   face_switch_arg = 0;
-   face_switch(face_switch_arg);
+   CW.face_switch(0);
    $_('clockface_container').style.visibility = 'hidden';
    $_('hrs_container').style.visibility = 'hidden';
    $_('mns_container').style.visibility = 'hidden';
    change_view('svg_48',views['hrs_driver_0']);
    change_view('svg_60',views['mins_driver_1']); }
  cq_2.onclick = () => {
-   face_switch_arg = 1;
-   face_switch(face_switch_arg);
+   CW.face_switch(1);
    $_('clockface_container').style.visibility = 'hidden';
    $_('hrs_container').style.visibility = 'hidden';
    $_('mns_container').style.visibility = 'hidden';
@@ -253,8 +217,7 @@ mk_clickable_quarters = (xy) => {
    change_view('svg_60',views['mins_driver_1']); }
  /*
  cq_3.onclick = () => {
-   face_switch_arg = 1;
-   face_switch(face_switch_arg);
+   CW.face_switch(1);
    $_('clockface_container').style.visibility = 'hidden';
    $_('hrs_container').style.visibility = 'hidden';
    $_('mns_container').style.visibility = 'hidden';
