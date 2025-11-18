@@ -51,50 +51,46 @@ window.onload = () => {
   CW.face_switch(); }
  if(mode != -1) {
   window.document.onkeydown = function(k) {
-   if(k.key == 'ArrowUp') {         // HRS/MNS++
+   if(k.key == 'ArrowUp') {         // HRS/10MNS++
     if(CW.shown_face == 0) {
      switch_mode_1();
-     if(++TH == 24) TH = 0;
-     CW.set(TH,TM); }
+     if(++TH == 24) TH = 0; }
     else if(CW.shown_face == 1) {
      switch_mode_1();
      TM += 10;
-     if(TM > 59) TM -= 60;
-     CW.set(TH,TM); }}
-   else if(k.key == 'ArrowDown') {  // HRS/MNS--
+     if(TM > 59) TM -= 60; }
+    CW.set(TH,TM); }
+   else if(k.key == 'ArrowDown') {  // HRS/10MNS--
     if(CW.shown_face == 0) {
      switch_mode_1();
-     if(--TH == -1) TH = 23;
-     CW.set(TH,TM); }
+     if(--TH == -1) TH = 23; }
     else if(CW.shown_face == 1) {
      switch_mode_1();
      TM -= 10;
-     if(TM < 0) TM += 60;
-     CW.set(TH,TM); }}
-   else if(k.key == 'ArrowLeft') {  // ¼HRS/MNS --
+     if(TM < 0) TM += 60; }
+    CW.set(TH,TM); }
+   else if(k.key == 'ArrowLeft') {  // ¼HRS/MNS--
     if(CW.shown_face == 0) {
      switch_mode_1();
      TM -= 15;
      if(TM < 0) {
       TM += 60;
-      if(--TH == -1) TH = 23; }
-     CW.set(TH,TM); }
+      if(--TH == -1) TH = 23; }}
     else if(CW.shown_face == 1) {
      switch_mode_1();
-     if(--TM == -1) TM = 59;
-     CW.set(TH,TM); }}
+     if(--TM == -1) TM = 59; }
+    CW.set(TH,TM); }
    else if(k.key == 'ArrowRight') { // ¼HRS/MNS++
     if(CW.shown_face == 0) {
      switch_mode_1();
      TM += 15;
      if(TM > 59) {
       TM -= 60;
-      if(++TH == 24) TH = 0; }
-      CW.set(TH,TM); }
+      if(++TH == 24) TH = 0; }}
     else if(CW.shown_face == 1) {
      switch_mode_1();
-     if(++TM == 60) TM = 0;
-     CW.set(TH,TM); }}
+     if(++TM == 60) TM = 0; }
+    CW.set(TH,TM); }
    else if(k.key == 'Enter') {      // EXEC
     switch_mode_1();
    /***/ }
