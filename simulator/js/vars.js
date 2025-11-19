@@ -6,7 +6,7 @@ var HH, MM, SS;           // ACTUAL TIME - ACTUALIZED EVERY SECOND
 var TH, TM, TS;           // TARGET TIME - TO BE INDICATED
 
 // --- ETC CMANUAL SETTINGS BEGIN ---
-var mode =  0;            // -1 FORCE DECO CLOCK WITH JUMPING HANDS, 0 = NORMAL RUN, 1 = TEST [AUTOSWITCH 0/1, SET mode = 0]
+var mode =  1;            // -1 FORCE DECO CLOCK WITH JUMPING HANDS, 0 = NORMAL RUN, 1 = TEST [AUTOSWITCH 0/1, SET mode = 0]
 var secx = 50;            // second when the movement to next minute begins in mode 0
 // --- ETC MANUAL SETTINGS END -----
 

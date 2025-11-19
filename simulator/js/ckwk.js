@@ -9,6 +9,31 @@ class clockwork {
   this.HH_angle = 0;
   this.MK_angle = 0;
   this.shown_face = 0; }
+ move = (A,n,t,s) => {
+  console.log(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s}`);
+  if(this.shown_face == 0) { // HRS
+   if(n == 'D_MNS') {
+    $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180 + A})`); }
+   else if(n == 'D_HRS') {
+    $_('geneva_48').setAttribute('transform', `rotate(${this.HH_angle + A})`);
+    $_('marker').setAttribute('transform', `rotate(${-this.MK_angle + A})`);
+    $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180 + A})`); }}
+  else if(this.shown_face == 1) { // MNS
+   if(n == 'D_MNS') {
+    $_('geneva_60').setAttribute('transform', `rotate(${this.MM_angle + A})`);
+    $_('marker').setAttribute('transform', `rotate(${-this.MK_angle + A})`);
+    $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180 + A})`); }
+   else if(n == 'D_HRS') {
+    $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180 + A})`); }}
+  if(t == 0) this.fix(s); }
+ fix = (d) => {
+  console.log(`FIX: ${d}`);
+  if(d == 1) {
+
+  }
+  else if(d == -1) {
+
+  }}
  init = (hh,mm,ss) => {
   this.MM = mm;
   this.HH = hh;
@@ -64,7 +89,7 @@ radToDeg = rad => {
 
 class Driver {
  tri_rotate = s => {
-  console.log(s);
+  // console.log(s);
   var rot = this.rotation % 120;
   var rad = degToRad(rot);
   var wheel_delta = 0;
@@ -81,8 +106,8 @@ class Driver {
     wheel_delta = -(radToDeg(Math.atan((orbit_r * Math.sin(2 * Math.PI / 3 - rad)) / (axis_dx - (orbit_r * Math.cos(2 * Math.PI / 3 - rad)))))); }
    else {
     wheel_delta = -(a_stepx - radToDeg(Math.atan((orbit_r * Math.sin(rad)) / (axis_dx - (orbit_r * Math.cos(rad)))))); }}
-  console.log(`ROT: ${rot} Δ: ${wheel_delta.toFixed(3)}`);
-  /* CW */ }
+  // console.log(`ROT: ${rot} Δ: ${wheel_delta.toFixed(3)}`);
+  CW.move(-wheel_delta,this.name,rot,s); }
  autorotate_ = deg => {
   this.rotation += deg;
   if((this.rotation % 120) == 0) {
