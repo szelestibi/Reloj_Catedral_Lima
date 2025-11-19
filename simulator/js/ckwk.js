@@ -9,7 +9,7 @@ class clockwork {
   this.HH_angle = 0;
   this.MK_angle = 0;
   this.shown_face = 0; }
- move = (A,n,t,s) => {
+ rotate = (A,n,t,s) => {
   console.log(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s}`);
   if(this.shown_face == 0) { // HRS
    if(n == 'D_MNS') {
@@ -26,7 +26,8 @@ class clockwork {
    else if(n == 'D_HRS') {
     $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180 + A})`); }}
   if(t == 0) this.fix(s); }
- fix = (d) => {
+/* * */
+  fix = (d) => {
   console.log(`FIX: ${d}`);
   if(d == 1) {
 
@@ -34,6 +35,8 @@ class clockwork {
   else if(d == -1) {
 
   }}
+ move = () => {}
+/* * */
  init = (hh,mm,ss) => {
   this.MM = mm;
   this.HH = hh;
@@ -107,7 +110,7 @@ class Driver {
    else {
     wheel_delta = -(a_stepx - radToDeg(Math.atan((orbit_r * Math.sin(rad)) / (axis_dx - (orbit_r * Math.cos(rad)))))); }}
   // console.log(`ROT: ${rot} Δ: ${wheel_delta.toFixed(3)}`);
-  CW.move(-wheel_delta,this.name,rot,s); }
+  CW.rotate(-wheel_delta,this.name,rot,s); }
  autorotate_ = deg => {
   this.rotation += deg;
   if((this.rotation % 120) == 0) {
