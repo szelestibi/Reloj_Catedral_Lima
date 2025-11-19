@@ -11,6 +11,12 @@ window.onload = () => {
  var target_clock = window.document.createElement('div');
  target_clock.id = 'TC';
  window.document.body.appendChild(target_clock);
+ var work_clock = window.document.createElement('div');
+ work_clock.id = 'WC';
+ window.document.body.appendChild(work_clock);
+ var marker_angle = window.document.createElement('div');
+ marker_angle.id = 'MA';
+ window.document.body.appendChild(marker_angle);
  ['mechanism_container','clockface_container','seconds_container','marker_container','hrs_container','mns_container'].forEach(e => {
   $_(e).style.width = xy + 'px';
   $_(e).style.height = xy + 'px';
@@ -129,6 +135,9 @@ exec_movement = () => {
   $_('TC').innerHTML = `${String(TH).padStart(2, '0')}:${String(TM).padStart(2, '0')}:${String(TS).padStart(2, '0')}`; }
  else if(mode == 1) {
   $_('TC').innerHTML = `${String(TH).padStart(2, '0')}:${String(TM).padStart(2, '0')}`; }
+ if(mode > -1) {
+  $_('WC').innerHTML = `${String(CW.SH).padStart(2, '0')}:${String(CW.SM).padStart(2, '0')}`;
+  $_('MA').innerHTML = `${String(CW.MK_angle)}`; }
  const secs_angle = SS * 6;
  $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`);
  if((mode == -1) || (loaded == 0)) {

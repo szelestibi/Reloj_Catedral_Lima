@@ -65,19 +65,28 @@ body {
  cursor: default;
  background: rgba(0,200,0,0); }
 
-#DC, #TC {
+#DC, #TC, #WC, #MA {
  /* background: #FFF; */
  position: absolute;
  width: 120px;
  height: 28px;
- top: 10px;
- text-align: center;
+ text-align: left;
  font-family: monospace;
  font-size: 24px;
  color: rgba(255,255,255,1); }
 
 #DC {
+ top: 10px;
  left: 10px; }
 
 #TC {
+ top: 10px;
+ right: 10px; }
+
+#WC {
+ top: 48px;
+ right: 10px; }
+
+#MA {
+ top: 86px;
  right: 10px; }
