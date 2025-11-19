@@ -50,3 +50,16 @@ var D_MNS = 0;
 
 var CW;        // clockwork
 
+// timer aux vars
+var realtime =  true;
+realtime = false;
+var getTimeStarted = false;
+var IH = 13;
+var IM =  6;
+var IS = 48;
+var now_date = new Date();
+if(realtime == false) {
+ now_date.setHours(IH);
+ now_date.setMinutes(IM);
+ now_date.setSeconds(IS);
+ now_date.setMilliseconds(0); }

@@ -90,3 +90,15 @@ body {
 #MA {
  top: 86px;
  right: 10px; }
+
+#DBG {
+ background: #FFF;
+ color: #700;
+ position: absolute;
+ width: 95%;
+ height: 28px;
+ text-align: center;
+ font-family: monospace;
+ font-size: 24px;
+ bottom: 30px;
+ right: 2.5%; }

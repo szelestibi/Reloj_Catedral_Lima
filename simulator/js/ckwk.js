@@ -37,15 +37,18 @@ class clockwork {
   else if(d == -1) {
 
   }}
- move = () => {}
+ move = () => {
+  console.log(`this is move(MK_HH: ${this.MK_HH}, MK_MM: ${this.MK_MM});`);
+  debug(`${(((this.HH % 12) * 30) + (Math.floor((this.MM * 60 + SS + 450) / 900) * 7.5))} - ${this.HH_angle}`);
+ }
 /* * */
- init = (hh,mm,ss) => {
+ init = (hh,mm) => {
   this.MM = mm;
   this.HH = hh;
   this.SM = mm;
   this.SH = hh;
   this.MM_angle = mm * 6;
-  this.HH_angle = ((hh % 12) * 30) + (Math.floor((mm * 60 + ss + 450) / 900) * 7.5);
+  this.HH_angle = ((hh % 12) * 30) + (Math.floor((mm * 60 + SS + 450) / 900) * 7.5);
   $_('geneva_60').setAttribute('transform', `rotate(${this.MM_angle})`);
   $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180})`);
   $_('geneva_48').setAttribute('transform', `rotate(${this.HH_angle})`);
@@ -57,7 +60,7 @@ class clockwork {
   $_('MA').innerHTML = `${String(this.MK_angle)}`;
   this.MM = mm;
   this.HH = hh;
-  this.show_face_(SS); }
+  this.show_face_(); }
  face_switch = (F=undefined) => {
   if(F == undefined) {}
   else {
@@ -70,9 +73,9 @@ class clockwork {
    $_('svg_60').style.display = 'none';
    $_('svg_48').style.display = 'block';
    this.shown_face = 0; }
-  this.show_face_(SS); }
- show_face_ = ss => {
-  this.mk_angle_(ss);
+  this.show_face_(); }
+ show_face_ = () => {
+  this.mk_angle_();
   if(this.shown_face == 1) { // MNS
    this.MK_angle = this.MK_MM;
    $_('marker').setAttribute('transform', `rotate(${-this.MK_angle})`); }
@@ -80,9 +83,9 @@ class clockwork {
    this.MK_angle = this.MK_HH;
    $_('marker').setAttribute('transform', `rotate(${-this.MK_angle})`); }
   $_('MA').innerHTML = `${String(this.MK_angle)}`; }
- mk_angle_ = ss => {
+ mk_angle_ = () => {
   this.MK_MM = (((((this.MM - this.SM) % 60) * 6) + 180) % 360 + 360) % 360 - 180;
-  this.MK_HH = (((((this.HH % 12) * 30) + (Math.floor((this.MM * 60 + ss + 450) / 900) * 7.5) - this.HH_angle) + 180) % 360 + 360) % 360 - 180; } }
+  this.MK_HH = ((((((this.HH % 12) * 30) + (Math.floor((this.MM * 60 + SS + 450) / 900) * 7.5)) - this.HH_angle) + 180) % 360 + 360) % 360 - 180; } }
 
 polar2xy = (deg,r) => {
  const cx = 0;

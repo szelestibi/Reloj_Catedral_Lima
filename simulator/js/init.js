@@ -17,6 +17,9 @@ window.onload = () => {
  var marker_angle = window.document.createElement('div');
  marker_angle.id = 'MA';
  window.document.body.appendChild(marker_angle);
+ var debug = window.document.createElement('div');
+ debug.id = 'DBG';
+ window.document.body.appendChild(debug);
  ['mechanism_container','clockface_container','seconds_container','marker_container','hrs_container','mns_container'].forEach(e => {
   $_(e).style.width = xy + 'px';
   $_(e).style.height = xy + 'px';
@@ -38,7 +41,8 @@ window.onload = () => {
   dial.style.width = hmd;
   mk_clickable_quarters(dial_xy);
   mk_clickable_reset(dial_xy * 155 / 100);
-  var now_date = new Date();
+  if(realtime == true) {
+   now_date = new Date(); }
   SM = now_date.getMinutes();
   SH = now_date.getHours();
   getTimeNow();
@@ -99,7 +103,7 @@ window.onload = () => {
     CW.set(TH,TM); }
    else if(k.key == 'Enter') {      // EXEC
     switch_mode_1();
-   /***/ }
+    CW.move(); }
    else if(k.key == 'Escape') {
     switch_mode_0(); }
    else if(k.key == ' ') {
@@ -115,18 +119,22 @@ switch_mode_1 = () => {
  /***/ }
 
 getTimeNow = () => {
- var now_date = new Date();
+ if(realtime == true) {
+  now_date = new Date(); }
+ else {
+  now_date.setTime(now_date.getTime() + 250); }
  SS = now_date.getSeconds();
  MM = now_date.getMinutes();
  HH = now_date.getHours();
  if(mode == -1) {
   SM = MM;
   SH = HH; }
- now_date.setTime(now_date.getTime() + (60 - secx) * 1000); // TARGET TIME
- TS = now_date.getSeconds();
+ tar_date = new Date(); 
+ tar_date.setTime(now_date.getTime() + (60 - secx) * 1000); // TARGET TIME
+ TS = tar_date.getSeconds();
  if((mode == 0) || (loaded == 0)) {
-  TM = now_date.getMinutes();
-  TH = now_date.getHours(); }}
+  TM = tar_date.getMinutes();
+  TH = tar_date.getHours(); }}
 
 exec_movement = () => {
  if(SS == psec) return;
@@ -141,10 +149,11 @@ exec_movement = () => {
  const secs_angle = SS * 6;
  $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`);
  if((mode == -1) || (loaded == 0)) {
-  CW.init(HH,MM,SS);
+  CW.init(HH,MM);
   loaded = 1; }
  if((mode == 0) && ((TS == 0) || (TS == 30))) {
-  CW.set(TH,TM,TS); }
+  CW.set(TH,TM,TS);
+  CW.move(); }
  psec = SS; }
 
 change_view = (s,[w,h,x,y]) => {
@@ -207,3 +216,6 @@ mk_clickable_quarters = (xy) => {
    $_('mns_container').style.visibility = 'hidden';
    change_view('svg_48',views['hrs_driver_0']);
    change_view('svg_60',views['mins_driver_1']); }}
+
+debug = s => {
+ $_('DBG').innerHTML = s; }
