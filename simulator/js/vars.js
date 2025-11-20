@@ -7,7 +7,6 @@ var TH, TM, TS;           // TARGET TIME - TO BE INDICATED
 
 // --- ETC CMANUAL SETTINGS BEGIN ---
 var mode =  0;            // -1 FORCE DECO CLOCK WITH JUMPING HANDS, 0 = NORMAL RUN, 1 = TEST [AUTOSWITCH 0/1, SET mode = 0]
-var secx = 50;            // second when the movement to next minute begins in mode 0
 // --- ETC MANUAL SETTINGS END -----
 
 var modes = {
@@ -54,9 +53,10 @@ var CW;        // clockwork
 var realtime =  true;
 realtime = false;
 var getTimeStarted = false;
-var IH = 13;
+var IH = 12;
 var IM =  6;
-var IS = 48;
+var IS = 45;
+var add_ms = 250; // to add every ¼ sec
 var now_date = new Date();
 if(realtime == false) {
  now_date.setHours(IH);

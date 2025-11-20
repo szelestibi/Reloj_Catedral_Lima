@@ -11,15 +11,10 @@ window.onload = () => {
  var target_clock = window.document.createElement('div');
  target_clock.id = 'TC';
  window.document.body.appendChild(target_clock);
- var work_clock = window.document.createElement('div');
- work_clock.id = 'WC';
- window.document.body.appendChild(work_clock);
- var marker_angle = window.document.createElement('div');
- marker_angle.id = 'MA';
- window.document.body.appendChild(marker_angle);
  var debug = window.document.createElement('div');
  debug.id = 'DBG';
  window.document.body.appendChild(debug);
+ $_('DBG').style.visibility = 'hidden';
  ['mechanism_container','clockface_container','seconds_container','marker_container','hrs_container','mns_container'].forEach(e => {
   $_(e).style.width = xy + 'px';
   $_(e).style.height = xy + 'px';
@@ -107,7 +102,43 @@ window.onload = () => {
    else if(k.key == 'Escape') {
     switch_mode_0(); }
    else if(k.key == ' ') {
-    CW.face_switch(); }}}}
+    CW.face_switch(); }
+   if(mode == 5) {                  // MODE 1  !!!
+    if(k.key == 'Insert') {
+     if(++HH > 23) HH -= 24;
+     show_ttime(); }
+    else if(k.key == 'Delete') {
+     if(--HH < 0) HH += 24;
+     show_ttime(); }
+    else if(k.key == 'Home') {
+     if(++MM > 59) {
+      MM -= 60;
+      if(++HH > 23) HH -= 24; }
+     show_ttime(); }
+    else if(k.key == 'End') {
+     if(--MM < 0) {
+      MM += 60;
+      if(--HH < 0) HH += 24; }
+     show_ttime(); }
+    else if(k.key == 'PageUp') {
+     if(++SS > 59) {
+      SS -= 60;
+      if(++MM > 59) {
+       MM -= 60;
+       if(++HH > 23) HH -= 24; }}
+     show_ttime(); }
+    else if(k.key == 'PageDown') {
+     if(--SS < 0) {
+      SS += 60;
+      if(--MM < 0) {
+       MM += 60;
+       if(--HH < 0) HH += 24; }}
+     show_ttime(); }
+    else {
+     console.log(k.key); }} }}}
+
+show_ttime = () => {
+ $_('TC').innerHTML = `${String(HH).padStart(2,'0')}:${String(MM).padStart(2,'0')}:${String(SS).padStart(2,'0')}`; }
 
 switch_mode_0 = () => {
  mode = 0;
@@ -115,14 +146,13 @@ switch_mode_0 = () => {
 
 switch_mode_1 = () => {
  mode = 1;
- window.document.title = 'RCL MANUAL TEST';
- /***/ }
+ window.document.title = 'RCL MANUAL TEST'; }
 
 getTimeNow = () => {
  if(realtime == true) {
   now_date = new Date(); }
  else {
-  now_date.setTime(now_date.getTime() + 250); }
+  now_date.setTime(now_date.getTime() + add_ms); }
  SS = now_date.getSeconds();
  MM = now_date.getMinutes();
  HH = now_date.getHours();
@@ -130,29 +160,27 @@ getTimeNow = () => {
   SM = MM;
   SH = HH; }
  tar_date = new Date(); 
- tar_date.setTime(now_date.getTime() + (60 - secx) * 1000); // TARGET TIME
+ tar_date.setTime(now_date.getTime() + 10000); // TARGET TIME 10 sec AHEAD
  TS = tar_date.getSeconds();
  if((mode == 0) || (loaded == 0)) {
   TM = tar_date.getMinutes();
   TH = tar_date.getHours(); }}
 
 exec_movement = () => {
+ // debug(`${CW.HH}:${String(CW.MM).padStart(2, '0')}:${String(TS).padStart(2, '0')} ${CW.SH}:${String(CW.SM).padStart(2, '0')} ${(((CW.HH % 12) * 30) + (Math.floor((CW.MM * 60 + TS + 450) / 900) * 7.5))} - ${CW.HH_angle}`);
  if(SS == psec) return;
  $_('DC').innerHTML = `${String(HH).padStart(2,'0')}:${String(MM).padStart(2,'0')}:${String(SS).padStart(2,'0')}`;
  if(mode == 0) {
-  $_('TC').innerHTML = `${String(TH).padStart(2, '0')}:${String(TM).padStart(2, '0')}:${String(TS).padStart(2, '0')}`; }
+  $_('TC').innerHTML = `${String(TH).padStart(2,'0')}:${String(TM).padStart(2,'0')}:${String(TS).padStart(2,'0')}`; }
  else if(mode == 1) {
-  $_('TC').innerHTML = `${String(TH).padStart(2, '0')}:${String(TM).padStart(2, '0')}`; }
- if(mode > -1) {
-  $_('WC').innerHTML = `${String(CW.SH).padStart(2, '0')}:${String(CW.SM).padStart(2, '0')}`;
-  $_('MA').innerHTML = `${String(CW.MK_angle)}`; }
+  $_('TC').innerHTML = `${String(TH).padStart(2,'0')}:${String(TM).padStart(2,'0')}`; }
  const secs_angle = SS * 6;
  $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`);
  if((mode == -1) || (loaded == 0)) {
   CW.init(HH,MM);
   loaded = 1; }
  if((mode == 0) && ((TS == 0) || (TS == 30))) {
-  CW.set(TH,TM,TS);
+  CW.set(TH,TM);
   CW.move(); }
  psec = SS; }
 
@@ -218,4 +246,5 @@ mk_clickable_quarters = (xy) => {
    change_view('svg_60',views['mins_driver_1']); }}
 
 debug = s => {
+ $_('DBG').style.visibility = 'visible';
  $_('DBG').innerHTML = s; }
