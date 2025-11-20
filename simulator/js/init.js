@@ -67,7 +67,12 @@ window.onload = () => {
     CW.stop();
     CW.set_MM(+1); }}
   else if(k.key == 'Enter') {
-  }
+   CW.stop();
+   realtime = true;
+   CW.init();
+   CW.show_face_();
+   CW.showTime_();
+   CW.start(); }
   else if(k.key == 'Escape') {
    if(CW.running == false) {
     realtime = false;
