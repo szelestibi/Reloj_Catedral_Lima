@@ -66,10 +66,12 @@ window.onload = () => {
    else if(CW.shown_face == 1) {
     CW.stop();
     CW.set_MM(+1); }}
-  else if(k.key == 'Enter') {      // EXEC
+  else if(k.key == 'Enter') {
   }
   else if(k.key == 'Escape') {
-  }
+   if(CW.running == false) {
+    realtime = false;
+    CW.start(); }}
   else if(k.key == ' ') {
    CW.face_switch(); }
   else if(k.key == 'Insert') {

@@ -42,9 +42,9 @@ class clockwork {
    var rt = new Date();
    this.time.setTime(rt.getTime()); }
   else {
-   var hh = this.getHours();
-   var mm = this.getMinutes();
-   var ss = this.getSeconds();
+   var hh = this.time.getHours();
+   var mm = this.time.getMinutes();
+   var ss = this.time.getSeconds();
    if(++ss == 60) {
     ss = 0;
     if(++mm == 60) {
@@ -56,12 +56,15 @@ class clockwork {
    this.time.setHours(hh); }
   if(this.time.getSeconds() != this.PS) {
    var ss = this.time.getSeconds();
-   const secs_angle = ss * 6;
-   $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`);
-   $_('TIME').innerHTML = `${String(this.time.getHours()).padStart(2,'0')}:${String(this.time.getMinutes()).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+   this.showTime_();
    if((ss == 20) || (ss == 50)) {
     this.show_face_(); }
    this.PS = ss; }}
+ showTime_ = () => {
+  const ss = this.time.getSeconds();
+  const secs_angle = ss * 6;
+  $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`);
+  $_('TIME').innerHTML = `${String(this.time.getHours()).padStart(2,'0')}:${String(this.time.getMinutes()).padStart(2,'0')}:${String(ss).padStart(2,'0')}`; }
  start = () => {
   if(realtime) {
    this.IH = setInterval(this.tick_,250); }
@@ -72,9 +75,18 @@ class clockwork {
   if(this.running) {
    clearInterval(this.IH);
    this.running = false; }}
- set_HH = dh => {}
- set_MM = dm => {}
- set_SS = ds => {}
+ set_HH = dh => {
+  this.time.setHours(this.time.getHours() + dh);
+  this.show_face_();
+  this.showTime_(); }
+ set_MM = dm => {
+  this.time.setMinutes(this.time.getMinutes() + dm);
+  this.show_face_();
+  this.showTime_(); }
+ set_SS = ds => {
+  this.time.setSeconds(this.time.getSeconds() + ds);
+  this.show_face_();
+  this.showTime_(); }
  fix_ = (d) => {
  }
  move = () => {
