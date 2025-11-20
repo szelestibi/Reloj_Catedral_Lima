@@ -56,7 +56,7 @@ class clockwork {
   $_('marker').setAttribute('transform', `rotate(${-this.MK_angle})`); }
  set = (hh,mm) => {
   $_('TC').innerHTML = `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
-  console.log(`this is CW.set(${hh},${mm})`);
+  console.log(`this is CW.set(${hh},${mm},${TS})`);
   this.MM = mm;
   this.HH = hh;
   this.show_face_(); }

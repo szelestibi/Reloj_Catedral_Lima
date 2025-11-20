@@ -6,7 +6,7 @@ var HH, MM, SS;           // ACTUAL TIME - ACTUALIZED EVERY SECOND
 var TH, TM, TS;           // TARGET TIME - TO BE INDICATED
 
 // --- ETC CMANUAL SETTINGS BEGIN ---
-var mode =  0;            // -1 FORCE DECO CLOCK WITH JUMPING HANDS, 0 = NORMAL RUN, 1 = TEST [AUTOSWITCH 0/1, SET mode = 0]
+var mode = 0;             // -1 FORCE DECO CLOCK WITH JUMPING HANDS, 0 = NORMAL RUN, 1 = TEST [AUTOSWITCH 0/1, SET mode = 0]
 // --- ETC MANUAL SETTINGS END -----
 
 var modes = {
@@ -51,7 +51,7 @@ var CW;        // clockwork
 
 // timer aux vars
 var realtime =  true;
-realtime = false;
+// realtime = false;
 var getTimeStarted = false;
 var IH = 12;
 var IM =  6;
