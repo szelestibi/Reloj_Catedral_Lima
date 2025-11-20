@@ -1,15 +1,24 @@
 class clockwork {
  static CW = new clockwork();
- constructor(hh = 12, mm = 0) {
-  this.MM = mm; // actual MM
-  this.HH = hh; // actual HH
-  this.SM = mm; // start  MM
-  this.SH = hh; // start  HH
-  this.MM_angle = 0;
+ constructor() {
+  this.time = new Date();
+  this.time.setHours(12);
+  this.time.setMinutes(0);
+  this.time.setSeconds(0);
+  this.time.setMilliseconds(0);
+  this.time_um = new Date(); // upcomming time for move
+  this.HH = this.time.getHours();
+  this.MM = this.time.getMinutes();
+  this.SS = this.time.getSeconds();
+  this.PS = -1;              // previous second
+  this.interval = 1000;      // interval for run
+  this.IH = 0;               // interval handler
+  this.running = false;
   this.HH_angle = 0;
-  this.MK_MM = 0;
-  this.MK_HH = 0;
-  this.MK_angle = 0;
+  this.MM_angle = 0;
+  this.marker_angle_HH = 0;
+  this.marker_angle_MM = 0;
+  this.marker_angle = 0;
   this.shown_face = 0; }
  rotate = (A,n,t,s) => {
   console.log(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s}`);
@@ -18,42 +27,76 @@ class clockwork {
     $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180 + A})`); }
    else if(n == 'D_HRS') {
     $_('geneva_48').setAttribute('transform', `rotate(${this.HH_angle + A})`);
-    $_('marker').setAttribute('transform', `rotate(${-this.MK_angle + A})`);
+    $_('marker').setAttribute('transform', `rotate(${-this.marker_angle + A})`);
     $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180 + A})`); }}
   else if(this.shown_face == 1) { // MNS
    if(n == 'D_MNS') {
     $_('geneva_60').setAttribute('transform', `rotate(${this.MM_angle + A})`);
-    $_('marker').setAttribute('transform', `rotate(${-this.MK_angle + A})`);
+    $_('marker').setAttribute('transform', `rotate(${-this.marker_angle + A})`);
     $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180 + A})`); }
    else if(n == 'D_HRS') {
     $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180 + A})`); }}
-  if(t == 0) this.fix(s); }
-/* * */
-  fix = (d) => {
-  console.log(`FIX: ${d}`);
-  if(d == 1) {
-
-  }
-  else if(d == -1) {
-
-  }}
- move = () => {
-  console.log(`this is move(MK_HH: ${this.MK_HH}, MK_MM: ${this.MK_MM});`);
-  // debug(`${this.HH}H ${(((this.HH % 12) * 30) + (Math.floor((this.MM * 60 + TS + 450) / 900) * 7.5))} - ${this.HH_angle}`);
+  if(t == 0) this.fix_(s); }
+ tick_ = () => {
+  if(realtime) {
+   var rt = new Date();
+   this.time.setTime(rt.getTime()); }
+  else {
+   var hh = this.getHours();
+   var mm = this.getMinutes();
+   var ss = this.getSeconds();
+   if(++ss == 60) {
+    ss = 0;
+    if(++mm == 60) {
+     mm = 0;
+     if(++hh == 24) {
+      hh = 0; }}}
+   this.time.setSeconds(ss);   
+   this.time.setMinutes(mm);
+   this.time.setHours(hh); }
+  if(this.time.getSeconds() != this.PS) {
+   var ss = this.time.getSeconds();
+   const secs_angle = ss * 6;
+   $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`);
+   $_('TIME').innerHTML = `${String(this.time.getHours()).padStart(2,'0')}:${String(this.time.getMinutes()).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+   if((ss == 20) || (ss == 50)) {}
+   this.show_face_();
+   this.PS = ss; }}
+ start = () => {
+  if(realtime) {
+   this.IH = setInterval(this.tick_,250); }
+  else {
+   this.IH = setInterval(this.tick_,this.interval); }
+  this.running = true; }
+ stop = () => {}
+ fix_ = (d) => {
  }
-/* * */
- init = (hh,mm) => {
-  this.MM = mm;
-  this.HH = hh;
-  this.SM = mm;
-  this.SH = hh;
+ move = () => {
+ }
+ getRealTime_ = () => {
+  var rt = new Date();
+  this.HH = rt.getHours();
+  this.MM = rt.getMinutes();
+  this.SS = rt.getSeconds();
+  this.time.setTime(rt.getTime()); }
+ init = (hh='',mm='') => {
+  if(realtime) {
+   this.getRealTime_(); }
+  else {
+   this.HH = hh;
+   this.MM = mm;
+   this.SS = 0;
+   this.time.setMilliseconds(0);
+   this.time.setSeconds(0);
+   this.time.setMinutes(mm);
+   this.time.setHours(hh); }
   this.MM_angle = this.MM * 6;
-  this.HH_angle = ((this.HH % 12) * 30) + (Math.floor((this.MM * 60 + TS + 450) / 900) * 7.5);
+  this.HH_angle = ((this.HH % 12) * 30) + (Math.floor((this.MM * 60 + this.SS + 450) / 900) * 7.5);
   $_('geneva_60').setAttribute('transform', `rotate(${this.MM_angle})`);
   $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180})`);
   $_('geneva_48').setAttribute('transform', `rotate(${this.HH_angle})`);
   $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180})`);
-  $_('marker').setAttribute('transform', `rotate(${-this.MK_angle})`); }
+  $_('marker').setAttribute('transform', `rotate(${-this.marker_angle})`); }
  set = (hh,mm) => {
   $_('TC').innerHTML = `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
   console.log(`this is CW.set(${hh},${mm},${TS})`);
@@ -76,14 +119,15 @@ class clockwork {
  show_face_ = () => {
   this.mk_angle_();
   if(this.shown_face == 1) { // MNS
-   this.MK_angle = this.MK_MM;
-   $_('marker').setAttribute('transform', `rotate(${-this.MK_angle})`); }
+   this.marker_angle = this.marker_angle_MM;
+   $_('marker').setAttribute('transform', `rotate(${-this.marker_angle})`); }
   else {                     // HRS
-   this.MK_angle = this.MK_HH;
-   $_('marker').setAttribute('transform', `rotate(${-this.MK_angle})`); }}
+   this.marker_angle = this.marker_angle_HH;
+   $_('marker').setAttribute('transform', `rotate(${-this.marker_angle})`); }}
  mk_angle_ = () => {
-  this.MK_MM = (((((this.MM - this.SM) % 60) * 6) + 180) % 360 + 360) % 360 - 180;
-  this.MK_HH = ((((((this.HH % 12) * 30) + (Math.floor((this.MM * 60 + TS + 450) / 900) * 7.5)) - this.HH_angle) + 180) % 360 + 360) % 360 - 180; } }
+  this.time_um.setTime(this.time.getTime() + 10000);
+  this.marker_angle_MM = (((((this.time_um.getMinutes() - this.MM) % 60) * 6) + 180) % 360 + 360) % 360 - 180;
+  this.marker_angle_HH = ((((((this.time_um.getHours() % 12) * 30) + (Math.floor((this.time_um.getMinutes() * 60 + this.time_um.getSeconds() + 450) / 900) * 7.5)) - this.HH_angle) + 180) % 360 + 360) % 360 - 180; } }
 
 polar2xy = (deg,r) => {
  const cx = 0;

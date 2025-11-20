@@ -6,11 +6,8 @@ window.onload = () => {
  else {
   xy = wWidth; }
  var digital_clock = window.document.createElement('div');
- digital_clock.id = 'DC';
+ digital_clock.id = 'TIME';
  window.document.body.appendChild(digital_clock);
- var target_clock = window.document.createElement('div');
- target_clock.id = 'TC';
- window.document.body.appendChild(target_clock);
  var debug = window.document.createElement('div');
  debug.id = 'DBG';
  window.document.body.appendChild(debug);
@@ -20,9 +17,6 @@ window.onload = () => {
   $_(e).style.height = xy + 'px';
   $_(e).style.left = (wWidth - xy) / 2 + 'px;'
   $_(e).style.top = (wHeight - xy) / 2 + 'px;' });
- if(mode == -1) {
-  // $_('mechanism_container').style.visibility = 'hidden';
-  $_('marker_container').style.visibility = 'hidden'; }
  const dial = window.document.createElement('img');
  dial.id = 'clock_dial';
  dial.src = './svg/dial.svg';
@@ -31,30 +25,19 @@ window.onload = () => {
   CW = clockwork.CW;
   var rect = dial.getBoundingClientRect();
   var dial_xy = rect.width;
-  // console.log(`dial_xy: ${dial_xy}`);
   var hmd = (dial_xy * 77 / 100) + 'px'
   dial.style.width = hmd;
+  dial.style.height = hmd;
   mk_clickable_quarters(dial_xy);
   mk_clickable_reset(dial_xy * 155 / 100);
-  if(realtime == true) {
-   now_date = new Date(); }
-  SM = now_date.getMinutes();
-  SH = now_date.getHours();
-  getTimeNow();
-  CW.face_switch(0); // 0 = SHOW MNS MECHANIC, 1 = HRS
-  exec_movement();
-  setTimeout(() => {
-   if(mode in modes) {
-    window.document.title = 'RCL ' + modes[mode]; }
-   else {
-    window.document.title = 'RCL MANUAL TEST'; }},3000);
-  clockjump = setInterval(() => {
-   getTimeNow();
-   exec_movement(F = 0); },250);
-  make_drivers(); }
+  make_drivers();
+  CW.init();
+  CW.face_switch(0); // 0 = MNS | 1 = HRS
+  CW.start(); }
  $_('docbody').onclick = () => {
   CW.face_switch(); }
- if(mode != -1) {
+ var mm = -1;
+ if(mm != -1) {
   window.document.onkeydown = function(k) {
    if(k.key == 'ArrowUp') {         // HRS/10MNS++
     if(CW.shown_face == 0) {
@@ -140,36 +123,10 @@ window.onload = () => {
 show_ttime = () => {
  $_('TC').innerHTML = `${String(HH).padStart(2,'0')}:${String(MM).padStart(2,'0')}:${String(SS).padStart(2,'0')}`; }
 
-switch_mode_0 = () => {
- mode = 0;
- window.document.title = 'RCL ' + modes[mode]; }
-
-switch_mode_1 = () => {
- mode = 1;
- window.document.title = 'RCL MANUAL TEST'; }
-
-getTimeNow = () => {
- if(realtime == true) {
-  now_date = new Date(); }
- else {
-  now_date.setTime(now_date.getTime() + add_ms); }
- SS = now_date.getSeconds();
- MM = now_date.getMinutes();
- HH = now_date.getHours();
- if(mode == -1) {
-  SM = MM;
-  SH = HH; }
- tar_date = new Date(); 
- tar_date.setTime(now_date.getTime() + 10000); // TARGET TIME 10 sec AHEAD
- TS = tar_date.getSeconds();
- if((mode == 0) || (loaded == 0)) {
-  TM = tar_date.getMinutes();
-  TH = tar_date.getHours(); }}
-
 exec_movement = () => {
  // debug(`${CW.HH}:${String(CW.MM).padStart(2, '0')}:${String(TS).padStart(2, '0')} ${CW.SH}:${String(CW.SM).padStart(2, '0')} ${(((CW.HH % 12) * 30) + (Math.floor((CW.MM * 60 + TS + 450) / 900) * 7.5))} - ${CW.HH_angle}`);
  if(SS == psec) return;
- $_('DC').innerHTML = `${String(HH).padStart(2,'0')}:${String(MM).padStart(2,'0')}:${String(SS).padStart(2,'0')}`;
+ 
  if(mode == 0) {
   $_('TC').innerHTML = `${String(TH).padStart(2,'0')}:${String(TM).padStart(2,'0')}:${String(TS).padStart(2,'0')}`; }
  else if(mode == 1) {
@@ -193,7 +150,6 @@ change_view = (s,[w,h,x,y]) => {
  s.viewBox.baseVal.height = h; }
 
 mk_clickable_reset = (xy) => {
- if(mode == -1) return;
  var cq_m = window.document.createElement('div');
  cq_m.id = 'CQM';
  cq_m.className = 'cq_elem';
@@ -211,7 +167,6 @@ mk_clickable_reset = (xy) => {
   change_view('svg_60',views['global']); }}
 
 mk_clickable_quarters = (xy) => {
- if(mode == -1) return;
  var cq_1 = window.document.createElement('div');
  cq_1.id = 'CQ1';
  cq_1.className = 'cq_elem';
