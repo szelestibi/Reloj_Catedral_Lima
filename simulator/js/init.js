@@ -36,89 +36,62 @@ window.onload = () => {
   CW.start(); }
  $_('docbody').onclick = () => {
   CW.face_switch(); }
- var mm = -1;
- if(mm != -1) {
-  window.document.onkeydown = function(k) {
-   if(k.key == 'ArrowUp') {         // HRS/10MNS++
-    if(CW.shown_face == 0) {
-     switch_mode_1();
-     if(++TH == 24) TH = 0; }
-    else if(CW.shown_face == 1) {
-     switch_mode_1();
-     TM += 10;
-     if(TM > 59) TM -= 60; }
-    CW.set(TH,TM); }
-   else if(k.key == 'ArrowDown') {  // HRS/10MNS--
-    if(CW.shown_face == 0) {
-     switch_mode_1();
-     if(--TH == -1) TH = 23; }
-    else if(CW.shown_face == 1) {
-     switch_mode_1();
-     TM -= 10;
-     if(TM < 0) TM += 60; }
-    CW.set(TH,TM); }
-   else if(k.key == 'ArrowLeft') {  // ¼HRS/MNS--
-    if(CW.shown_face == 0) {
-     switch_mode_1();
-     TM -= 15;
-     if(TM < 0) {
-      TM += 60;
-      if(--TH == -1) TH = 23; }}
-    else if(CW.shown_face == 1) {
-     switch_mode_1();
-     if(--TM == -1) TM = 59; }
-    CW.set(TH,TM); }
-   else if(k.key == 'ArrowRight') { // ¼HRS/MNS++
-    if(CW.shown_face == 0) {
-     switch_mode_1();
-     TM += 15;
-     if(TM > 59) {
-      TM -= 60;
-      if(++TH == 24) TH = 0; }}
-    else if(CW.shown_face == 1) {
-     switch_mode_1();
-     if(++TM == 60) TM = 0; }
-    CW.set(TH,TM); }
-   else if(k.key == 'Enter') {      // EXEC
-    switch_mode_1();
-    CW.move(); }
-   else if(k.key == 'Escape') {
-    switch_mode_0(); }
-   else if(k.key == ' ') {
-    CW.face_switch(); }
-   if(mode == 5) {                  // MODE 1  !!!
-    if(k.key == 'Insert') {
-     if(++HH > 23) HH -= 24;
-     show_ttime(); }
-    else if(k.key == 'Delete') {
-     if(--HH < 0) HH += 24;
-     show_ttime(); }
-    else if(k.key == 'Home') {
-     if(++MM > 59) {
-      MM -= 60;
-      if(++HH > 23) HH -= 24; }
-     show_ttime(); }
-    else if(k.key == 'End') {
-     if(--MM < 0) {
-      MM += 60;
-      if(--HH < 0) HH += 24; }
-     show_ttime(); }
-    else if(k.key == 'PageUp') {
-     if(++SS > 59) {
-      SS -= 60;
-      if(++MM > 59) {
-       MM -= 60;
-       if(++HH > 23) HH -= 24; }}
-     show_ttime(); }
-    else if(k.key == 'PageDown') {
-     if(--SS < 0) {
-      SS += 60;
-      if(--MM < 0) {
-       MM += 60;
-       if(--HH < 0) HH += 24; }}
-     show_ttime(); }
-    else {
-     console.log(k.key); }} }}}
+
+ window.document.onkeydown = function(k) {
+  if(k.key == 'ArrowUp') {         // HRS/10MNS++
+   if(CW.shown_face == 0) {
+    CW.stop();
+    CW.set_HH(+1); }
+   else if(CW.shown_face == 1) {
+    CW.stop();
+    CW.set_MM(+10); }}
+  else if(k.key == 'ArrowDown') {  // HRS/10MNS--
+   if(CW.shown_face == 0) {
+    CW.stop();
+    CW.set_HH(-1); }
+   else if(CW.shown_face == 1) {
+    CW.stop();
+    CW.set_MM(-10); }}
+  else if(k.key == 'ArrowLeft') {  // ¼HRS/MNS--
+   if(CW.shown_face == 0) {
+    CW.stop();
+    CW.set_MM(-15); }
+   else if(CW.shown_face == 1) {
+    CW.stop();
+    CW.set_MM(-1); }}
+  else if(k.key == 'ArrowRight') { // ¼HRS/MNS++
+   if(CW.shown_face == 0) {
+    CW.stop();
+    CW.set_MM(+15); }
+   else if(CW.shown_face == 1) {
+    CW.stop();
+    CW.set_MM(+1); }}
+  else if(k.key == 'Enter') {      // EXEC
+  }
+  else if(k.key == 'Escape') {
+  }
+  else if(k.key == ' ') {
+   CW.face_switch(); }
+  else if(k.key == 'Insert') {
+   CW.stop();
+   CW.set_HH(+1); }
+  else if(k.key == 'Delete') {
+   CW.stop();
+   CW.set_HH(-1); }
+  else if(k.key == 'Home') {
+   CW.stop();
+   CW.set_MM(+1); }
+  else if(k.key == 'End') {
+   CW.stop();
+   CW.set_MM(-1); }
+  else if(k.key == 'PageUp') {
+   CW.stop();
+   CW.set_SS(+1); }
+  else if(k.key == 'PageDown') {
+   CW.stop();
+   CW.set_SS(-1); }
+  else {
+   console.log(k.key); } }}
 
 show_ttime = () => {
  $_('TC').innerHTML = `${String(HH).padStart(2,'0')}:${String(MM).padStart(2,'0')}:${String(SS).padStart(2,'0')}`; }
