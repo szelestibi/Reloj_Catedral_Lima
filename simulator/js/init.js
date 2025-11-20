@@ -98,28 +98,10 @@ window.onload = () => {
    CW.stop();
    CW.set_SS(-1); }
   else {
-   console.log(k.key); } }}
+   console.log(k.key); }}}
 
 show_ttime = () => {
  $_('TC').innerHTML = `${String(HH).padStart(2,'0')}:${String(MM).padStart(2,'0')}:${String(SS).padStart(2,'0')}`; }
-
-exec_movement = () => {
- // debug(`${CW.HH}:${String(CW.MM).padStart(2, '0')}:${String(TS).padStart(2, '0')} ${CW.SH}:${String(CW.SM).padStart(2, '0')} ${(((CW.HH % 12) * 30) + (Math.floor((CW.MM * 60 + TS + 450) / 900) * 7.5))} - ${CW.HH_angle}`);
- if(SS == psec) return;
- 
- if(mode == 0) {
-  $_('TC').innerHTML = `${String(TH).padStart(2,'0')}:${String(TM).padStart(2,'0')}:${String(TS).padStart(2,'0')}`; }
- else if(mode == 1) {
-  $_('TC').innerHTML = `${String(TH).padStart(2,'0')}:${String(TM).padStart(2,'0')}`; }
- const secs_angle = SS * 6;
- $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`);
- if((mode == -1) || (loaded == 0)) {
-  CW.init(HH,MM);
-  loaded = 1; }
- if((mode == 0) && ((TS == 0) || (TS == 30))) {
-  CW.set(TH,TM);
-  CW.move(); }
- psec = SS; }
 
 change_view = (s,[w,h,x,y]) => {
  if(typeof(s) == 'string') {
@@ -141,6 +123,8 @@ mk_clickable_reset = (xy) => {
  window.document.body.appendChild(cq_m);
  cq_m.onclick = e => {
   $_('clockface_container').style.visibility = 'visible';
+  $_('marker_container').style.visibility = 'visible';
+  $_('seconds_container').style.visibility = 'visible';
   $_('hrs_container').style.visibility = 'visible';
   $_('mns_container').style.visibility = 'visible';
   change_view('svg_48',views['global']);
@@ -168,6 +152,8 @@ mk_clickable_quarters = (xy) => {
  cq_1.onclick = () => {
    CW.face_switch(0);
    $_('clockface_container').style.visibility = 'hidden';
+   $_('marker_container').style.visibility = 'hidden';
+   $_('seconds_container').style.visibility = 'hidden';
    $_('hrs_container').style.visibility = 'hidden';
    $_('mns_container').style.visibility = 'hidden';
    change_view('svg_48',views['hrs_driver_0']);
@@ -175,6 +161,8 @@ mk_clickable_quarters = (xy) => {
  cq_2.onclick = () => {
    CW.face_switch(1);
    $_('clockface_container').style.visibility = 'hidden';
+   $_('marker_container').style.visibility = 'hidden';
+   $_('seconds_container').style.visibility = 'hidden';
    $_('hrs_container').style.visibility = 'hidden';
    $_('mns_container').style.visibility = 'hidden';
    change_view('svg_48',views['hrs_driver_0']);

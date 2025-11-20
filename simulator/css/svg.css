@@ -54,9 +54,9 @@ svg #marker {
 
 svg #SECS {
  fill: none;
- fill: rgba(180,0,0,.9);
- stroke-width: .1;
- stroke: rgba(180,0,0,.9); }
+ fill: rgba(180,0,0,.3);
+ stroke-width: .3;
+ stroke: rgba(200,0,0,1); }
 
 svg #deco_axis {
  fill: rgba(191,191,191,.9);
