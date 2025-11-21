@@ -123,7 +123,7 @@ mk_clickable_reset = (xy) => {
  var cq_m = window.document.createElement('div');
  cq_m.id = 'CQM';
  cq_m.className = 'cq_elem';
- cq_m.title = 'RESET';
+ cq_m.title = 'CENTER';
  cq_m.style.width = xy / 2 + 'px';
  cq_m.style.height = xy / 2 + 'px';
  cq_m.style.left = (wWidth - xy / 2) / 2 + 'px';
@@ -142,7 +142,7 @@ mk_clickable_quarters = (xy) => {
  var cq_1 = window.document.createElement('div');
  cq_1.id = 'CQ1';
  cq_1.className = 'cq_elem';
- cq_1.title = 'MNS_1';
+ cq_1.title = 'ZOOM';
  cq_1.style.width = xy / 2 + 'px';
  cq_1.style.height = xy / 2 + 'px';
  cq_1.style.left = (wWidth / 2) + 'px';
@@ -151,7 +151,7 @@ mk_clickable_quarters = (xy) => {
  var cq_2 = window.document.createElement('div');
  cq_2.id = 'CQ2';
  cq_2.className = 'cq_elem';
- cq_2.title = 'HRS_0';
+ cq_2.title = 'ZOOM';
  cq_2.style.width = xy / 2 + 'px';
  cq_2.style.height = xy / 2 + 'px';
  cq_2.style.left = (wWidth - xy) / 2 + 'px';
