@@ -3,6 +3,7 @@ var svgns = 'http://www.w3.org/2000/svg';
 var wWidth, wHeight;
 
 var realtime = true;    // true: real time, false: tim_HHMM
+//  realtime = false;
 var tim_HHMM = '21:00'; // default time when realtime is false
 
 var wheels = {

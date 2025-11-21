@@ -32,7 +32,7 @@ window.onload = () => {
   mk_clickable_reset(dial_xy * 155 / 100);
   make_drivers();
   CW.init();
-  CW.face_switch(0); // 0 = MNS | 1 = HRS
+  CW.face_switch(1); // 0 = MNS | 1 = HRS
   CW.start(); }
  $_('docbody').onclick = () => {
   CW.face_switch(); }
@@ -67,12 +67,7 @@ window.onload = () => {
     CW.stop();
     CW.set_MM(+1); }}
   else if(k.key == 'Enter') {
-   CW.stop();
-   realtime = true;
-   CW.init();
-   CW.show_face_();
-   CW.showTime_();
-   CW.start(); }
+   CW.move(); }
   else if(k.key == 'Escape') {
    if(CW.running == false) {
     realtime = false;
@@ -101,10 +96,6 @@ window.onload = () => {
   else if(k.key == 'PageDown') {
    CW.stop();
    CW.set_SS(-1); }
-  else if(k.key == 'm') {
-   CW.move(); }
-  else if(k.key == 'M') {
-   CW.move(); }
   else {
    console.log(k.key); }}}
 
