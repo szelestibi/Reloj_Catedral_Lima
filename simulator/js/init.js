@@ -79,6 +79,10 @@ window.onload = () => {
     CW.start(); }}
   else if(k.key == ' ') {
    CW.face_switch(); }
+  else if(k.key == 'Tab') {
+   k.preventDefault();
+   k.stopPropagation();
+   CW.face_switch(); }
   else if(k.key == 'Insert') {
    CW.stop();
    CW.set_HH(+1); }
@@ -97,6 +101,10 @@ window.onload = () => {
   else if(k.key == 'PageDown') {
    CW.stop();
    CW.set_SS(-1); }
+  else if(k.key == 'm') {
+   CW.move(); }
+  else if(k.key == 'M') {
+   CW.move(); }
   else {
    console.log(k.key); }}}
 

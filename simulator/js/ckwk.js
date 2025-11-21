@@ -19,7 +19,8 @@ class clockwork {
   this.marker_angle_HH = 0;
   this.marker_angle_MM = 0;
   this.marker_angle = 0;
-  this.shown_face = 0; }
+  this.shown_face = 0;
+  this.move_speed = 2; }
  rotate = (A,n,t,s) => {
   console.log(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s}`);
   if(this.shown_face == 0) { // HRS
@@ -36,7 +37,7 @@ class clockwork {
     $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180 + A})`); }
    else if(n == 'D_HRS') {
     $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180 + A})`); }}
-  if(t == 0) this.fix_(s); }
+  if(t == 0) this.fix_(s,n); }
  tick_ = () => {
   if(realtime) {
    var rt = new Date();
@@ -87,10 +88,16 @@ class clockwork {
   this.time.setSeconds(this.time.getSeconds() + ds);
   this.show_face_();
   this.showTime_(); }
- fix_ = (d) => {
- }
+ fix_ = (d,n) => {
+  console.log(`fix_(${d},${n})`); }
  move = () => {
- }
+  var hh_dir = Math.sign(this.marker_angle_HH);
+  var mm_dir = Math.sign(this.marker_angle_MM);
+  debug(`${this.marker_angle_HH} ${hh_dir} • ${mm_dir} ${this.marker_angle_MM}`);
+  if(hh_dir != 0) {
+   D_HRS.autorotate(hh_dir * this.move_speed * -1); }
+  if(mm_dir != 0) {
+   D_MNS.autorotate(mm_dir * this.move_speed * -1); }}
  getRealTime_ = () => {
   var rt = new Date();
   this.HH = rt.getHours();
