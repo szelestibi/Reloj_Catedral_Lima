@@ -18,9 +18,23 @@ var wheels = {
   'driver_axis_dist_cm' : 58.949,
   'driving_pin_orbit_cm' : 3.463,
   'driver_axis_diameter_cm' : 2.00,
-  'driving_pin_diameter_cm' : 2.00 }}
+  'driving_pin_diameter_cm' : 2.00 },
+ 'W48' : {
+  'name' : 'W48',
+  'svg' : ['geneva_48','HRS'],
+  'step' : 'tri_driver_hrs',
+  'HH' : 0,
+  'MM' : 0,
+  'SS' : 0 },
+ 'W60' : {
+  'name' : 'W60',
+  'svg' : ['geneva_60','MNS'],
+  'step' : 'tri_driver_mns',
+  'HH' : 0,
+  'MM' : 0,
+  'SS' : 0 }}
 
-var axis_deg = {
+var axis_deg = { // tri_driver location: MNS @ 23 MIN, HRS @ 7:30
  'MNS' : 23 * 6,
  'HRS' :  7 * 30 + 2 * 7.5 }
 
@@ -31,6 +45,8 @@ var views = { // svg  [cm]
  'hrs_driver_0' : [14,14,-48,34],
  'hrs_driver_1' : [14,14,-48,-48]}
 
+var W48 = 0;   // hours wheel + hand
+var W60 = 0;   // minutes wheel + hand
 var D_HRS = 0; // hours driver
 var D_MNS = 0; // minutes driver
 

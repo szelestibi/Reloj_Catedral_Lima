@@ -1,3 +1,37 @@
+class Wheel {
+ constructor(wheel) {
+  this.name = wheel['name'];
+  this.driven = wheel['svg'][0];
+  this.hand = wheel['svg'][1];
+  this.step = wheels[wheel['step']]['wheel_angle_step'];
+  this.HH = wheel['HH'];
+  this.MM = wheel['MM'];
+  this.SS = wheel['SS'];
+  this.calc_angle(); }
+ calc_angle = () => {
+  if(this.name == 'W60') {
+   this.angle = this.MM * this.step; }
+  else if(this.name == 'W48') {
+   this.angle = ((this.HH % 12) * 30) + (Math.floor((this.MM * 60 + this.SS + 450) / 900) * 7.5); }}
+ inc_HH = () => {
+  if(++this.HH > 23) this.HH -= 24;
+ }
+ dec_HH = () => {
+  if(--this.HH < 0) this.HH += 24;
+ }
+ inc_MM = () => {
+  if(++this.MM > 59) {
+   this.MM -= 60;
+   if(++this.HH > 23) this.HH -= 24; }
+ }
+ dec_MM = () => {
+  if(--this.MM < 0) {
+   this.MM += 60;
+   if(--this.HH < 0) this.HH += 24; }
+ }
+ inc_SS = () => {}
+ dec_SS = () => {}}
+
 class clockwork {
  static CW = new clockwork();
  constructor() {
@@ -22,7 +56,7 @@ class clockwork {
   this.move_speed = 12;
   this.enter_mode = 0; }
  rotate = (A,n,t,s) => {
-  // console.log(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s}`);
+  console.log(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s}`);
   // debug(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s} ${String(this.HH).padStart(2,'0')}:${String(this.MM).padStart(2,'0')} HH: ${this.HH_angle}° [Δ=${this.marker_angle_HH}°] MM: ${this.MM_angle}° [Δ=${this.marker_angle_MM}°] MK: ${this.marker_angle}°`);
   if(this.shown_face == 0) { // HRS
    if((n == 'D_MNS') && (t != 0)) {
@@ -53,7 +87,7 @@ class clockwork {
      mm = 0;
      if(++hh == 24) {
       hh = 0; }}}
-   this.time.setSeconds(ss);   
+   this.time.setSeconds(ss);
    this.time.setMinutes(mm);
    this.time.setHours(hh); }
   if(this.time.getSeconds() != this.PS) {
@@ -135,7 +169,8 @@ class clockwork {
   console.log(`this is CW.set(${hh},${mm})`);
   this.MM = mm;
   this.HH = hh;
- }
+  this.show_face_();
+  this.place_clockwork_(''); }
  cw_inc_hh = () => {
   if(++this.HH > 23) this.HH -= 24;
   this.show_face_();
@@ -207,7 +242,7 @@ radToDeg = rad => {
  return rad * 180 / Math.PI; }
 
 class Driver {
- tri_rotate = s => {
+ tri_rotate = s => { // s: +1=BACK | -1=FORW
   // console.log(s);
   var rot = this.rotation % 120;
   var rad = degToRad(rot);
@@ -241,14 +276,6 @@ class Driver {
   this.intv_handler = setInterval(() => {
    this.autorotate_(deg); }, 100);
    this.rotating = true; }
- rotate_by = deg => {
-  this.rotation += deg;
-  this.rotation %= 120 + 120;
-  $_(this.name).setAttribute('transform',`rotate(${this.angle}) translate(${this.radius}) rotate(${this.rotation})`); }
- rotate_to = deg => {
-  this.rotation = deg;
-  this.rotation %= 120 + 120;
-  $_(this.name).setAttribute('transform',`rotate(${this.angle}) translate(${this.radius}) rotate(${this.rotation})`); }
  constructor(name,radius,angle) {
   this.disks = {
    'D_HRS' : 'svg_48',
@@ -290,6 +317,8 @@ class Driver {
   return this; }}
 
 make_drivers = () => {
+ W48 = new Wheel(wheels['W48']);
+ W60 = new Wheel(wheels['W60']);
  var r = wheels['tri_driver_hrs']['driver_axis_dist_cm'];
  D_HRS = new Driver('D_HRS',r,axis_deg['HRS'] - 90);
  var r = wheels['tri_driver_mns']['driver_axis_dist_cm'];
