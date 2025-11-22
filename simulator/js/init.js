@@ -75,27 +75,49 @@ window.onload = () => {
   else if(k.key == ' ') {
    CW.face_switch(); }
   else if(k.key == 'Tab') {
+   CW.stop();
    k.preventDefault();
    k.stopPropagation();
-   CW.face_switch(); }
+   if((CW.enter_mode ^= 1) == 1) {
+    $_('TIME').style.visibility = 'hidden'; 
+    $_('seconds_container').style.visibility = 'hidden'; }
+   else {
+    $_('TIME').style.visibility = 'visible'; 
+    $_('seconds_container').style.visibility = 'visible'; }}
   else if(k.key == 'Insert') {
-   CW.stop();
-   CW.set_HH(+1); }
+   if(CW.enter_mode == 0) {
+    CW.stop();
+    CW.set_HH(+1); }
+   else {
+    CW.cw_inc_hh(); }}
   else if(k.key == 'Delete') {
-   CW.stop();
-   CW.set_HH(-1); }
+   if(CW.enter_mode == 0) {
+    CW.stop();
+    CW.set_HH(-1); }
+   else {
+    CW.cw_dec_hh(); }}
   else if(k.key == 'Home') {
-   CW.stop();
-   CW.set_MM(+1); }
+   if(CW.enter_mode == 0) {
+    CW.stop();
+    CW.set_MM(+1); }
+   else {
+    CW.cw_inc_mm(); }}
   else if(k.key == 'End') {
-   CW.stop();
-   CW.set_MM(-1); }
+   if(CW.enter_mode == 0) {
+    CW.stop();
+    CW.set_MM(-1); }
+   else {
+    CW.cw_dec_mm(); }}
   else if(k.key == 'PageUp') {
-   CW.stop();
-   CW.set_SS(+1); }
+   if(CW.enter_mode == 0) {
+    CW.stop();
+    CW.set_SS(+1); }
+   else {}}
   else if(k.key == 'PageDown') {
-   CW.stop();
-   CW.set_SS(-1); }
+   if(CW.enter_mode == 0) {
+    CW.stop();
+    CW.set_SS(-1); }
+   else {}}
   else {
    console.log(k.key); }}}
 

@@ -19,7 +19,8 @@ class clockwork {
   this.marker_angle_MM = 0;
   this.marker_angle = 0;
   this.shown_face = 0;
-  this.move_speed = 12; }
+  this.move_speed = 12;
+  this.enter_mode = 0; }
  rotate = (A,n,t,s) => {
   // console.log(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s}`);
   // debug(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s} ${String(this.HH).padStart(2,'0')}:${String(this.MM).padStart(2,'0')} HH: ${this.HH_angle}° [Δ=${this.marker_angle_HH}°] MM: ${this.MM_angle}° [Δ=${this.marker_angle_MM}°] MK: ${this.marker_angle}°`);
@@ -90,7 +91,7 @@ class clockwork {
   this.show_face_();
   this.showTime_(); }
  fix_ = (d,n) => {
-  console.log(`fix_(${d},${n})`);
+  // console.log(`fix_(${d},${n})`);
   if(n == 'D_MNS') {
    this.MM += d;
    if(this.MM > 59) {
@@ -129,12 +130,32 @@ class clockwork {
    this.time.setMinutes(mm);
    this.time.setHours(hh); }
   this.place_clockwork_(''); }
- set = (hh,mm) => {
+ cw_set = (hh,mm) => {
   $_('TC').innerHTML = `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
-  console.log(`this is CW.set(${hh},${mm},${TS})`);
+  console.log(`this is CW.set(${hh},${mm})`);
   this.MM = mm;
   this.HH = hh;
-  this.show_face_(); }
+ }
+ cw_inc_hh = () => {
+  if(++this.HH > 23) this.HH -= 24;
+  this.show_face_();
+  this.place_clockwork_(''); }
+ cw_dec_hh = () => {
+  if(--this.HH < 0) this.HH += 24;
+  this.show_face_();
+  this.place_clockwork_(''); }
+ cw_inc_mm = () => {
+  if(++this.MM > 59) {
+   this.MM -= 60;
+   if(++this.HH > 23) this.HH -= 24; }
+  this.show_face_();
+  this.place_clockwork_(''); }
+ cw_dec_mm = () => {
+  if(--this.MM < 0) {
+   this.MM += 60;
+   if(--this.HH < 0) this.HH += 24; }
+  this.show_face_();
+  this.place_clockwork_(''); }
  face_switch = (F=undefined) => {
   if(F == undefined) {}
   else {
