@@ -33,6 +33,11 @@ window.onload = () => {
   make_drivers();
   CW.init();
   CW.face_switch(1); // 0 = MNS | 1 = HRS
+  const hh = CW.time.getHours();
+  const mm = CW.time.getMinutes();
+  const ss = CW.time.getSeconds();
+  W48.setTime(hh,mm,ss);
+  W60.setTime(hh,mm,ss);
   CW.start(); }
  $_('docbody').onclick = () => {
   CW.face_switch(); }

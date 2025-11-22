@@ -7,30 +7,66 @@ class Wheel {
   this.HH = wheel['HH'];
   this.MM = wheel['MM'];
   this.SS = wheel['SS'];
-  this.calc_angle(); }
+  this.angle = undefined;
+  this.marker_angle = undefined;
+  this.time_um = new Date();
+  this.place_svg_elems(); }
  calc_angle = () => {
   if(this.name == 'W60') {
    this.angle = this.MM * this.step; }
   else if(this.name == 'W48') {
    this.angle = ((this.HH % 12) * 30) + (Math.floor((this.MM * 60 + this.SS + 450) / 900) * 7.5); }}
+ calc_marker_angle = () => {
+  this.time_um.setTime(CW.time.getTime() + 10000);
+  if(this.name == 'W60') {
+   this.marker_angle = (((((this.time_um.getMinutes() - this.MM) % 60) * 6) + 180) % 360 + 360) % 360 - 180; }
+  else if(this.name == 'W48') {
+   this.marker_angle = ((((((this.time_um.getHours() % 12) * 30) + (Math.floor((this.time_um.getMinutes() * 60 + this.time_um.getSeconds() + 450) / 900) * 7.5)) - this.angle) + 180) % 360 + 360) % 360 - 180; }}
+ place_svg_elems = () => {
+  this.calc_angle();
+  this.calc_marker_angle();
+  $_(this.driven).setAttribute('transform', `rotate(${this.angle})`);
+  $_(this.hand).setAttribute('transform', `scale(27) rotate(${this.angle + 180})`);
+  if((this.name == 'W60') && (CW.shown_face == 1)) {
+   $_('marker').setAttribute('transform', `rotate(${-this.marker_angle})`); }
+  else if((this.name == 'W48') && (CW.shown_face == 0)) {
+   $_('marker').setAttribute('transform', `rotate(${-this.marker_angle})`); }}
+ setTime = (hh,mm,ss) => {
+  this.HH = hh;
+  this.MM = mm;
+  this.SS = ss;
+  this.place_svg_elems(); }
  inc_HH = () => {
   if(++this.HH > 23) this.HH -= 24;
- }
+  this.place_svg_elems(); }
  dec_HH = () => {
   if(--this.HH < 0) this.HH += 24;
- }
+  this.place_svg_elems(); }
  inc_MM = () => {
   if(++this.MM > 59) {
    this.MM -= 60;
    if(++this.HH > 23) this.HH -= 24; }
- }
+  this.place_svg_elems(); }
  dec_MM = () => {
   if(--this.MM < 0) {
    this.MM += 60;
    if(--this.HH < 0) this.HH += 24; }
- }
- inc_SS = () => {}
- dec_SS = () => {}}
+  this.place_svg_elems(); }
+ inc_SS = () => {
+  if(++this.SS > 59) {
+   this.SS -= 60;
+   if(++this.MM > 59) {
+    this.MM -= 60;
+    if(++this.HH > 23) this.HH -= 24; }}
+  this.place_svg_elems(); }
+ dec_SS = () => {
+  if(--this.SS < 0) {
+   this.SS += 60;
+   if(--this.MM < 0) {
+    this.MM += 60;
+    if(--this.HH < 0) this.HH += 24; }}
+  this.place_svg_elems(); }
+}
 
 class clockwork {
  static CW = new clockwork();
@@ -56,7 +92,7 @@ class clockwork {
   this.move_speed = 12;
   this.enter_mode = 0; }
  rotate = (A,n,t,s) => {
-  console.log(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s}`);
+  // console.log(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s}`);
   // debug(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s} ${String(this.HH).padStart(2,'0')}:${String(this.MM).padStart(2,'0')} HH: ${this.HH_angle}° [Δ=${this.marker_angle_HH}°] MM: ${this.MM_angle}° [Δ=${this.marker_angle_MM}°] MK: ${this.marker_angle}°`);
   if(this.shown_face == 0) { // HRS
    if((n == 'D_MNS') && (t != 0)) {
