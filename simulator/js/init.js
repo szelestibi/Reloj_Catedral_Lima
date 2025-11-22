@@ -83,12 +83,20 @@ window.onload = () => {
    CW.stop();
    k.preventDefault();
    k.stopPropagation();
-   if((CW.enter_mode ^= 1) == 1) {
-    $_('TIME').style.visibility = 'hidden'; 
+   if((CW.enter_mode += 1) == 3) {
+    CW.enter_mode = 0; }
+   if(CW.enter_mode == 0) {
+    $_('hand_hrs').setAttribute('class','hand');
+    $_('hand_mns').setAttribute('class','hand');
+    $_('seconds_container').style.visibility = 'visible'; }
+   else if(CW.enter_mode == 1) {
+    $_('hand_hrs').setAttribute('class','hand');
+    $_('hand_mns').setAttribute('class','hand_selected');
     $_('seconds_container').style.visibility = 'hidden'; }
-   else {
-    $_('TIME').style.visibility = 'visible'; 
-    $_('seconds_container').style.visibility = 'visible'; }}
+   else if(CW.enter_mode == 2) {
+    $_('hand_hrs').setAttribute('class','hand_selected');
+    $_('hand_mns').setAttribute('class','hand');
+    $_('seconds_container').style.visibility = 'hidden'; }}
   else if(k.key == 'Insert') {
    if(CW.enter_mode == 0) {
     CW.stop();
