@@ -80,10 +80,10 @@ window.onload = () => {
   else if(k.key == ' ') {
    CW.face_switch(); }
   else if(k.key == 'Tab') {
-   CW.stop();
    k.preventDefault();
    k.stopPropagation();
-   if((CW.enter_mode += 1) == 3) {
+   CW.stop();
+   if((CW.enter_mode += 1) == 3) { // 0 = time | 1 = MNS | 2 = HRS
     CW.enter_mode = 0; }
    if(CW.enter_mode == 0) {
     $_('hand_hrs').setAttribute('class','hand');
@@ -96,46 +96,82 @@ window.onload = () => {
    else if(CW.enter_mode == 2) {
     $_('hand_hrs').setAttribute('class','hand_selected');
     $_('hand_mns').setAttribute('class','hand');
-    $_('seconds_container').style.visibility = 'hidden'; }}
+    $_('seconds_container').style.visibility = 'hidden'; }
+   display_clock(); }
   else if(k.key == 'Insert') {
-   if(CW.enter_mode == 0) {
-    CW.stop();
+   CW.stop();
+   if(CW.enter_mode == 0) {       // time
     CW.set_HH(+1); }
-   else {
-    CW.cw_inc_hh(); }}
+   else if(CW.enter_mode == 1) {  // MNS
+    W60.inc_HH(); }
+   else if(CW.enter_mode == 2) {  // HRS
+    W48.inc_HH(); }
+   display_clock(); }
   else if(k.key == 'Delete') {
-   if(CW.enter_mode == 0) {
-    CW.stop();
+   CW.stop(); 
+   if(CW.enter_mode == 0) {       // time
     CW.set_HH(-1); }
-   else {
-    CW.cw_dec_hh(); }}
+   else if(CW.enter_mode == 1) {  // MNS
+    W60.dec_HH(); }
+   else if(CW.enter_mode == 2) {  // HRS
+    W48.dec_HH(); }
+   display_clock(); }
   else if(k.key == 'Home') {
+   CW.stop();
    if(CW.enter_mode == 0) {
-    CW.stop();
     CW.set_MM(+1); }
-   else {
-    CW.cw_inc_mm(); }}
+   else if(CW.enter_mode == 1) {
+    W60.inc_MM(); }
+   else if(CW.enter_mode == 2) {
+    W48.inc_MM(); }
+   display_clock(); }
   else if(k.key == 'End') {
+   CW.stop();
    if(CW.enter_mode == 0) {
-    CW.stop();
     CW.set_MM(-1); }
-   else {
-    CW.cw_dec_mm(); }}
+   else if(CW.enter_mode == 1) {
+    W60.dec_MM(); }
+   else if(CW.enter_mode == 2) {
+    W48.dec_MM(); }
+   display_clock(); }
   else if(k.key == 'PageUp') {
+   CW.stop();
    if(CW.enter_mode == 0) {
-    CW.stop();
     CW.set_SS(+1); }
-   else {}}
+   else if(CW.enter_mode == 1) {
+    W60.inc_SS(); }
+   else if(CW.enter_mode == 2) {
+    W48.inc_SS(); }
+   display_clock(); }
   else if(k.key == 'PageDown') {
+   CW.stop();
    if(CW.enter_mode == 0) {
-    CW.stop();
     CW.set_SS(-1); }
-   else {}}
+   else if(CW.enter_mode == 1) {
+    W60.dec_SS(); }
+   else if(CW.enter_mode == 2) {
+    W48.dec_SS(); }
+   display_clock(); }
   else {
    console.log(k.key); }}}
 
-show_ttime = () => {
- $_('TC').innerHTML = `${String(HH).padStart(2,'0')}:${String(MM).padStart(2,'0')}:${String(SS).padStart(2,'0')}`; }
+display_clock = () => {
+ var ss, mm, hh; 
+ if(CW.enter_mode == 0) {
+  ss = CW.time.getSeconds();
+  mm = CW.time.getMinutes();
+  hh = CW.time.getHours();
+  const secs_angle = ss * 6;
+  $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`); }
+ else if(CW.enter_mode == 1) {
+  ss = W60.SS;
+  mm = W60.MM;
+  hh = W60.HH; }
+ else if(CW.enter_mode == 2) {
+  ss = W48.SS;
+  mm = W48.MM;
+  hh = W48.HH; }
+ $_('TIME').innerHTML = `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`; }
 
 change_view = (s,[w,h,x,y]) => {
  if(typeof(s) == 'string') {

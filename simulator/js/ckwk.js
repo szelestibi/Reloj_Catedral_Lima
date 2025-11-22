@@ -134,10 +134,7 @@ class clockwork {
     this.move(); }
    this.PS = ss; }}
  showTime_ = () => {
-  const ss = this.time.getSeconds();
-  const secs_angle = ss * 6;
-  $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`);
-  $_('TIME').innerHTML = `${String(this.time.getHours()).padStart(2,'0')}:${String(this.time.getMinutes()).padStart(2,'0')}:${String(ss).padStart(2,'0')}`; }
+  if(CW.enter_mode == 0) display_clock(); }
  start = () => {
   if(realtime) {
    this.IH = setInterval(this.tick_,250); }
