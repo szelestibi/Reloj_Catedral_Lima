@@ -25,12 +25,13 @@ class Wheel {
  place_svg_elems = () => {
   this.calc_angle();
   this.calc_marker_angle();
-  $_(this.driven).setAttribute('transform', `rotate(${this.angle})`);
-  $_(this.hand).setAttribute('transform', `scale(27) rotate(${this.angle + 180})`);
-  if((this.name == 'W60') && (CW.shown_face == 1)) {
-   $_('marker').setAttribute('transform', `rotate(${-this.marker_angle})`); }
-  else if((this.name == 'W48') && (CW.shown_face == 0)) {
-   $_('marker').setAttribute('transform', `rotate(${-this.marker_angle})`); }}
+  if((D_MNS.rotating == false) && (D_HRS.rotating == false)) {
+   $_(this.driven).setAttribute('transform', `rotate(${this.angle})`);
+   $_(this.hand).setAttribute('transform', `scale(27) rotate(${this.angle + 180})`);
+   if((this.name == 'W60') && (CW.shown_face == 0)) {
+    $_('marker').setAttribute('transform', `rotate(${-this.marker_angle})`); }
+   else if((this.name == 'W48') && (CW.shown_face == 1)) {
+    $_('marker').setAttribute('transform', `rotate(${-this.marker_angle})`); }}}
  setTime = (hh,mm,ss) => {
   this.HH = hh;
   this.MM = mm;
@@ -75,17 +76,18 @@ class Wheel {
     D_MNS.autorotate(dir * CW.move_speed * -1); }
    else if(this.name == 'W48') {
     D_HRS.autorotate(dir * CW.move_speed * -1); }}}
- fix = (s) => {
-  console.log(`${this.name} FIX: s = ${s}`);
+ fix = (a) => {
+  console.log(`${this.name} FIX: a = ${a}`);
   if(this.name == 'W60') {
-   this.MM += s;
+   this.MM += a;
    if(this.MM > 59) {
     this.MM -= 60;
     if(++this.HH > 23) this.HH -= 24; }
    if(this.MM < 0) {
     this.MM += 60;
     if(--this.HH < 0) this.HH += 24; }
-   this.place_svg_elems(); }
+   this.place_svg_elems();
+   W60.move(); }
   else if(this.name == 'W60') { }} }
 
 class clockwork {
@@ -96,43 +98,35 @@ class clockwork {
   this.time.setMinutes(0);
   this.time.setSeconds(0);
   this.time.setMilliseconds(0);
-  this.time_um = new Date(); // upcomming time for move
-  this.HH = this.time.getHours();
-  this.MM = this.time.getMinutes();
   this.PS = -1;              // previous second
   this.interval = 1000;      // interval for run
   this.IH = 0;               // interval handler
   this.running = false;
-  this.HH_angle = 0;
-  this.MM_angle = 0;
-  this.marker_angle_HH = 0;
-  this.marker_angle_MM = 0;
-  this.marker_angle = 0;
   this.shown_face = 0;
   this.move_speed = 3;
   this.enter_mode = 0; }
  rotate = (A,n,t,s) => {
   // console.log(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s}`);
   // debug(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s} ${String(this.HH).padStart(2,'0')}:${String(this.MM).padStart(2,'0')} HH: ${this.HH_angle}° [Δ=${this.marker_angle_HH}°] MM: ${this.MM_angle}° [Δ=${this.marker_angle_MM}°] MK: ${this.marker_angle}°`);
-  if(this.shown_face == 0) { // HRS
+  if(this.shown_face == 1) { // HRS
    if((n == 'D_MNS') && (t % 120 != 0)) {
-    $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180 + A})`); }
+    $_('MNS').setAttribute('transform', `scale(27) rotate(${W60.angle + 180 + A})`); }
    else if((n == 'D_HRS') && (t % 120 != 0)) {
-    $_('geneva_48').setAttribute('transform', `rotate(${this.HH_angle + A})`);
-    $_('marker').setAttribute('transform', `rotate(${-this.marker_angle + A})`);
-    $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180 + A})`); }}
-  else if(this.shown_face == 1) { // MNS
+    $_('geneva_48').setAttribute('transform', `rotate(${W48.angle + A})`);
+    $_('marker').setAttribute('transform', `rotate(${-W48.marker_angle + A})`);
+    $_('HRS').setAttribute('transform', `scale(27) rotate(${W48.angle + 180 + A})`); }}
+  else if(this.shown_face == 0) { // MNS
    if((n == 'D_MNS') && (t % 120 != 0)) {
-    $_('geneva_60').setAttribute('transform', `rotate(${this.MM_angle + A})`);
-    $_('marker').setAttribute('transform', `rotate(${-this.marker_angle + A})`);
-    $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180 + A})`); }
+    $_('geneva_60').setAttribute('transform', `rotate(${W60.angle + A})`);
+    $_('marker').setAttribute('transform', `rotate(${-W60.marker_angle + A})`);
+    $_('MNS').setAttribute('transform', `scale(27) rotate(${W60.angle + 180 + A})`); }
    else if((n == 'D_HRS') && (t % 120 != 0)) {
-    $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180 + A})`); }}
+    $_('HRS').setAttribute('transform', `scale(27) rotate(${W48.angle + 180 + A})`); }}
   if(t == 0) {
    // this.fix_(-s,n);
    if(n == 'D_MNS') W60.fix(-s);
    else if(n == 'D_HRS') W48.fix(-s); }}
- tick_ = () => {
+ tick = () => {
   if(realtime) {
    var rt = new Date();
    this.time.setTime(rt.getTime()); }
@@ -161,9 +155,9 @@ class clockwork {
    this.PS = ss; }}
  start = () => {
   if(realtime) {
-   this.IH = setInterval(this.tick_,250); }
+   this.IH = setInterval(this.tick,250); }
   else {
-   this.IH = setInterval(this.tick_,this.interval); }
+   this.IH = setInterval(this.tick,this.interval); }
   this.running = true; }
  stop = () => {
   if(this.running) {
@@ -189,70 +183,20 @@ class clockwork {
    this.time.setMilliseconds(0);
    this.time.setSeconds(0);
    this.time.setMinutes(mm);
-   this.time.setHours(hh); }
-  this.place_clockwork_(''); }
- cw_set = (hh,mm) => {
-  $_('TC').innerHTML = `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
-  console.log(`this is CW.set(${hh},${mm})`);
-  this.MM = mm;
-  this.HH = hh;
-  this.show_face_();
-  this.place_clockwork_(''); }
- cw_inc_hh = () => {
-  if(++this.HH > 23) this.HH -= 24;
-  this.show_face_();
-  this.place_clockwork_(''); }
- cw_dec_hh = () => {
-  if(--this.HH < 0) this.HH += 24;
-  this.show_face_();
-  this.place_clockwork_(''); }
- cw_inc_mm = () => {
-  if(++this.MM > 59) {
-   this.MM -= 60;
-   if(++this.HH > 23) this.HH -= 24; }
-  this.show_face_();
-  this.place_clockwork_(''); }
- cw_dec_mm = () => {
-  if(--this.MM < 0) {
-   this.MM += 60;
-   if(--this.HH < 0) this.HH += 24; }
-  this.show_face_();
-  this.place_clockwork_(''); }
+   this.time.setHours(hh); } }
  face_switch = (F=undefined) => {
   if(F == undefined) {}
   else {
    this.shown_face = F; }
+  this.shown_face ^= 1; 
   if(this.shown_face == 0) {
    $_('svg_48').style.display = 'none';
-   $_('svg_60').style.display = 'block';
-   this.shown_face = 1; }
+   $_('svg_60').style.display = 'block'; }
   else {
    $_('svg_60').style.display = 'none';
-   $_('svg_48').style.display = 'block';
-   this.shown_face = 0; }
-  this.show_face_(); }
- place_clockwork_ = (HM) => {
-  if((HM == '') || (HM == 'MM')) {
-   this.MM_angle = this.MM * 6;
-   $_('geneva_60').setAttribute('transform', `rotate(${this.MM_angle})`);
-   $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180})`); }
-  if((HM == '') || (HM == 'HH')) {
-   this.HH_angle = ((this.HH % 12) * 30) + (Math.floor((this.MM * 60 + 30 + 450) / 900) * 7.5);
-   $_('geneva_48').setAttribute('transform', `rotate(${this.HH_angle})`);
-   $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180})`); }
-  $_('marker').setAttribute('transform', `rotate(${-this.marker_angle})`); }
- show_face_ = () => {
-  this.mk_angle_();
-  if(this.shown_face == 1) { // MNS
-   this.marker_angle = this.marker_angle_MM;
-   $_('marker').setAttribute('transform', `rotate(${-this.marker_angle})`); }
-  else {                     // HRS
-   this.marker_angle = this.marker_angle_HH;
-   $_('marker').setAttribute('transform', `rotate(${-this.marker_angle})`); }}
- mk_angle_ = () => { // calculate marker angle for MM and HH
-  this.time_um.setTime(this.time.getTime() + 10000);
-  this.marker_angle_MM = (((((this.time_um.getMinutes() - this.MM) % 60) * 6) + 180) % 360 + 360) % 360 - 180;
-  this.marker_angle_HH = ((((((this.time_um.getHours() % 12) * 30) + (Math.floor((this.time_um.getMinutes() * 60 + this.time_um.getSeconds() + 450) / 900) * 7.5)) - this.HH_angle) + 180) % 360 + 360) % 360 - 180; } }
+   $_('svg_48').style.display = 'block'; }
+  W60.place_svg_elems();
+  W48.place_svg_elems(); }}
 
 polar2xy = (deg,r) => {
  const cx = 0;

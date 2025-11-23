@@ -32,7 +32,7 @@ window.onload = () => {
   mk_clickable_reset(dial_xy * 155 / 100);
   make_drivers();
   CW.init();
-  CW.face_switch(1); // 0 = MNS | 1 = HRS
+  CW.face_switch(1); // 0 = HRS | 1 = MNS
   const hh = CW.time.getHours();
   const mm = CW.time.getMinutes();
   const ss = CW.time.getSeconds();
@@ -154,7 +154,7 @@ window.onload = () => {
     W48.dec_SS(); }
    display_clock(); }
   else {
-   console.log(k.key); }}}
+   console.log(k.key); }}} // ONLOAD END
 
 display_clock = () => {
  var ss, mm, hh; 
@@ -221,7 +221,7 @@ mk_clickable_quarters = (xy) => {
  cq_2.style.top = (wHeight / 2) + 'px';
  window.document.body.appendChild(cq_2);
  cq_1.onclick = () => {
-   CW.face_switch(0);
+   CW.face_switch(1);
    $_('clockface_container').style.visibility = 'hidden';
    $_('marker_container').style.visibility = 'hidden';
    $_('seconds_container').style.visibility = 'hidden';
@@ -230,7 +230,7 @@ mk_clickable_quarters = (xy) => {
    change_view('svg_48',views['hrs_driver_0']);
    change_view('svg_60',views['mins_driver_1']); }
  cq_2.onclick = () => {
-   CW.face_switch(1);
+   CW.face_switch(0);
    $_('clockface_container').style.visibility = 'hidden';
    $_('marker_container').style.visibility = 'hidden';
    $_('seconds_container').style.visibility = 'hidden';
