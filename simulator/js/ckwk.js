@@ -66,7 +66,27 @@ class Wheel {
     this.MM += 60;
     if(--this.HH < 0) this.HH += 24; }}
   this.place_svg_elems(); }
-}
+ move = () => {
+  console.log(`this is ${this.name}.move();`);
+  var dir = Math.sign(this.marker_angle);
+  console.log(`dir: ${dir}`);
+  if(dir != 0) {
+   if(this.name == 'W60') {
+    D_MNS.autorotate(dir * CW.move_speed * -1); }
+   else if(this.name == 'W48') {
+    D_HRS.autorotate(dir * CW.move_speed * -1); }}}
+ fix = (s) => {
+  console.log(`${this.name} FIX: s = ${s}`);
+  if(this.name == 'W60') {
+   this.MM += s;
+   if(this.MM > 59) {
+    this.MM -= 60;
+    if(++this.HH > 23) this.HH -= 24; }
+   if(this.MM < 0) {
+    this.MM += 60;
+    if(--this.HH < 0) this.HH += 24; }
+   this.place_svg_elems(); }
+  else if(this.name == 'W60') { }} }
 
 class clockwork {
  static CW = new clockwork();
@@ -108,7 +128,10 @@ class clockwork {
     $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180 + A})`); }
    else if((n == 'D_HRS') && (t != 0)) {
     $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180 + A})`); }}
-  if(t == 0) this.fix_(-s,n); }
+  if(t == 0) {
+   // this.fix_(-s,n);
+   if(n == 'D_MNS') W60.fix(-s);
+   else if(n == 'D_HRS') W48.fix(-s); }}
  tick_ = () => {
   if(realtime) {
    var rt = new Date();
@@ -128,13 +151,14 @@ class clockwork {
    this.time.setHours(hh); }
   if(this.time.getSeconds() != this.PS) {
    var ss = this.time.getSeconds();
-   this.showTime_();
-   if((ss == 20) || (ss == 50)) {
-    this.show_face_();
-    this.move(); }
+   if(CW.enter_mode == 0) display_clock();
+   W60.place_svg_elems();
+   W48.place_svg_elems();
+   if(ss == 20) {
+    W48.move(); }
+   if(ss == 50) {
+    W60.move(); }
    this.PS = ss; }}
- showTime_ = () => {
-  if(CW.enter_mode == 0) display_clock(); }
  start = () => {
   if(realtime) {
    this.IH = setInterval(this.tick_,250); }
@@ -146,17 +170,11 @@ class clockwork {
    clearInterval(this.IH);
    this.running = false; }}
  set_HH = dh => {
-  this.time.setHours(this.time.getHours() + dh);
-  this.show_face_();
-  this.showTime_(); }
+  this.time.setHours(this.time.getHours() + dh); }
  set_MM = dm => {
-  this.time.setMinutes(this.time.getMinutes() + dm);
-  this.show_face_();
-  this.showTime_(); }
+  this.time.setMinutes(this.time.getMinutes() + dm); }
  set_SS = ds => {
-  this.time.setSeconds(this.time.getSeconds() + ds);
-  this.show_face_();
-  this.showTime_(); }
+  this.time.setSeconds(this.time.getSeconds() + ds); }
  fix_ = (d,n) => {
   // console.log(`fix_(${d},${n})`);
   if(n == 'D_MNS') {

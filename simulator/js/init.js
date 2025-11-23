@@ -72,7 +72,8 @@ window.onload = () => {
     CW.stop();
     CW.set_MM(+1); }}
   else if(k.key == 'Enter') {
-   CW.move(); }
+   W60.move();
+   W48.move(); }
   else if(k.key == 'Escape') {
    if(CW.running == false) {
     realtime = false;
@@ -164,9 +165,9 @@ display_clock = () => {
   const secs_angle = ss * 6;
   $_('SECS').setAttribute('transform', `rotate(${secs_angle + 180})`); }
  else if(CW.enter_mode == 1) {
-  ss = W60.SS;
+  ss = 'XX';
   mm = W60.MM;
-  hh = W60.HH; }
+  hh = 'XX'; }
  else if(CW.enter_mode == 2) {
   ss = W48.SS;
   mm = W48.MM;
