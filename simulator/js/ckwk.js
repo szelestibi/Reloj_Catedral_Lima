@@ -109,7 +109,16 @@ class Wheel {
     if(--this.HH < 0) this.HH += 24; }
    this.place_svg_elems();
    W60.move(); }
-  else if(this.name == 'W60') { }} }
+  else if(this.name == 'W48') {
+   this.MM += (a * 15);
+   if(this.MM > 59) {
+    this.MM -= 60;
+    if(++this.HH > 23) this.HH -= 24; }
+   if(this.MM < 0) {
+    this.MM += 60;
+    if(--this.HH < 0) this.HH += 24; }
+   this.place_svg_elems();
+   W48.move(); }} }
 
 class clockwork {
  static CW = new clockwork();
