@@ -109,24 +109,24 @@ class clockwork {
   this.marker_angle_MM = 0;
   this.marker_angle = 0;
   this.shown_face = 0;
-  this.move_speed = 12;
+  this.move_speed = 3;
   this.enter_mode = 0; }
  rotate = (A,n,t,s) => {
   // console.log(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s}`);
   // debug(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s} ${String(this.HH).padStart(2,'0')}:${String(this.MM).padStart(2,'0')} HH: ${this.HH_angle}° [Δ=${this.marker_angle_HH}°] MM: ${this.MM_angle}° [Δ=${this.marker_angle_MM}°] MK: ${this.marker_angle}°`);
   if(this.shown_face == 0) { // HRS
-   if((n == 'D_MNS') && (t != 0)) {
+   if((n == 'D_MNS') && (t % 120 != 0)) {
     $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180 + A})`); }
-   else if((n == 'D_HRS') && (t != 0)) {
+   else if((n == 'D_HRS') && (t % 120 != 0)) {
     $_('geneva_48').setAttribute('transform', `rotate(${this.HH_angle + A})`);
     $_('marker').setAttribute('transform', `rotate(${-this.marker_angle + A})`);
     $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180 + A})`); }}
   else if(this.shown_face == 1) { // MNS
-   if((n == 'D_MNS') && (t != 0)) {
+   if((n == 'D_MNS') && (t % 120 != 0)) {
     $_('geneva_60').setAttribute('transform', `rotate(${this.MM_angle + A})`);
     $_('marker').setAttribute('transform', `rotate(${-this.marker_angle + A})`);
     $_('MNS').setAttribute('transform', `scale(27) rotate(${this.MM_angle + 180 + A})`); }
-   else if((n == 'D_HRS') && (t != 0)) {
+   else if((n == 'D_HRS') && (t % 120 != 0)) {
     $_('HRS').setAttribute('transform', `scale(27) rotate(${this.HH_angle + 180 + A})`); }}
   if(t == 0) {
    // this.fix_(-s,n);
@@ -175,30 +175,6 @@ class clockwork {
   this.time.setMinutes(this.time.getMinutes() + dm); }
  set_SS = ds => {
   this.time.setSeconds(this.time.getSeconds() + ds); }
- fix_ = (d,n) => {
-  // console.log(`fix_(${d},${n})`);
-  if(n == 'D_MNS') {
-   this.MM += d;
-   if(this.MM > 59) {
-    this.MM -= 60;
-    if(++this.HH > 23) this.HH -= 24; }
-   if(this.MM < 0) {
-    this.MM += 60;
-    if(--this.HH < 0) this.HH += 24; }
-   this.show_face_();
-   this.place_clockwork_('MM');
-   this.move(); }
-  else if(n == 'D_HRS') {
-   this.show_face_();
-   this.place_clockwork_('HH');
-   this.move(); }}
- move = () => {
-  var hh_dir = Math.sign(this.marker_angle_HH);
-  var mm_dir = Math.sign(this.marker_angle_MM);
-  if(hh_dir != 0) {
-   D_HRS.autorotate(hh_dir * this.move_speed * -1); }
-  if(mm_dir != 0) {
-   D_MNS.autorotate(mm_dir * this.move_speed * -1); }}
  getRealTime_ = () => {
   var rt = new Date();
   this.HH = rt.getHours();
