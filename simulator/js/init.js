@@ -37,7 +37,7 @@ window.onload = () => {
   const mm = CW.time.getMinutes();
   const ss = CW.time.getSeconds();
   W48.setTime(hh,mm,ss);
-  W60.setTime(hh,mm,ss);
+  W60.setTime(hh,mm,ss); W48.normalize();
   CW.start(); }
  $_('docbody').onclick = () => {
   CW.face_switch(); }
@@ -157,6 +157,7 @@ window.onload = () => {
    console.log(k.key); }}} // ONLOAD END
 
 display_clock = () => {
+ var show_aux = 1;
  var ss, mm, hh; 
  if(CW.enter_mode == 0) {
   ss = CW.time.getSeconds();
@@ -172,7 +173,15 @@ display_clock = () => {
   ss = W48.SS;
   mm = W48.MM;
   hh = W48.HH; }
- $_('TIME').innerHTML = `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`; }
+ $_('TIME').innerHTML = `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`;
+ if(show_aux == 1) {
+  ss_48 = W48.SS;
+  mm_48 = W48.MM;
+  hh_48 = W48.HH;
+  ss_60 = 'XX';
+  mm_60 = W60.MM;
+  hh_60 = 'XX';
+  debug(`${String(hh_48).padStart(2,'0')}:${String(mm_48).padStart(2,'0')}:${String(ss_48).padStart(2,'0')} • ${String(hh_60).padStart(2,'0')}:${String(mm_60).padStart(2,'0')}:${String(ss_60).padStart(2,'0')}`); }}
 
 change_view = (s,[w,h,x,y]) => {
  if(typeof(s) == 'string') {

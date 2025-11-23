@@ -67,6 +67,27 @@ class Wheel {
     this.MM += 60;
     if(--this.HH < 0) this.HH += 24; }}
   this.place_svg_elems(); }
+ normalize = () => {
+  if(this.name == 'W60') {}
+  else if(this.name == 'W48') {
+   var sss = this.SS + this.MM * 60;
+   if(sss <= 450) {
+    this.MM = 0;
+    this.SS = 0; }
+   else if(sss > 3150) {
+    this.MM = 0;
+    this.SS = 0;
+    if((this.HH++) > 23) {
+     this.HH -= 24; }}
+   else if(sss > 2250) {
+    this.MM = 45;
+    this.SS = 0; }
+   else if(sss > 1350) {
+    this.MM = 30;
+    this.SS = 0; }
+   else if(sss > 450) {
+    this.MM = 15;
+    this.SS = 0; }}}
  move = () => {
   console.log(`this is ${this.name}.move();`);
   var dir = Math.sign(this.marker_angle);
