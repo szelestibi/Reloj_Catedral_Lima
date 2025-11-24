@@ -43,6 +43,20 @@ class Wheel {
  dec_HH = () => {
   if(--this.HH < 0) this.HH += 24;
   this.place_svg_elems(); }
+ inc_MM_15 = () => {
+  if(this.name == 'W48') {
+   this.normalize();
+   if((this.MM += 15) > 59) {
+    this.MM -= 60;
+    if(++this.HH > 23) this.HH -= 24; }}
+  this.place_svg_elems(); }
+ dec_MM_15 = () => {
+  if(this.name == 'W48') {
+   this.normalize();
+   if((this.MM -= 15) < 0) {
+    this.MM += 60;
+    if(--this.HH < 0) this.HH += 24; }}
+  this.place_svg_elems(); }
  inc_MM = () => {
   if(++this.MM > 59) {
    this.MM -= 60;
@@ -189,12 +203,14 @@ class clockwork {
    this.IH = setInterval(this.tick,250); }
   else {
    this.IH = setInterval(this.tick,this.interval); }
-  this.running = true; }
+  this.running = true;
+  $_('autoset_container').style.visibility = 'visible'; }
  stop = () => {
   if(this.running) {
    clearInterval(this.IH);
    this.realtime = false; $_('SECS').setAttribute('class','secs');
-   this.running = false; }}
+   this.running = false; }
+  $_('autoset_container').style.visibility = 'hidden'; }
  set_HH = dh => {
   this.time.setHours(this.time.getHours() + dh); }
  set_MM = dm => {

@@ -14,7 +14,7 @@ window.onload = () => {
  debug.id = 'DBG';
  window.document.body.appendChild(debug);
  $_('DBG').style.visibility = 'hidden';
- ['mechanism_container','clockface_container','seconds_container','marker_container','index_container','hrs_container','mns_container'].forEach(e => {
+ ['mechanism_container','clockface_container','seconds_container','marker_container','autoset_container','index_container','hrs_container','mns_container'].forEach(e => {
   $_(e).style.width = xy + 'px';
   $_(e).style.height = xy + 'px';
   $_(e).style.left = (wWidth - xy) / 2 + 'px;'
@@ -30,11 +30,12 @@ window.onload = () => {
   var hmd = (dial_xy * 77 / 100) + 'px'
   dial.style.width = hmd;
   dial.style.height = hmd;
+  // $_('help_page').style.width = dial_xy + 'px';
+  // $_('help_page').style.height = dial_xy + 'px';
   mk_clickable_quarters(dial_xy);
   mk_clickable_reset(dial_xy * 155 / 100);
   make_drivers();
   if((ST != '') && (Number.isNaN(ST-0) === false)) {
-   // console.log(`ST: ${ST} OK`);
    CW.realtime = false;
    if(ST.length > 5) {
     var hh = ST.substring(0,2) - 0;
@@ -76,45 +77,32 @@ window.onload = () => {
   CW.face_switch(); }
 
  window.document.onkeydown = function(k) {
-  if(k.key == 'ArrowUp') {         // HRS/10MNS++
-   if(CW.shown_face == 1) {
-    CW.stop();
-    CW.set_HH(+1); }
-   else if(CW.shown_face == 0) {
-    CW.stop();
-    CW.set_MM(+10); }
-   display_clock(); }
-  else if(k.key == 'ArrowDown') {  // HRS/10MNS--
-   if(CW.shown_face == 1) {
-    CW.stop();
-    CW.set_HH(-1); }
-   else if(CW.shown_face == 0) {
-    CW.stop();
-    CW.set_MM(-10); }
-   display_clock(); }
-  else if(k.key == 'ArrowLeft') {  // ¼HRS/MNS--
-   if(CW.shown_face == 1) {
-    CW.stop();
-    CW.set_MM(-15); }
-   else if(CW.shown_face == 0) {
-    CW.stop();
-    CW.set_MM(-1); }
-   display_clock(); }
-  else if(k.key == 'ArrowRight') { // ¼HRS/MNS++
-   if(CW.shown_face == 1) {
-    CW.stop();
-    CW.set_MM(+15); }
-   else if(CW.shown_face == 0) {
-    CW.stop();
-    CW.set_MM(+1); }
-   display_clock(); }
+  if(k.key == 'ArrowUp') {         // MEC: HRS+15MNS
+   if((D_MNS.rotating == false) && (D_HRS.rotating == false)) {
+    W48.inc_MM_15();
+    display_clock(); }}
+  else if(k.key == 'ArrowDown') {  // MEC: HRS-15MNS
+   if((D_MNS.rotating == false) && (D_HRS.rotating == false)) {
+    W48.dec_MM_15();
+    display_clock(); }}
+  else if(k.key == 'ArrowLeft') {  // MEC: MNS--
+   if((D_MNS.rotating == false) && (D_HRS.rotating == false)) {
+    W60.dec_MM();
+    display_clock(); }}
+  else if(k.key == 'ArrowRight') { // MEC: MNS++
+   if((D_MNS.rotating == false) && (D_HRS.rotating == false)) {
+    W60.inc_MM();
+    display_clock(); }}
   else if(k.key == 'Enter') {
    W60.move();
    W48.move(); }
   else if(k.key == 'Escape') {
-   if(CW.running == false) {
-    CW.realtime = false; $_('SECS').setAttribute('class','secs');
-    CW.start(); }}
+   if($_('help_page').style.visibility == 'visible') {
+    $_('help_page').style.visibility = 'hidden'; }
+   else {
+    if(CW.running == false) {
+     CW.realtime = false; $_('SECS').setAttribute('class','secs');
+     CW.start(); }}}
   else if(k.key == ' ') {
    CW.face_switch(); }
   else if(k.key == 'Tab') {
@@ -146,7 +134,7 @@ window.onload = () => {
     W48.inc_HH(); }
    display_clock(); }
   else if(k.key == 'Delete') {
-   CW.stop(); 
+   CW.stop();
    if(CW.enter_mode == 0) {       // time
     CW.set_HH(-1); }
    else if(CW.enter_mode == 1) {  // MNS
@@ -189,6 +177,14 @@ window.onload = () => {
     W60.dec_SS(); }
    else if(CW.enter_mode == 2) {
     W48.dec_SS(); }
+   display_clock(); }
+  else if(k.key == 's') {
+   CW.stop();
+   CW.time.setSeconds(0);
+   display_clock(); }
+  else if(k.key == 'S') {
+   CW.stop();
+   CW.time.setSeconds(0);
    display_clock(); }
   else if(k.key == 'r') {
    if(CW.realtime == true) {}
@@ -272,12 +268,16 @@ window.onload = () => {
     W48.setTime(11,0,0);
     W60.setTime(11,0,0);
     display_clock(); }}
+  else if(k.key == 'F1') {
+   k.preventDefault();
+   k.stopPropagation();
+   $_('help_page').style.visibility = 'visible'; }
   else {
-   /* console.log(k.key); */ }}} // ONLOAD END
+   console.log(k.key); }}} // ONLOAD END
 
 display_clock = () => {
  var show_aux = 1;
- var ss, mm, hh; 
+ var ss, mm, hh;
  if(CW.enter_mode == 0) {
   ss = CW.time.getSeconds();
   mm = CW.time.getMinutes();
@@ -326,6 +326,8 @@ mk_clickable_reset = (xy) => {
   $_('clockface_container').style.visibility = 'visible';
   $_('marker_container').style.visibility = 'visible';
   $_('index_container').style.visibility = 'visible';
+  if(CW.running == true) {
+   $_('autoset_container').style.visibility = 'visible'; }
   $_('seconds_container').style.visibility = 'visible';
   $_('hrs_container').style.visibility = 'visible';
   $_('mns_container').style.visibility = 'visible';
@@ -356,6 +358,7 @@ mk_clickable_quarters = (xy) => {
    $_('clockface_container').style.visibility = 'hidden';
    $_('marker_container').style.visibility = 'hidden';
    $_('index_container').style.visibility = 'hidden';
+   $_('autoset_container').style.visibility = 'hidden';
    $_('seconds_container').style.visibility = 'hidden';
    $_('hrs_container').style.visibility = 'hidden';
    $_('mns_container').style.visibility = 'hidden';
@@ -366,6 +369,7 @@ mk_clickable_quarters = (xy) => {
    $_('clockface_container').style.visibility = 'hidden';
    $_('marker_container').style.visibility = 'hidden';
    $_('index_container').style.visibility = 'hidden';
+   $_('autoset_container').style.visibility = 'hidden';
    $_('seconds_container').style.visibility = 'hidden';
    $_('hrs_container').style.visibility = 'hidden';
    $_('mns_container').style.visibility = 'hidden';
