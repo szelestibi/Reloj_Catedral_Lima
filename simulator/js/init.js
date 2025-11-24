@@ -14,7 +14,7 @@ window.onload = () => {
  debug.id = 'DBG';
  window.document.body.appendChild(debug);
  $_('DBG').style.visibility = 'hidden';
- ['mechanism_container','clockface_container','seconds_container','marker_container','hrs_container','mns_container'].forEach(e => {
+ ['mechanism_container','clockface_container','seconds_container','marker_container','index_container','hrs_container','mns_container'].forEach(e => {
   $_(e).style.width = xy + 'px';
   $_(e).style.height = xy + 'px';
   $_(e).style.left = (wWidth - xy) / 2 + 'px;'
@@ -191,11 +191,15 @@ window.onload = () => {
     W48.dec_SS(); }
    display_clock(); }
   else if(k.key == 'r') {
-   if(CW.running == false) {
+   if(CW.realtime == true) {}
+   else {
+    if(CW.running) CW.stop;
     CW.realtime = true; $_('SECS').setAttribute('class','secs_rt');
     CW.start(); }}
   else if(k.key == 'R') {
-   if(CW.running == false) {
+   if(CW.realtime == true) {}
+   else {
+    if(CW.running) CW.stop;
     CW.realtime = true; $_('SECS').setAttribute('class','secs_rt');
     CW.start(); }}
   else {
@@ -251,6 +255,7 @@ mk_clickable_reset = (xy) => {
  cq_m.onclick = e => {
   $_('clockface_container').style.visibility = 'visible';
   $_('marker_container').style.visibility = 'visible';
+  $_('index_container').style.visibility = 'visible';
   $_('seconds_container').style.visibility = 'visible';
   $_('hrs_container').style.visibility = 'visible';
   $_('mns_container').style.visibility = 'visible';
@@ -280,6 +285,7 @@ mk_clickable_quarters = (xy) => {
    CW.face_switch(1);
    $_('clockface_container').style.visibility = 'hidden';
    $_('marker_container').style.visibility = 'hidden';
+   $_('index_container').style.visibility = 'hidden';
    $_('seconds_container').style.visibility = 'hidden';
    $_('hrs_container').style.visibility = 'hidden';
    $_('mns_container').style.visibility = 'hidden';
@@ -289,6 +295,7 @@ mk_clickable_quarters = (xy) => {
    CW.face_switch(0);
    $_('clockface_container').style.visibility = 'hidden';
    $_('marker_container').style.visibility = 'hidden';
+   $_('index_container').style.visibility = 'hidden';
    $_('seconds_container').style.visibility = 'hidden';
    $_('hrs_container').style.visibility = 'hidden';
    $_('mns_container').style.visibility = 'hidden';

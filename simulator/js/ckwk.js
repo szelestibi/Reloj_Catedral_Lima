@@ -139,18 +139,22 @@ class clockwork {
  rotate = (A,n,t,s) => {
   // debug(`${n}: ${A.toFixed(3)}° ROT: ${t} S:${s}`);
   if(this.shown_face == 1) { // HRS
-   if((n == 'D_MNS') && (t % 120 != 0)) {
+   // if((n == 'D_MNS') && (t % 120 != 0)) {
+   if((n == 'D_MNS') && (A != 0)) {
     $_('MNS').setAttribute('transform', `scale(27) rotate(${W60.angle + 180 + A})`); }
-   else if((n == 'D_HRS') && (t % 120 != 0)) {
+   // else if((n == 'D_HRS') && (t % 120 != 0)) {
+   else if((n == 'D_HRS') && (A != 0)) {
     $_('geneva_48').setAttribute('transform', `rotate(${W48.angle + A})`);
     $_('marker').setAttribute('transform', `rotate(${-W48.marker_angle + A})`);
     $_('HRS').setAttribute('transform', `scale(27) rotate(${W48.angle + 180 + A})`); }}
   else if(this.shown_face == 0) { // MNS
-   if((n == 'D_MNS') && (t % 120 != 0)) {
+   // if((n == 'D_MNS') && (t % 120 != 0)) {
+   if((n == 'D_MNS') && (A != 0)) {
     $_('geneva_60').setAttribute('transform', `rotate(${W60.angle + A})`);
     $_('marker').setAttribute('transform', `rotate(${-W60.marker_angle + A})`);
     $_('MNS').setAttribute('transform', `scale(27) rotate(${W60.angle + 180 + A})`); }
-   else if((n == 'D_HRS') && (t % 120 != 0)) {
+   // else if((n == 'D_HRS') && (t % 120 != 0)) {
+   else if((n == 'D_HRS') && (A != 0)) {
     $_('HRS').setAttribute('transform', `scale(27) rotate(${W48.angle + 180 + A})`); }}
   if(t == 0) {
    if(n == 'D_MNS') W60.fix(-s);

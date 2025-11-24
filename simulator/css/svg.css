@@ -51,9 +51,13 @@ svg .deco {
 svg #marker {
  position: absolute;
  fill: none;
- fill: rgba(0,180,0,.3);
- stroke-width: .1;
- stroke: rgba(0,180,0,.9); }
+ stroke-width: .3;
+ stroke: rgba(255,255,255,1); }
+
+svg #index {
+ position: absolute;
+ fill: rgba(255,255,255,1);
+ stroke: none; }
 
 svg .secs {
  fill: none;
@@ -63,9 +67,9 @@ svg .secs {
 
 svg .secs_rt {
  fill: none;
- fill: rgba(0,180,0,.7);
+ fill: rgba(0,150,0,.5);
  stroke-width: .3;
- stroke: rgba(0,200,0,1); }
+ stroke: rgba(0,150,0,1); }
 
 svg #deco_axis {
  fill: rgba(191,191,191,.9);
