@@ -28,7 +28,7 @@ svg .hand_selected {
  fill: rgba(100,0,0,1); }
 
 svg .contrapeso {
- fill: rgba(150,150,150,.3);
+ fill: rgba(150,150,150,1);
  stroke: none; }
 
 svg .deco {
