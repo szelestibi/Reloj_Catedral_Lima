@@ -202,6 +202,62 @@ window.onload = () => {
     if(CW.running) CW.stop;
     CW.realtime = true; $_('SECS').setAttribute('class','secs_rt');
     CW.start(); }}
+  else if(k.key == '0') {
+   W48.setTime(0,0,0);
+   W60.setTime(0,0,0);
+   display_clock(); }
+  else if(k.key == '1') {
+   W48.setTime(1,0,0);
+   W60.setTime(1,0,0);
+   display_clock(); }
+  else if(k.key == '2') {
+   W48.setTime(2,0,0);
+   W60.setTime(2,0,0);
+   display_clock(); }
+  else if(k.key == '3') {
+   W48.setTime(3,0,0);
+   W60.setTime(3,0,0);
+   display_clock(); }
+  else if(k.key == '4') {
+   W48.setTime(4,0,0);
+   W60.setTime(4,0,0);
+   display_clock(); }
+  else if(k.key == '5') {
+   W48.setTime(5,0,0);
+   W60.setTime(5,0,0);
+   display_clock(); }
+  else if(k.key == '6') {
+   W48.setTime(6,0,0);
+   W60.setTime(6,0,0);
+   display_clock(); }
+  else if(k.key == '7') {
+   W48.setTime(7,0,0);
+   W60.setTime(7,0,0);
+   display_clock(); }
+  else if(k.key == '8') {
+   W48.setTime(8,0,0);
+   W60.setTime(8,0,0);
+   display_clock(); }
+  else if(k.key == '9') {
+   W48.setTime(9,0,0);
+   W60.setTime(9,0,0);
+   display_clock(); }
+  else if(k.key == 'A') {
+   W48.setTime(10,0,0);
+   W60.setTime(10,0,0);
+   display_clock(); }
+  else if(k.key == 'B') {
+   W48.setTime(11,0,0);
+   W60.setTime(11,0,0);
+   display_clock(); }
+  else if(k.key == 'a') {
+   W48.setTime(10,0,0);
+   W60.setTime(10,0,0);
+   display_clock(); }
+  else if(k.key == 'b') {
+   W48.setTime(11,0,0);
+   W60.setTime(11,0,0);
+   display_clock(); }
   else {
    /* console.log(k.key); */ }}} // ONLOAD END
 
