@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2000mm" height="2000mm" viewBox="-3543.307 -3543.307 7086.614 7086.614">
+<defs>
+ <g id="G_I" class="glyph">
+  <path style="fill:#000000; stroke:#000000;" d="M 366.165 18 l 0 -18 -346.165 0 0 18 22 0 c 19.1654,0 34.6654,3.5 46.3346,10.3346 8.5,4.5 15,12.3307 19.5,23.5 3.66535,7.66535 5.5,28.1654 5.5,61.5 l 0 435.5 c 0,33.8307 -1.83465,55 -5.5,63.5 -3.5,8.5 -10.6693,15.8307 -21.6693,22.1654 -10.8307,6.33465 -25.6654,9.5 -44.1654,9.5 l -22 0 0 18.1654 346.165 0 0 -18.1654 -22 0 c -19.1654,0 -34.6654,-3.33465 -46.3307,-10.1654 -8.5,-4.66929 -15.1693,-12.3346 -20,-23.5 -3.5,-7.83465 -5.33465,-28.3346 -5.33465,-61.5 l 0 -435.5 c 0,-33.8346 1.83465,-55 5.5,-63.5 3.83465,-8.5 11.1654,-15.8346 22,-22.1693 11,-6.5 25.6654,-9.66535 44.1654,-9.66535 l 22 0 Z" /><!-- I -->
+ </g>
+ <g id="G_V" class="glyph">
+  <path style="fill:#000000; stroke:#000000;" d="M 711.835 662.165 l 0 -18.1654 c -24,-3.83465 -45.5,-16.6654 -64.3346,-38.5 -13.6654,-16.3346 -34,-54.5 -61,-114.835 l -228.165 -505.831 -16 0 -227.169 526.331 c -27.3307,63.5 -45.6654,100.835 -54.8307,111.835 -9.33465,11.1654 -26.8346,18.1654 -52.5,21 l 0 18.1654 317.331 0 0 -18.1654 -10.6654 0 c -28.6654,0 -48.1654,-3.5 -58.6654,-10.6654 -7.5,-4.83465 -11.1693,-12 -11.1693,-21.5 0,-5.83465 1.33465,-12.8346 3.83465,-20.8346 2.66535,-7.83465 11.5,-29.3346 26.3346,-64.1654 l 141.165 -329.5 130.835 293.331 c 15.6654,35.5 25.3307,59.3346 28.8307,71.3346 3.66929,12 5.33465,22.3346 5.33465,30.8346 0,9.66535 -2.5,18.3307 -7.83465,25.8307 -5.16535,7.5 -12.8307,13.1693 -22.8307,17 -14,5.66929 -32.6693,8.33465 -55.6693,8.33465 l 0 18.1654 217.169 0 Z" /><!-- V inverted -->
+ </g>
+ <g id="G_X" class="glyph">
+  <path style="fill:#000000; stroke:#000000;" d="M 422.335 388.165 l 182.665 -271 c 30.3346,-44.8307 51.8346,-72.1654 64.6654,-81.8307 12.8346,-9.5 28.1693,-15.3346 45.6693,-17.3346 l 0 -18 -322.835 0 0 18 c 25.8346,2 42.3346,6 49.8346,11.8346 7.5,5.83071 11.3307,13 11.3307,21.5 0,5.83071 -1.16535,11 -3.5,15.5 -4.5,9.83071 -16,28 -34.1654,54.8307 l -96.6654 143 -101 -123.5 c -30.3346,-37.5 -45.5,-62.8307 -45.5,-76.1654 0,-9.5 4,-18.3346 11.6654,-26.5 7.83465,-8 19.5,-14 34.6654,-17.5 6.83465,-2 20.8346,-3 42,-3 l 0 -18 -254.331 0 0 18 c 29,4.33465 51.8307,12.1654 68.3307,23.5 21.8346,15 52.3346,46.1654 91.3346,93.8346 l 131.335 160 -168.5 247.665 c -27.6693,40.6654 -43.3346,63.3346 -47.3346,67.8346 -8.83465,10.6654 -17.3346,18.3307 -25.8346,23 -8.5,4.5 -20.1654,8 -35.1654,10.1654 l 0 18.1654 328.665 0 0 -18.1654 -16.6654 0 c -18.8346,0 -32,-3 -39.5,-9 -7.5,-6 -11.3346,-13.5 -11.3346,-22.6654 0,-7.16929 1.16929,-13.3346 3.5,-18.5 l 33.6693 -50.8346 82 -125 69.8307 85.5 c 35.8346,43.8346 53.6693,74.6654 53.6693,92.1654 0,8.83465 -2.5,17 -7.5,24.5 -5,7.5 -12.3346,13.3346 -21.6693,17.5 -9.5,4.33465 -24.1654,6.33465 -44,6.33465 l 0 18.1654 243.669 0 0 -18.1654 c -19.1693,-0.334646 -34.6693,-2.66535 -46.3346,-7 -11.8346,-4.5 -24.3346,-12.6654 -37.6654,-24.6654 -8.5,-7.83465 -29.6693,-32.1693 -63.5,-72.8346 l -125.5 -151.335 Z" /><!-- X -->
+ </g>
+</defs>
+<defs>
+ <g id="minline" class="minline">
+  <path style="fill:#000000; stroke:#000000;" d="M -17.717 77.953 L 17.717 77.953 17.717 -77.953 -17.717 -77.953 Z" />
+ </g>
+</defs>
+<defs>
+ <g id="rhomb" class="rhomb">
+  <path style="fill:#000000; stroke:#000000;" d="M -53.150 0 L 0 -77.953 53.150 0 0 77.953 Z" />
+ </g>
+</defs>
+<circle id="bgnd" style="fill:#BFBFBF; stroke:none;" cx="0" cy="0" r="3539" />
+<circle style="fill:none; stroke:#000000; stroke-width:10;" cx="0.000" cy="0.000" r="3539.764" />
+<circle style="fill:none; stroke:#000000; stroke-width:10;" cx="0.000" cy="0.000" r="3530.906" />
+<circle style="fill:none; stroke:#000000; stroke-width:10;" cx="0.000" cy="0.000" r="3522.047" />
+<circle style="fill:none; stroke:#000000; stroke-width:10;" cx="0.000" cy="0.000" r="3366.142" />
+<circle style="fill:none; stroke:#000000; stroke-width:10;" cx="0.000" cy="0.000" r="3357.283" />
+<circle style="fill:none; stroke:#000000; stroke-width:10;" cx="0.000" cy="0.000" r="3348.425" />
+<circle style="fill:none; stroke:#000000; stroke-width:10;" cx="0.000" cy="0.000" r="2675.197" />
+<circle style="fill:none; stroke:#000000; stroke-width:10;" cx="0.000" cy="0.000" r="2666.339" />
+<circle style="fill:none; stroke:#000000; stroke-width:10;" cx="0.000" cy="0.000" r="2657.480" />
+<use xlink:href="#rhomb" x="0" y="3444.094" transform="rotate(0)" />
+<use xlink:href="#rhomb" x="0" y="3444.094" transform="rotate(30)" />
+<use xlink:href="#rhomb" x="0" y="3444.094" transform="rotate(60)" />
+<use xlink:href="#rhomb" x="0" y="3444.094" transform="rotate(90)" />
+<use xlink:href="#rhomb" x="0" y="3444.094" transform="rotate(120)" />
+<use xlink:href="#rhomb" x="0" y="3444.094" transform="rotate(150)" />
+<use xlink:href="#rhomb" x="0" y="3444.094" transform="rotate(180)" />
+<use xlink:href="#rhomb" x="0" y="3444.094" transform="rotate(210)" />
+<use xlink:href="#rhomb" x="0" y="3444.094" transform="rotate(240)" />
+<use xlink:href="#rhomb" x="0" y="3444.094" transform="rotate(270)" />
+<use xlink:href="#rhomb" x="0" y="3444.094" transform="rotate(300)" />
+<use xlink:href="#rhomb" x="0" y="3444.094" transform="rotate(330)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(6)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(12)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(18)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(24)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(36)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(42)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(48)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(54)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(66)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(72)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(78)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(84)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(96)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(102)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(108)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(114)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(126)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(132)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(138)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(144)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(156)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(162)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(168)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(174)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(186)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(192)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(198)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(204)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(216)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(222)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(228)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(234)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(246)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(252)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(258)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(264)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(276)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(282)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(288)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(294)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(306)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(312)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(318)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(324)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(336)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(342)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(348)" />
+<use xlink:href="#minline" x="0" y="3444.094" transform="rotate(354)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(210)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(237)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(243)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(264)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(270)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(276)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(291)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(297)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(303)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(309)" />
+<use xlink:href="#G_V" x="-389.764" y="3437.008" transform="scale(0.8) rotate(330)" />
+<use xlink:href="#G_V" x="-389.764" y="3437.008" transform="scale(0.8) rotate(-4)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(4)" />
+<use xlink:href="#G_V" x="-389.764" y="3437.008" transform="scale(0.8) rotate(22)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(30)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(36)" />
+<use xlink:href="#G_V" x="-389.764" y="3437.008" transform="scale(0.8) rotate(49)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(57)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(63)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(69)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(86)" />
+<use xlink:href="#G_X" x="-354.331" y="3437.008" transform="scale(0.8) rotate(95)" />
+<use xlink:href="#G_X" x="-354.331" y="3437.008" transform="scale(0.8) rotate(120)" />
+<use xlink:href="#G_X" x="-354.331" y="3437.008" transform="scale(0.8) rotate(146)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(155)" />
+<use xlink:href="#G_X" x="-354.331" y="3437.008" transform="scale(0.8) rotate(173)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(182)" />
+<use xlink:href="#G_I" x="-194.882" y="3437.008" transform="scale(0.8) rotate(188)" />
+</svg>
