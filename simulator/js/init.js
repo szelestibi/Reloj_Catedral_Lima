@@ -228,7 +228,7 @@ display_clock = () => {
   ss_60 = 'XX';
   mm_60 = W60.MM;
   hh_60 = 'XX';
-  debug(`${String(hh_48).padStart(2,'0')}:${String(mm_48).padStart(2,'0')}:${String(ss_48).padStart(2,'0')} • ${String(hh_60).padStart(2,'0')}:${String(mm_60).padStart(2,'0')}:${String(ss_60).padStart(2,'0')}`); }}
+  /* debug(`${String(hh_48).padStart(2,'0')}:${String(mm_48).padStart(2,'0')}:${String(ss_48).padStart(2,'0')} • ${String(hh_60).padStart(2,'0')}:${String(mm_60).padStart(2,'0')}:${String(ss_60).padStart(2,'0')}`); */ }}
 
 change_view = (s,[w,h,x,y]) => {
  if(typeof(s) == 'string') {
